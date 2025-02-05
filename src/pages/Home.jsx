@@ -1,5 +1,5 @@
 import React from 'react';
-import './Home.css'; // We’ll style the page here
+import './Home.css'; // Make sure the updated CSS is applied when testing
 
 const Home = () => {
   return (
@@ -7,12 +7,11 @@ const Home = () => {
       {/* Sticky Navigation Bar */}
       <nav className="navbar">
         <div className="navbar-container">
+          {/* Logo with frame */}
+          <div className="navbar-logo">
+            <img src="/logo.png" alt="Logo" />
+          </div>
           <h1 className="navbar-title">Ente Gramam</h1>
-          <ul className="navbar-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
         </div>
       </nav>
 
