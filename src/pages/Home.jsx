@@ -1,5 +1,5 @@
-import React from 'react';
-import './Home.css'; // Make sure the updated CSS is applied when testing
+import React from "react";
+import "./Home.css"; // Ensure this CSS file contains the updated styles
 
 const Home = () => {
   return (
@@ -7,7 +7,7 @@ const Home = () => {
       {/* Sticky Navigation Bar */}
       <nav className="navbar">
         <div className="navbar-container">
-          {/* Logo with frame */}
+          {/* Logo as a Rounded Square */}
           <div className="navbar-logo">
             <img src="/logo.png" alt="Logo" />
           </div>
@@ -39,7 +39,7 @@ const Home = () => {
 
       {/* Footer */}
       <footer className="footer">
-        <p>© 2023 Ente Gramam. All rights reserved.</p>
+        <p>© 2025 Ente Gramam. All rights reserved.</p>
       </footer>
     </div>
   );
