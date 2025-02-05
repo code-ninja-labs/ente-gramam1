@@ -1,14 +1,16 @@
 /* General Resets */
-body, html {
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+  background-color: #f9f9f9; /* Light background for the whole page */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Navbar Styles */
 .navbar {
-  background-color: #007bff;
+  background-color: #007bff; /* Primary blue color */
   color: #fff;
   position: sticky;
   top: 0;
@@ -40,7 +42,7 @@ body, html {
 }
 
 .navbar-links a {
-  color: #fff;
+  color: #fff; /* Keep link color white */
   text-decoration: none;
   font-weight: bold;
 }
@@ -53,9 +55,23 @@ body, html {
 .content {
   padding: 20px;
   text-align: center;
-  background-color: #f9f9f9;
+  background-color: #f9f9f9; /* Matches body’s background */
+  color: #333; /* Dark font color for better visibility */
 }
 
+.content h2 {
+  font-size: 2rem;
+  color: #007bff; /* Bright color for the heading */
+  margin-bottom: 10px;
+}
+
+.content p {
+  color: #555; /* Subtle but visible for descriptions */
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+/* Cards Section */
 .cards-container {
   display: flex;
   justify-content: center;
@@ -75,20 +91,24 @@ body, html {
 }
 
 .card h3 {
-  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+  color: #007bff; /* Card title matches theme */
+  margin-bottom: 10px;
 }
 
 .card p {
   color: #555;
+  font-size: 1rem;
 }
 
 /* Footer Styles */
 .footer {
-  background-color: #007bff;
+  background-color: #007bff; /* Consistent with navbar */
   color: #fff;
   text-align: center;
   padding: 10px 0;
-  margin-top: 20px;
+  margin: 0; /* Removes unwanted spacing */
+  font-size: 0.9rem;
 }
 
 .footer p {
