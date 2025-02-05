@@ -1,0 +1,72 @@
+/* Navbar - Glassmorphism Dark Theme */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  backdrop-filter: blur(10px); /* Blurry (glassmorphism) effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  color: #ffffff; /* White text color */
+  padding: 10px 20px; /* Add padding for spacing inside the navbar */
+  display: flex;
+  align-items: center; /* Horizontally center logo and title */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6); /* Slight shadow for depth */
+}
+
+/* Navbar Container */
+.navbar-container {
+  display: flex;
+  align-items: center; /* Vertically center content in the navbar */
+  justify-content: space-between; /* Push items to the left and right edges if needed */
+  width: 100%; /* Ensure it spans full width */
+}
+
+/* Logo Styling */
+.navbar-logo img {
+  width: 40px; /* Set logo size */
+  height: 40px; /* Make it square */
+  border-radius: 8px; /* Rounded-square corners */
+  object-fit: cover; /* Keeps the image's aspect ratio */
+}
+
+/* Title Styling */
+.navbar-title {
+  font-size: 1.5rem; /* Slightly large font for the title */
+  font-weight: bold; /* Simple bold title for emphasis */
+  margin-left: 10px; /* Space between logo and title */
+  color: #ffffff; /* White text for the dark theme */
+}
+
+/* Example: Add Navigation Links (Optional) */
+.navbar-links {
+  display: flex;
+  list-style: none; /* Remove bullets from the list */
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li {
+  margin-left: 20px; /* Spacing between navigation items */
+}
+
+.navbar-links a {
+  text-decoration: none; /* Remove underline */
+  color: #ffffff; /* White for links */
+  font-size: 1rem; /* Normal link size */
+}
+
+.navbar-links a:hover {
+  color: #1e90ff; /* Bright blue hover effect */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    text-align: center;
+  }
+
+  .navbar-links {
+    margin-top: 10px; /* Add spacing between the links and logo/title on mobile */
+  }
+}
