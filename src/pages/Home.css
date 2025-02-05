@@ -17,38 +17,31 @@ body {
   z-index: 1000;
   padding: 10px 20px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center; /* Vertically align logo and text */
 }
 
+/* Navbar Container */
 .navbar-container {
   display: flex;
+  align-items: center; /* Align items */
+  gap: 10px; /* Space between logo and text */
   justify-content: space-between;
-  align-items: center;
 }
 
+/* Logo Frame */
+.navbar-logo img {
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Keep it square */
+  border-radius: 50%; /* Makes it circular */
+  border: 2px solid #fff; /* White frame around the logo */
+  object-fit: cover; /* Ensures image fits inside the circle */
+}
+
+/* Navbar Title */
 .navbar-title {
   font-size: 24px;
   font-weight: bold;
-}
-
-.navbar-links {
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar-links li {
-  margin: 0 10px;
-}
-
-.navbar-links a {
-  color: #fff; /* Keep link color white */
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.navbar-links a:hover {
-  text-decoration: underline;
 }
 
 /* Main Content Styles */
