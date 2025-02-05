@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build" # Command to build your project
+  publish = "dist"          # Directory Netlify will deploy
+
+[[redirects]]
+  from = "/*"               # Redirect all routes
+  to = "/index.html"        # To your SPA's main file
+  status = 200
