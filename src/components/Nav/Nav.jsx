@@ -1,5 +1,4 @@
 import React from "react";
-import "./Nav.css"; // If you plan to separate styles specifically for the Nav
 
 const Nav = () => {
   return (
