@@ -1,0 +1,22 @@
+.app-icons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  flex-wrap: wrap; /* Wrap icons if necessary */
+  gap: 20px; /* Space between icons */
+}
+
+.icon-item {
+  text-align: center;
+  width: 100px; /* Fixed size for uniformity */
+}
+
+.icon {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.icon-label {
+  color: #ffffff; /* White text for dark theme */
+  font-size: 1rem;
+}
