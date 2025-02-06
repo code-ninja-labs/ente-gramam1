@@ -1,6 +1,6 @@
 import React from "react";
 import Nav from "../components/Nav/Nav"; // Updated path assuming Nav is in a Nav folder
-import AppIcons from "../components/AppIcons/AppIcons"; // Assumes AppIcons is in a subfolder named AppIcons
+import AppIcons from "../components/AppIcon/AppIcon"; // Assumes AppIcons is in a subfolder named AppIcons
 import "./Home.css";
 
 const Home = () => {
