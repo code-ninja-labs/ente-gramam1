@@ -2,47 +2,57 @@
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
-  flex-wrap: wrap; /* Wrap icons if necessary */
-  gap: 20px; /* Space between icons */
+  flex-wrap: wrap; /* Wrap icons to next line if needed */
+  gap: 20px; /* Space between each icon-container set */
 }
 
 .icon-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative; /* Positioning the container for layered styling */
   text-align: center;
-  width: 100px; /* Fixed size for uniformity */
-  height: 100px;
-  border-radius: 16px; /* Rounded square */
-  background: rgba(255, 255, 255, 0.2); /* Transparent background */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  width: 100px; /* Fixed width for each container */
+  height: 100px; /* Fixed height for each container */
+  border-radius: 16px; /* Rounded square effect */
+  background: rgba(255, 255, 255, 0.2); /* Glassmorphic background */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
   backdrop-filter: blur(10px); /* Glassmorphism blur effect */
-  -webkit-backdrop-filter: blur(10px); /* Safari support */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle outline */
-  transition: transform 0.3s ease; /* Smooth animations */
+  -webkit-backdrop-filter: blur(10px); /* Safari browser support */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border for container */
+  transition: transform 0.3s ease-in-out; /* Smooth animation for hover effect */
 }
 
 .icon-item:hover {
-  transform: translateY(-10px); /* Lift-up effect on hover */
+  transform: scale(1.05); /* Slight hover effect for better interaction */
 }
 
 .icon {
-  font-size: 50px;
-  margin-bottom: 10px;
-  position: absolute;
+  font-size: 50px; /* Size of the icon (emoji) */
 }
 
 .icon-label {
-  color: #ffffff; /* White text for dark theme */
-  font-size: 1rem;
-  position: absolute; /* Ensure it stays in place */
-  bottom: 10px;
+  color: #ffffff; /* White text for labels to blend with a dark theme */
+  font-size: 0.9rem; /* Subtle font size for app names */
+  text-align: center; /* Center-align the label text */
+  margin-top: 10px; /* Space between the container and the label */
 }
 
-/* Specific adjustments for Lawn Mower and Autorickshaw */
-.icon-item:nth-child(1) .icon, /* Lawn Mower */
-.icon-item:nth-child(2) .icon { /* Autorickshaw */
-  top: -15px; /* Lift above the container */
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .app-icons {
+    gap: 15px; /* Reduce the gap between sets */
+  }
+
+  .icon-item {
+    width: 80px; /* Reduce size of the icon-container */
+    height: 80px;
+  }
+
+  .icon {
+    font-size: 40px; /* Reduce icon size */
+  }
+
+  .icon-label {
+    font-size: 0.8rem; /* Reduce label size */
+  }
 }
