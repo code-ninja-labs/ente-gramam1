@@ -3,70 +3,71 @@
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
-  gap: 30px; /* Add space between each item */
+  flex-wrap: wrap; /* Allows wrapping for smaller screens */
+  gap: 30px; /* Gaps between individual app items */
 }
 
-/* Individual app icon (icon + glass container + text) */
+/* Wrapper for the icon + container + text */
 .icon-item {
   display: flex;
-  flex-direction: column; /* Stack icon, container, and text */
-  align-items: center; /* Center-align all elements */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Align horizontally at the center */
 }
 
-/* Styling the glassmorphism box */
+/* Glassmorphism container style */
 .icon-container {
-  width: 100px; /* Fixed size for the box */
-  height: 100px; /* Fixed size for the box */
-  border-radius: 16px; /* Rounded edges for the box */
-  background: rgba(255, 255, 255, 0.2); /* Semi-transparent for the glass effect */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Shadow adds depth */
-  backdrop-filter: blur(15px); /* Frosted glass blur effect */
-  -webkit-backdrop-filter: blur(15px); /* Safari compatibility for blur effect */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border for a defined look */
+  width: 100px; /* Fixed width for the container */
+  height: 100px; /* Fixed height for the container */
+  border-radius: 16px; /* Rounded box corners */
+  background: rgba(255, 255, 255, 0.2); /* Frosted glass transparency */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  backdrop-filter: blur(20px); /* Strong frosted glass effect */
+  -webkit-backdrop-filter: blur(20px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for a glass edge */
   display: flex;
-  align-items: center; /* Center any content (if necessary) */
-  justify-content: center; /* Ensure content remains centered */
-  margin-top: -25px; /* Pull the glass box closer under the icon */
-  position: relative; /* Allows stacking of the icon above */
+  flex-direction: column; /* Stack content inside vertically */
+  align-items: center; /* Center align the content in the container */
+  justify-content: center; /* Vertically center the content */
+  position: relative; /* Positioning context for the icon */
+  margin-top: 20px; /* Separate the container visually from the top */
 }
 
-/* Icon styling (floating above the glass container) */
+/* Icon positioning */
 .icon {
-  font-size: 50px; /* Size of the emoji/icon */
-  position: relative;
-  top: -15px; /* Pull the icon above the glass box */
-  z-index: 1; /* Ensure the icon is above the glass container */
+  font-size: 40px; /* Size of the icon */
+  position: absolute;
+  top: -30px; /* Move the icon above the container */
+  z-index: 1; /* Ensure the icon visually floats above the container */
 }
 
-/* Text styling (below the glass container) */
+/* Text (inside the container) */
 .icon-label {
-  color: #ffffff; /* White text for better visibility */
-  font-size: 1rem; /* Standard readable font size */
-  text-transform: uppercase; /* All caps styling for the text */
-  margin-top: 15px; /* Space the text below the glass box */
-  text-align: center; /* Center-align the label text */
+  color: #ffffff; /* White text for better contrast */
+  font-size: 0.9rem; /* Readable font size */
+  text-align: center; /* Center the text horizontally */
+  text-transform: uppercase; /* Make the text all caps */
+  margin-top: 60px; /* Align the text centrally inside the container */
+  line-height: 1.2; /* Better spacing for multi-word labels */
 }
 
-/* Responsive adjustments for smaller screens */
+/* Responsive styles for smaller screens */
 @media (max-width: 768px) {
   .app-icons {
-    gap: 20px; /* Reduce space between icons */
+    gap: 20px; /* Reduce the gap between app items */
   }
 
   .icon-container {
-    width: 80px; /* Smaller size for the glass container */
-    height: 80px; /* Match reduced container size */
-    border-radius: 12px; /* Keep the rounded corners proportional */
+    width: 80px; /* Smaller width for smaller screens */
+    height: 80px; /* Match the width */
   }
 
   .icon {
-    font-size: 40px; /* Smaller icon size */
-    top: -10px; /* Adjust icon position slightly above the smaller container */
+    font-size: 30px; /* Slightly smaller icons */
+    top: -20px; /* Adjust icon position */
   }
 
   .icon-label {
-    font-size: 0.8rem; /* Decrease text size */
-    margin-top: 10px; /* Adjust spacing for smaller screens */
+    font-size: 0.8rem; /* Reduce text size */
+    margin-top: 50px; /* Adjust margin for smaller containers */
   }
 }
