@@ -10,7 +10,7 @@ const Nav = () => {
           <img src="/logo.png" alt="Logo" />
         </div>
         {/* Title Section */}
-        <h1 className="navbar-title">Ente Gramam</h1>
+        <h1 className="navbar-title">ENTE GRAMAM</h1>
       </div>
     </nav>
   );
