@@ -42,16 +42,6 @@ body {
 }
 
 /* Content Section */
-.content {
-  padding-top: 70px;
-  text-align: center;
-  background-color: #212121; /* Slightly lighter than body background */
-  color: #fff;
-}
-.content {
-   /* Create space equal to the height of the navbar */
-}
-
 
 .content h2 {
   font-size: 2rem;
