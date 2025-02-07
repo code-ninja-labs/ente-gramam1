@@ -28,14 +28,15 @@
   position: relative; /* Needed for proper placement of child elements */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* Center the icon horizontally and vertically */
+  overflow: hidden; /* Ensure no overflow of contents */
 }
 
-/* Emoji (icon) positioned above the container */
+/* Emoji (icon) positioned at the center of the container */
 .icon {
   font-size: 40px; /* Icon size */
-  margin-bottom: -5px; /* Bring the icon closer to the container */
-  z-index: 1; /* Ensure it appears above the container */
+  margin: 0; /* Remove margin */
+  z-index: 0; /* Ensure it is at the correct depth */
 }
 
 /* Label text below the container */
@@ -61,7 +62,6 @@
 
   .icon {
     font-size: 35px; /* Reduce icon size for smaller screens */
-    margin-bottom: -3px; /* Move closer proportionally */
   }
 
   .icon-label {
