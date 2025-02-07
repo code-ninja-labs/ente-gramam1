@@ -1,49 +1,49 @@
-/* Nav.css - Smaller Logo with Proportional Text Styling */
+/* Nav.css - Navigation Bar with Smaller Logo */
 
 /* NAVBAR STYLES */
 .navbar {
-  position: fixed; /* Stick to top */
+  position: fixed; /* Stick to top of the viewport */
   top: 0;
   left: 0;
-  width: 100%; /* Full width */
-  height: 60px; /* Slightly reduced height */
+  width: 100%; /* Full-width */
+  height: 70px; /* Navigation bar remains 70px */
   background: transparent; /* Fully transparent */
   backdrop-filter: blur(12px); /* Frosted glass effect */
   -webkit-backdrop-filter: blur(12px); /* Safari support */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for glassmorphism */
   z-index: 1000; /* Stays above other elements */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* Light shadow */
-  display: flex; /* Use flexbox */
-  align-items: center; /* Center items vertically */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* Add light shadow for depth */
+  display: flex;
+  align-items: center; /* Vertically align items */
   justify-content: flex-start; /* Align items to the left */
-  padding: 0 20px; /* Add padding for spacing */
+  padding: 0 20px; /* Add horizontal padding */
 }
 
 /* CONTAINER STYLES */
 .navbar-container {
-  display: flex; /* Use flexbox for alignment */
-  flex-direction: row; /* Ensure items stay horizontal */
-  align-items: center; /* Vertically align everything */
-  justify-content: flex-start; /* Move items to the left */
-  gap: 12px; /* Slightly reduced gap for a cleaner design */
+  display: flex; /* Use flexbox to layout items */
+  flex-direction: row; /* Keep items horizontal */
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Push items to the left */
+  gap: 12px; /* Add spacing between logo and text */
 }
 
 /* LOGO STYLES */
 .navbar-logo img {
-  width: 50px; /* Reduced logo size */
-  height: 50px; /* Keep proportional */
+  width: 40px; /* Reduce logo size to 40px */
+  height: 40px; /* Keep proportional to width */
   object-fit: cover; /* Prevent distortion */
-  border-radius: 12%; /* Rounded square effect */
-  border: 2px solid rgba(255, 255, 255, 0.5); /* Add border for contrast */
+  border-radius: 12%; /* Maintain rounded square shape */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Subtle border for appearance */
   box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.3); /* Add glow */
 }
 
 /* TITLE TEXT STYLES */
 .navbar-title {
-  font-size: calc(50px * 0.5); /* Reduced font size to match smaller logo */
-  font-weight: 600; /* Semi-bold for a clean look */
-  color: rgba(255, 255, 255, 0.85); /* Slightly transparent for glassy effect */
-  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
-  margin: 0; /* Remove extra space around text */
-  line-height: 50px; /* Match line height with logo size for alignment */
+  font-size: 24px; /* Keep text size for visual balance */
+  font-weight: 600; /* Semi-bold font weight */
+  color: rgba(255, 255, 255, 0.85); /* Contrast with background */
+  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2); /* Slight shadow for better readability */
+  margin: 0; /* Remove additional space */
+  line-height: 70px; /* Match navigation bar height to vertically center text */
 }
