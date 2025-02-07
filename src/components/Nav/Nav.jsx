@@ -5,9 +5,11 @@ const Nav = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
+        {/* Logo Section */}
         <div className="navbar-logo">
           <img src="/logo.png" alt="Logo" />
         </div>
+        {/* Title Section */}
         <h1 className="navbar-title">Ente Gramam</h1>
       </div>
     </nav>
