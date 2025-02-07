@@ -1,5 +1,5 @@
 import React from "react";
-import "./AppIcons.css"; // Separate styles for icons if needed
+import "./AppIcons.css";
 
 const AppIcons = () => {
   const icons = [
@@ -12,8 +12,9 @@ const AppIcons = () => {
     <div className="app-icons">
       {icons.map((app) => (
         <div key={app.id} className="icon-item">
-          <div className="icon">{app.icon}</div>
-          <p className="icon-label">{app.name}</p>
+          <div className="icon">{app.icon}</div> {/* Icon floating above */}
+          <div className="icon-container"></div> {/* Glassmorphism box */}
+          <p className="icon-label">{app.name}</p> {/* Text below the container */}
         </div>
       ))}
     </div>
