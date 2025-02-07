@@ -25,18 +25,20 @@
   backdrop-filter: blur(12px); /* Frosted glass blur effect */
   -webkit-backdrop-filter: blur(12px); /* Safari compatibility */
   border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for definition */
-  position: relative; /* Needed for proper placement of child elements */
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Center the icon horizontally and vertically */
-  overflow: hidden; /* Ensure no overflow of contents */
+
+  position: relative; /* Ensure compatibility for child positioning */
+  display: flex; /* Use flexbox to center contents */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  overflow: hidden; /* Prevent any visual overflow */
 }
 
 /* Emoji (icon) positioned at the center of the container */
 .icon {
-  font-size: 40px; /* Icon size */
-  margin: 0; /* Remove margin */
-  z-index: 0; /* Ensure it is at the correct depth */
+  font-size: 40px;  /* Icon size */
+  line-height: 1;   /* Ensures no extra space around inline elements */
+  margin: 0;        /* Remove default margins */
+  padding: 0;       /* Remove default padding */
 }
 
 /* Label text below the container */
