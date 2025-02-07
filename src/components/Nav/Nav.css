@@ -1,38 +1,44 @@
-/* Nav.css - Navigation Bar Styles */
+/* Nav.css - Glassmorphic Navigation Bar Styles */
 
 .navbar {
-  position: fixed; /* Stick to the top of the viewport */
+  position: fixed; /* Stick to the top */
   top: 0;
   left: 0;
-  width: 100%; /* Full-width navbar */
-  height: 50px; /* Reduced the height of the navbar */
-  background: rgba(0, 0, 0, 0.8); /* Transparent black background */
-  backdrop-filter: blur(8px); /* Frosted glass effect */
-  -webkit-backdrop-filter: blur(8px); /* For Safari support */
-  z-index: 1000; /* Stays above other elements */
+  width: 100%; /* Full-width bar */
+  height: 70px; /* Increased height for better design */
+  background: rgba(255, 255, 255, 0.1); /* Very light transparent background */
+  backdrop-filter: blur(10px); /* Add frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari compatibility */
+  border: 1px solid rgba(255, 255, 255, 0.18); /* Subtle border for glass effect */
+  z-index: 1000; /* Ensure it stays above other elements */
   display: flex;
-  align-items: center; /* Align items like logo and title vertically */
-  justify-content: space-between; /* Space between logo and title */
-  padding: 0 15px; /* Add horizontal padding for spacing */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Add a shadow for visual appeal */
+  align-items: center; /* Vertical alignment of content */
+  justify-content: center; /* Center the entire navbar elements */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* Add shadow for depth */
+  transition: 0.3s all ease-in-out; /* Smooth animations */
+  padding: 0 20px; /* Add padding for a cleaner look */
 }
 
 .navbar-container {
-  display: flex;
-  align-items: center; /* Keeps the logo and title aligned */
-  gap: 10px; /* Add spacing between logo and title */
+  display: flex; /* Set flex for logo and title */
+  align-items: center; /* Align logo and title vertically */
+  justify-content: center; /* Set even spacing horizontally */
+  gap: 20px; /* Space between logo and title elements */
 }
 
 .navbar-logo img {
-  width: 45px; /* Make the logo slightly larger */
-  height: 45px; /* Keep it proportional */
-  object-fit: cover; /* Make sure the logo fits nicely without distortion */
-  border-radius: 8px; /* Round edge for the logo if desired */
+  width: 50px; /* Resize the width of the logo */
+  height: 50px; /* Keep height proportional */
+  object-fit: cover; /* Ensure it doesn't stretch */
+  border-radius: 50%; /* Make logo circular */
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Add a border for contrast */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Highlight the logo with glow */
 }
 
 .navbar-title {
-  font-size: 20px; /* Adjusted font size to fit the navbar height */
-  font-weight: bold; /* Keep the title visible */
-  color: #ffffff; /* Use white color for contrast */
-  margin: 0;
+  font-size: 24px; /* Increase the font for better readability */
+  font-weight: 600; /* Medium weight for a professional look */
+  color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for better effect */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* Text shadow for contrast */
+  margin: 0; /* No margin around text */
 }
