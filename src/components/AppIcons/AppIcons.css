@@ -3,62 +3,45 @@
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
-  flex-wrap: wrap; /* Wrap icons to the next line if necessary */
-  gap: 20px; /* Space between each icon set */
+  flex-wrap: wrap; /* Allow wrapping to the next line if necessary */
+  gap: 30px; /* Space between each app icon */
 }
 
 /* Individual icon container */
 .icon-item {
   display: flex;
-  flex-direction: column; /* Stack icon and text vertically */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center;
+}
+
+/* Glass-style container for text */
+.icon-container {
+  width: 100px; /* Fixed width for consistency */
+  height: 100px; /* Fixed height */
+  border-radius: 16px; /* Rounded square effect */
+  background: rgba(255, 255, 255, 0.2); /* Background for glass effect */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Shadow for container depth */
+  backdrop-filter: blur(10px); /* Glassmorphism blur effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle transparent border */
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px; /* Fixed width for uniformity */
-  height: 100px; /* Fixed height for uniformity */
-  border-radius: 16px; /* Rounded square effect */
-  background: rgba(255, 255, 255, 0.2); /* Glassmorphism background */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
-  backdrop-filter: blur(10px); /* Frosted glass blur effect */
-  -webkit-backdrop-filter: blur(10px); /* Safari support */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle outline for container */
-  transition: transform 0.3s ease-in-out; /* Smooth scaling on hover */
+  margin-top: 30px; /* Space to position icons above the container */
 }
 
-/* Interactive hover effect */
-.icon-item:hover {
-  transform: scale(1.05); /* Hover effect: slightly larger */
-}
-
-/* Icon styling (emoji or image in the container) */
+/* Icon styling (emoji/icon) */
 .icon {
   font-size: 50px; /* Icon size */
-  margin-bottom: 10px; /* Space between the icon and text */
+  position: relative;
+  top: -30px; /* Move the icon above the container */
 }
 
 /* Text styling for labels */
 .icon-label {
-  color: #ffffff; /* White text for dark themes */
+  color: #ffffff; /* White text color for the name */
   font-size: 1rem; /* Standard font size */
+  text-transform: uppercase; /* Make text uppercase */
+  margin-top: 10px; /* Space between the container and label */
   text-align: center; /* Center-align the text */
-  margin-top: 5px; /* Additional spacing from the icon */
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-  .app-icons {
-    gap: 15px; /* Reduce gap between icons */
-  }
-
-  .icon-item {
-    width: 80px; /* Reduce container size */
-    height: 80px; /* Match smaller container size */
-  }
-
-  .icon {
-    font-size: 40px; /* Reduce icon size */
-  }
-
-  .icon-label {
-    font-size: 0.8rem; /* Slightly smaller labels */
-  }
 }
