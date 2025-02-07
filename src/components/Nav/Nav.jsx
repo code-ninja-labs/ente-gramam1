@@ -1,4 +1,5 @@
 import React from "react";
+import "./../styles/Nav.css"; // Adjust the path based on your folder structure
 
 const Nav = () => {
   return (
