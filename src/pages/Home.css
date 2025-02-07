@@ -1,1 +1,16 @@
+/* Home.css - Home Page Specific Styles */
+.content {
+  padding-top: 70px; /* Add padding equal to or larger than the navbar height (50px) */
+  text-align: center;
+}
 
+.content h2 {
+  font-size: 2rem;
+  color: #1e90ff;
+  margin-bottom: 1rem;
+}
+
+.content p {
+  color: #555;
+  font-size: 1.1rem;
+}
