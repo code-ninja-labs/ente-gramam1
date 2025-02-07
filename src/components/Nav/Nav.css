@@ -1,50 +1,49 @@
-/* Nav.css - Fully Transparent Navigation Bar with Glassmorphism */
+/* Nav.css - Proportional Logo and Title Styling */
 
 /* NAVBAR STYLES */
 .navbar {
-  position: fixed; /* Stick to the top of the viewport */
+  position: fixed; /* Stick to top */
   top: 0;
   left: 0;
-  width: 100%; /* Full-width */
-  height: 70px; /* Adjust height for a better visual */
-  background: transparent; /* Completely transparent */
-  backdrop-filter: blur(12px); /* Frosted glass blur effect */
-  -webkit-backdrop-filter: blur(12px); /* For Safari support */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for glassmorphism */
+  width: 100%; /* Full width */
+  height: 70px; /* Adjusted height */
+  background: transparent; /* Fully transparent */
+  backdrop-filter: blur(12px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
   z-index: 1000; /* Stays above other elements */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* Add light shadow for depth */
-  display: flex;
-  align-items: center; /* Vertically align items */
-  justify-content: flex-start; /* Move items to the left side */
-  padding: 0 20px; /* Padding for spacing */
-  transition: 0.3s all ease-in-out; /* Smooth transitions for hover effects */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); /* Light shadow */
+  display: flex; /* Use flexbox */
+  align-items: center; /* Center items vertically */
+  justify-content: flex-start; /* Align items to the left */
+  padding: 0 20px; /* Add padding for spacing */
 }
 
 /* CONTAINER STYLES */
 .navbar-container {
-  display: flex; /* Set flexbox for alignment */
-  flex-direction: row; /* Ensure items are horizontally aligned */
-  align-items: center; /* Vertically align */
-  justify-content: flex-start; /* Align everything to the left */
+  display: flex; /* Set flex for alignment */
+  flex-direction: row; /* Ensure items stay horizontal */
+  align-items: center; /* Vertically align everything */
+  justify-content: flex-start; /* Move items to the left */
   gap: 15px; /* Add spacing between logo and text */
 }
 
 /* LOGO STYLES */
 .navbar-logo img {
-  width: 50px; /* Adjust logo to desired size */
-  height: 50px; /* Keep it proportional */
-  object-fit: cover; /* Ensure it doesn't distort */
+  width: 60px; /* Increased size for a larger logo */
+  height: 60px; /* Keep proportional */
+  object-fit: cover; /* Prevent distortion */
   border-radius: 15%; /* Rounded square effect */
-  border: 2px solid rgba(255, 255, 255, 0.5); /* Subtle border for logo */
-  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.3); /* Add glow around logo */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Add border for contrast */
+  box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.3); /* Add glow */
 }
 
 /* TITLE TEXT STYLES */
 .navbar-title {
-  font-size: 20px; /* Adjust text size */
+  font-size: calc(60px * 0.5); /* Dynamic sizing relative to the logo */
   font-weight: 600; /* Semi-bold for readability */
-  color: rgba(255, 255, 255, 0.85); /* Slightly transparent for glassy look */
-  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2); /* Light shadow for better contrast */
-  margin: 0; /* Ensure no extra space around text */
+  color: rgba(255, 255, 255, 0.85); /* Slightly transparent white for modern look */
+  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2); /* Light shadow for contrast */
+  margin: 0; /* No extra margin */
+  line-height: 60px; /* Match line height with logo size for vertical alignment */
 }
-
