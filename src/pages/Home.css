@@ -45,8 +45,10 @@
   text-align: center;
   padding: 20px 0;
   width: 100%;
-  background-color: #f1f1f1; /* Footer remains light */
+  background-color: #000; /* Black background */
+  color: #fff; /* White text */
   position: relative;
+  box-sizing: border-box; /* Ensure proper layout with padding */
 }
 
 /* Optional: Links in home container styled for better contrast */
