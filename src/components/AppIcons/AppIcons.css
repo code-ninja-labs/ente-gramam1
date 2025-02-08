@@ -36,13 +36,12 @@
 
 /* Emoji (icon) positioned at the center of the container */
 .icon {
-  font-size: 40px;  
-  line-height: 1;
-  margin: 0;
-  padding: 0;
-  display: flex; /* Make sure it aligns properly */
-  align-items: center; 
-  justify-content: center;  
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Make sure it stays inside the container */
+  height: 100%;
 }
 
 /* Label text below the container */
