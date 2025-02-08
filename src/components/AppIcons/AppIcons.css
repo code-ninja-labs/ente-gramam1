@@ -1,10 +1,10 @@
 /* Container for all app icons */
 .app-icons {
     display: flex;
-    justify-content: space-evenly;
-    margin-top: 5px; /* Moved the containers up */
+    justify-content: center;
+    margin-top: 10px;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 20px;
 }
 
 /* Wrapper for each app icon */
@@ -15,31 +15,24 @@
     justify-content: flex-start;
 }
 
-/* Glass-style container adjustments */
+/* Simple icon container adjustments */
 .icon-container {
     width: 100px;
-    height: 160px; /* Increased height */
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: hidden;
 }
 
-/* Emoji alignment fix */
+/* Emoji alignment */
 .icon {
     font-size: 40px;
     line-height: 1;
     margin: 0;
-    padding-top: 70px; /* Adjusted padding to move the emoji further downwards */
-    display: flex; /* Added for better centering */
-    align-items: flex-end; /* Move emoji to the bottom */
+    padding: 0;
+    display: flex;
+    align-items: center; /* Vertical center */
     justify-content: center; /* Horizontal center */
     width: 100%; /* Ensure full container width */
     height: 100%; /* Ensure full container height */
@@ -47,23 +40,20 @@
 
 /* Label styling */
 .icon-label {
-    color: #ffffff;
     font-size: 0.9rem;
-    text-transform: uppercase;
-    margin-top: 15px;
+    margin-top: 5px;
     text-align: center;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .app-icons {
-        gap: 20px;
+        gap: 10px;
     }
 
     .icon-container {
         width: 80px;
-        height: 130px; /* Increased height for smaller screens */
-        border-radius: 12px;
+        height: 80px;
     }
 
     .icon {
@@ -72,6 +62,6 @@
 
     .icon-label {
         font-size: 0.8rem;
-        margin-top: 10px;
+        margin-top: 5px;
     }
 }
