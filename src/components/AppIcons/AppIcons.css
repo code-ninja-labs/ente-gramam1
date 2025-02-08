@@ -1,82 +1,75 @@
-/* Container for all app icons */
+/* Container for all app icons /
+
 .app-icons {
-  display: flex;
-  justify-content: space-evenly; /* Evenly distribute the icons */
-  margin-top: 20px;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
-  gap: 40px; /* Space between icon items */
+display: flex;
+justify-content: space-evenly; / Evenly distribute the icons /
+margin-top: 20px;
+flex-wrap: wrap; / Allow wrapping for smaller screens /
+gap: 40px; / Space between icon items */
 }
 
-/* Wrapper for each app icon (icon + container + label) */
+/* Wrapper for each app icon (icon + container + label) /
 .icon-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 15px; /* Add space between emoji and container */
+display: flex;
+flex-direction: column; / Stack the icon, container, and text vertically /
+align-items: center; / Align horizontally in the center /
+justify-content: flex-start; / Align items starting from the top */
 }
 
-/* Glass-style container for a frosted effect */
+/* Glass-style container for a frosted effect /
 .icon-container {
-  width: 100px; /* Fixed width for uniform containers */
-  height: 100px; /* Fixed height */
-  border-radius: 16px; /* Rounded corners for the box */
-  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-  backdrop-filter: blur(12px); /* Frosted glass blur effect */
-  -webkit-backdrop-filter: blur(12px); /* Safari compatibility */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for definition */
+width: 100px; / Fixed width for uniform containers /
+height: 100px; / Fixed height /
+border-radius: 16px; / Rounded corners for the box /
+background: rgba(255, 255, 255, 0.2); / Semi-transparent background /
+box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); / Subtle shadow for depth /
+backdrop-filter: blur(12px); / Frosted glass blur effect /
+-webkit-backdrop-filter: blur(12px); / Safari compatibility /
+border: 1px solid rgba(255, 255, 255, 0.3); / Light border for definition */
 
-  position: relative; /* Ensure compatibility for child positioning */
-  display: flex; /* Use flexbox to center contents */
-  align-items: center; /* Center items vertically */
-  justify-content: center; /* Center items horizontally */
-  overflow: hidden; /* Prevent any visual overflow */
+position: relative; /* Ensure compatibility for child positioning /
+display: flex; / Use flexbox to center contents /
+align-items: center; / Center items vertically /
+justify-content: center; / Center items horizontally /
+overflow: hidden; / Prevent any visual overflow */
 }
 
-.icon-container {
-  display: flex;
-  align-items: center; /* Center contents vertically */
-  justify-content: center; /* Center contents horizontally */
-}
-
-/* Emoji (icon) positioned at the center of the container */
+/* Emoji (icon) positioned at the center of the container /
 .icon {
-  font-size: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%; /* Make sure it stays inside the container */
-  height: 100%;
+font-size: 40px;  / Icon size /
+line-height: 1;   / Ensures no extra space around inline elements /
+margin: 0;        / Remove default margins /
+padding: 0;       / Remove default padding */
 }
 
-/* Label text below the container */
+/* Label text below the container /
 .icon-label {
-  color: #ffffff; /* White text for better contrast */
-  font-size: 0.9rem; /* Readable font size */
-  text-transform: uppercase; /* Uppercase for better readability */
-  margin-top: 15px; /* Space between the container and the label */
-  text-align: center; /* Center-align the text */
+color: #ffffff; / White text for better contrast /
+font-size: 0.9rem; / Readable font size /
+text-transform: uppercase; / Uppercase for better readability /
+margin-top: 15px; / Space between the container and the label /
+text-align: center; / Center-align the text */
 }
 
-/* Responsive Adjustments for Smaller Screens */
+/* Responsive Adjustments for Smaller Screens /
 @media (max-width: 768px) {
-  .app-icons {
-    gap: 20px; /* Reduce gaps for smaller screens */
-  }
-
-  .icon-container {
-    width: 80px; /* Reduce container size for smaller layouts */
-    height: 80px; /* Match the width */
-    border-radius: 12px; /* Adjust rounded corners for smaller containers */
-  }
-
-  .icon {
-    font-size: 35px; /* Reduce icon size for smaller screens */
-  }
-
-  .icon-label {
-    font-size: 0.8rem; /* Slightly smaller text */
-    margin-top: 10px; /* Adjust space between the label and container */
-  }
+.app-icons {
+gap: 20px; / Reduce gaps for smaller screens */
 }
+
+.icon-container {
+width: 80px; /* Reduce container size for smaller layouts /
+height: 80px; / Match the width /
+border-radius: 12px; / Adjust rounded corners for smaller containers */
+}
+
+.icon {
+font-size: 35px; /* Reduce icon size for smaller screens */
+}
+
+.icon-label {
+font-size: 0.8rem; /* Slightly smaller text /
+margin-top: 10px; / Adjust space between the label and container */
+}
+}
+
