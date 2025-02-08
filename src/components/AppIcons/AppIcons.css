@@ -10,9 +10,10 @@
 /* Wrapper for each app icon (icon + container + label) */
 .icon-item {
   display: flex;
-  flex-direction: column; /* Stack the icon, container, and text vertically */
-  align-items: center; /* Align horizontally in the center */
-  justify-content: flex-start; /* Align items starting from the top */
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px; /* Add space between emoji and container */
 }
 
 /* Glass-style container for a frosted effect */
@@ -39,10 +40,9 @@
   line-height: 1;
   margin: 0;
   padding: 0;
-  position: absolute; /* Ensure it aligns properly */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Perfectly center the emoji */
+  display: flex; /* Make sure it aligns properly */
+  align-items: center; 
+  justify-content: center;  
 }
 
 /* Label text below the container */
