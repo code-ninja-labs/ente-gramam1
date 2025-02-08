@@ -37,9 +37,9 @@
     font-size: 40px;
     line-height: 1;
     margin: 0;
-    padding: 0;
+    padding-top: 20px; /* Added padding to move the emoji downwards */
     display: flex; /* Added for better centering */
-    align-items: center; /* Vertical center */
+    align-items: flex-end; /* Move emoji to the bottom */
     justify-content: center; /* Horizontal center */
     width: 100%; /* Ensure full container width */
     height: 100%; /* Ensure full container height */
@@ -48,8 +48,7 @@
 /* Label styling */
 .icon-label {
     color: #ffffff;
-    font-size: 0.9rem;
-    text-transform: uppercase;
+    font-size:-transform: uppercase;
     margin-top: 15px;
     text-align: center;
 }
