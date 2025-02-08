@@ -1,7 +1,21 @@
 /* Home.css - Home Page Specific Styles */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .content {
   padding-top: 70px; /* Add padding equal to or larger than the navbar height (50px) */
   text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .content h2 {
@@ -13,4 +27,11 @@
 .content p {
   color: #555;
   font-size: 1.1rem;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+  background-color: #f1f1f1;
 }
