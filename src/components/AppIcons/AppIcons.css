@@ -35,10 +35,14 @@
 
 /* Emoji (icon) positioned at the center of the container */
 .icon {
-  font-size: 40px;  /* Icon size */
-  line-height: 1;   /* Ensures no extra space around inline elements */
-  margin: 0;        /* Remove default margins */
-  padding: 0;       /* Remove default padding */
+  font-size: 40px;  
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  position: absolute; /* Ensure it aligns properly */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Perfectly center the emoji */
 }
 
 /* Label text below the container */
