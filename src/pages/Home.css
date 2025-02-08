@@ -1,17 +1,22 @@
 /* Home.css - Home Page Specific Styles */
+
+/* Home container with black background and white text */
 .home-container {
+  background-color: #000; /* Black background */
+  color: #fff; /* White text color */
+  min-height: 100vh; /* Full screen height */
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   align-items: center;
   justify-content: space-between;
   text-align: center;
-  padding: 0 1rem; /* Add padding for small screens */
-  box-sizing: border-box; /* Ensure padding doesn't alter total width */
+  padding: 0 1rem; /* Spacing for small screens */
+  box-sizing: border-box; /* Ensure padding doesn't affect width calculations */
 }
 
+/* Content area remains centered */
 .content {
-  padding-top: 70px; /* Add padding equal to or larger than the navbar height (50px) */
+  padding-top: 70px; /* Padding greater than the navbar height */
   text-align: center;
   flex: 1;
   display: flex;
@@ -20,55 +25,62 @@
   justify-content: center;
 }
 
-/* Ensure font sizes and margins adapt */
+/* Headings inside content */
 .content h2 {
   font-size: 2rem;
-  color: #1e90ff;
+  color: #fff; /* White text for headings */
   margin-bottom: 1rem;
-  text-align: center; /* Ensures proper centering */
 }
 
+/* Paragraphs inside content */
 .content p {
-  color: #555;
+  color: #fff; /* Ensure all paragraphs are white */
   font-size: 1.1rem;
-  line-height: 1.6; /* Improves readability */
-  margin: 0 1rem; /* Adds some breathing room for text on small screens */
+  line-height: 1.6; /* Better readability */
+  margin: 0 1rem;
 }
 
+/* Footer styles remain */
 .footer {
   text-align: center;
   padding: 20px 0;
   width: 100%;
-  background-color: #f1f1f1;
+  background-color: #f1f1f1; /* Footer remains light */
   position: relative;
-  box-sizing: border-box;
 }
 
-/* Responsive Design: Media Queries */
+/* Optional: Links in home container styled for better contrast */
+.home-container a {
+  color: #1e90ff; /* Light blue for links */
+  text-decoration: none; /* No underline */
+  transition: color 0.3s ease; /* Smooth hover transition */
+}
+
+.home-container a:hover {
+  color: #ff4500; /* Orange on hover */
+}
+
+/* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .content h2 {
-    font-size: 1.8rem; /* Adjust font size for tablet and smaller screens */
+    font-size: 1.8rem; /* Slightly smaller text for tablets */
   }
 
   .content p {
-    font-size: 1rem; /* Reduce font size for readability */
-  }
-
-  .footer {
-    padding: 15px 0; /* Adjust padding */
+    font-size: 1rem; /* Smaller paragraph text */
   }
 }
 
 @media screen and (max-width: 480px) {
   .content {
-    padding-top: 50px; /* Adjust the spacing for smaller devices */
+    padding-top: 50px; /* Less padding for small screens */
   }
 
   .content h2 {
-    font-size: 1.5rem; /* Further decrease font size for mobile devices */
+    font-size: 1.5rem; /* Further reduction for headings on mobile */
   }
 
   .content p {
-    font-size: 0.9rem; /* Further adjust text size */
+    font-size: 0.9rem; /* Smaller font for mobile viewers */
   }
 }
