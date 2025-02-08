@@ -34,6 +34,12 @@
   overflow: hidden; /* Prevent any visual overflow */
 }
 
+.icon-container {
+  display: flex;
+  align-items: center; /* Center contents vertically */
+  justify-content: center; /* Center contents horizontally */
+}
+
 /* Emoji (icon) positioned at the center of the container */
 .icon {
   font-size: 40px;
