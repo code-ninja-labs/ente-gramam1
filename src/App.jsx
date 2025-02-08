@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home'; // Home Component
-import Autorickshaw from './pages/Autorickshaw'; // Existing Autorickshaw Component
+import Home from './pages/Home';
+import Autorickshaw from './pages/Autorickshaw'; // Import the new component
 
 function App() {
   return (
@@ -10,8 +10,9 @@ function App() {
         {/* Home Route */}
         <Route path="/" element={<Home />} />
 
-        {/* Autorickshaw Services */}
+        {/* Autorickshaw Route */}
         <Route path="/autorickshaw" element={<Autorickshaw />} />
+      </Routes>
     </Router>
   );
 }
