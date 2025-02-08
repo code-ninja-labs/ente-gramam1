@@ -17,8 +17,8 @@
 
 /* Glass-style container adjustments */
 .icon-container {
-    width: 120px; /* Increased width */
-    height: 120px; /* Increased height */
+    width: 100px;
+    height: 150px; /* Increased height */
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -37,7 +37,7 @@
     font-size: 40px;
     line-height: 1;
     margin: 0;
-    padding-top: 50px; /* Increased padding to move the emoji further downwards */
+    padding-top: 60px; /* Adjusted padding to move the emoji further downwards */
     display: flex; /* Added for better centering */
     align-items: flex-end; /* Move emoji to the bottom */
     justify-content: center; /* Horizontal center */
@@ -61,8 +61,8 @@
     }
 
     .icon-container {
-        width: 100px; /* Increased width for smaller screens */
-        height: 100px; /* Increased height for smaller screens */
+        width: 80px;
+        height: 120px; /* Increased height for smaller screens */
         border-radius: 12px;
     }
 
