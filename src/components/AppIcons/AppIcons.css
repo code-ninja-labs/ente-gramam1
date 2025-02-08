@@ -2,7 +2,7 @@
 .app-icons {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 10px; /* Adjusted margin to move container upwards */
+    margin-top: 5px; /* Moved the containers up */
     flex-wrap: wrap;
     gap: 40px;
 }
@@ -18,7 +18,7 @@
 /* Glass-style container adjustments */
 .icon-container {
     width: 100px;
-    height: 150px; /* Increased height */
+    height: 160px; /* Increased height */
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
@@ -37,7 +37,7 @@
     font-size: 40px;
     line-height: 1;
     margin: 0;
-    padding-top: 60px; /* Adjusted padding to move the emoji further downwards */
+    padding-top: 70px; /* Adjusted padding to move the emoji further downwards */
     display: flex; /* Added for better centering */
     align-items: flex-end; /* Move emoji to the bottom */
     justify-content: center; /* Horizontal center */
@@ -62,7 +62,7 @@
 
     .icon-container {
         width: 80px;
-        height: 120px; /* Increased height for smaller screens */
+        height: 130px; /* Increased height for smaller screens */
         border-radius: 12px;
     }
 
