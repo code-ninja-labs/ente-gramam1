@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../supabaseClient'; // Supabase client setup
+import { supabase } from '../supabaseClient'; // Import Supabase client
 
 const Autorickshaw = () => {
-  const [drivers, setDrivers] = useState([]); // State to hold the driver list
-  const [loading, setLoading] = useState(true); // State for the loading indicator
+  const [drivers, setDrivers] = useState([]); // To store autorickshaw driver details
+  const [loading, setLoading] = useState(true); // To manage loading state
 
-  // Fetch data from Supabase on component mount
+  // Fetch driver details when the component mounts
   useEffect(() => {
     const fetchDrivers = async () => {
       try {
         const { data, error } = await supabase
-          .from('autorickshaw-drivers')
-          .select('name, phone'); // Fetch name and phone only
-  
-        if (error) throw error; // Handle errors
-        setDrivers(data); // Save fetched data to state
+          .from('autorickshaw-drivers') // Table name in Supabase
+          .select('name, phone'); // Query specific columns: name and phone
+
+        if (error) throw error; // Log any errors
+        setDrivers(data); // Save the retrieved data to state
       } catch (err) {
         console.error('Error fetching drivers', err.message);
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false); // Stop showing the loading spinner
       }
     };
 
@@ -27,15 +27,15 @@ const Autorickshaw = () => {
 
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h1>Autorickshaw Details</h1>
-      <p>Below are the autorickshaw driver details:</p>
+      <h1>Autorickshaw Drivers</h1>
+      <p>Find details about autorickshaw drivers available in your area:</p>
 
-      {/* Show loading state */}
+      {/* Show loading spinner while fetching */}
       {loading ? (
-        <p>Loading drivers...</p>
-      ) : drivers?.length > 0 ? (
-        // Render the drivers table if data is available
-        <table border="1" style={{ margin: '0 auto', width: '80%', textAlign: 'left' }}>
+        <p>Loading driver details...</p>
+      ) : drivers.length > 0 ? (
+        /* Render table with driver details once loaded */
+        <table border="1" style={{ margin: '20px auto', width: '80%', textAlign: 'center' }}>
           <thead>
             <tr>
               <th>Name</th>
@@ -52,8 +52,8 @@ const Autorickshaw = () => {
           </tbody>
         </table>
       ) : (
-        // Show this message if no drivers exist
-        <p>No driver data available.</p>
+        /* Show this message if no driver data is available */
+        <p>No drivers found in the database.</p>
       )}
     </div>
   );
