@@ -1,88 +1,60 @@
-/* Home.css - Home Page Specific Styles */
-
-/* Home container with black background and white text */
-.home-container {
-  background-color: #000; /* Black background */
-  color: #fff; /* White text color */
-  min-height: 100vh; /* Full screen height */
+/* Main container for all icons */
+.icon-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  text-align: center;
-  padding: 0 1rem; /* Spacing for small screens */
-  box-sizing: border-box; /* Ensure padding doesn't affect width calculations */
+  gap: 1rem; /* Space between icons */
+  justify-content: center; /* Center icons horizontally */
+  flex-wrap: wrap; /* Wrap on smaller screens */
+  margin: 2rem 0; /* Add spacing around the icon section */
 }
 
-/* Content area remains centered */
-.content {
-  padding-top: 70px; /* Padding greater than the navbar height */
-  text-align: center;
-  flex: 1;
+/* Wrapper around each individual icon */
+.icon-wrapper {
+  width: 100px; /* Fixed width for square shape */
+  height: 100px; /* Fixed height for square shape */
+  background-color: #1e1e1e; /* Dark background for contrast */
+  border-radius: 20px; /* Rounded edges */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Headings inside content */
-.content h2 {
-  font-size: 2rem;
-  color: #fff; /* White text for headings */
-  margin-bottom: 1rem;
-}
-
-/* Paragraphs inside content */
-.content p {
-  color: #fff; /* Ensure all paragraphs are white */
-  font-size: 1.1rem;
-  line-height: 1.6; /* Better readability */
-  margin: 0 1rem;
-}
-
-/* Footer styles remain */
-.footer {
+  flex-direction: column; /* Stack icon and label vertically */
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Optional shadow for depth */
+  color: #fff; /* White text/icons */
   text-align: center;
-  padding: 20px 0;
-  width: 100%;
-  background-color: #000; /* Black background */
-  color: #fff; /* White text */
-  position: relative;
-  box-sizing: border-box; /* Ensure proper layout with padding */
+  cursor: pointer; /* Add pointer for interaction */
+  transition: transform 0.3s ease; /* Subtle scaling on hover */
 }
 
-/* Optional: Links in home container styled for better contrast */
-.home-container a {
-  color: #1e90ff; /* Light blue for links */
-  text-decoration: none; /* No underline */
-  transition: color 0.3s ease; /* Smooth hover transition */
+/* Hover effect for the icon wrapper */
+.icon-wrapper:hover {
+  transform: scale(1.1); /* Slight scaling on hover */
+  background-color: #ff4500; /* Optional: Change to orange on hover */
 }
 
-.home-container a:hover {
-  color: #ff4500; /* Orange on hover */
+/* The actual icon inside */
+.icon {
+  font-size: 2rem; /* Adjust size of the icon */
+  margin-bottom: 0.5rem; /* Space between icon and label */
+}
+
+/* Label/text under the icon */
+.icon-wrapper p {
+  font-size: 1rem; /* Size of the label */
+  margin: 0; /* Remove unwanted margins */
+  color: #ccc; /* Slightly dimmed color for labels */
 }
 
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
-  .content h2 {
-    font-size: 1.8rem; /* Slightly smaller text for tablets */
+  .icon-wrapper {
+    width: 80px; /* Smaller square on tablets */
+    height: 80px;
   }
 
-  .content p {
-    font-size: 1rem; /* Smaller paragraph text */
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .content {
-    padding-top: 50px; /* Less padding for small screens */
+  .icon {
+    font-size: 1.5rem; /* Adjust icon size */
   }
 
-  .content h2 {
-    font-size: 1.5rem; /* Further reduction for headings on mobile */
-  }
-
-  .content p {
-    font-size: 0.9rem; /* Smaller font for mobile viewers */
+  .icon-wrapper p {
+    font-size: 0.9rem; /* Reduce label text size */
   }
 }
