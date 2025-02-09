@@ -1,100 +1,60 @@
 import React, { useState } from 'react';
-import { supabase } from '../supabaseClient'; // Make sure this works properly
-import './Auth.css'; // Keep this for CSS styling
+import { supabase } from '../supabaseClient'; // Ensure Supabase is configured properly
+import './Auth.css'; // Your CSS for styling
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [phone, setPhone] = useState('');
-  const [isSigningUp, setIsSigningUp] = useState(false);
+  const [isSigningUp, setIsSigningUp] = useState(false); // State to toggle between Login and Signup
   const [loading, setLoading] = useState(false);
 
-  /**
-   * Handles user sign-up submission.
-   */
+  // Sign up using email and password
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // Check if email is already registered
-      const { data: existingUser, error: checkError } = await supabase
-        .from('users')
-        .select('id')
-        .eq('email', email)
-        .single();
-
-      if (existingUser) {
-        alert('This email is already registered. Please use a different email or log in.');
-        setIsSigningUp(false); // Switch back to login form
-        return;
-      } else if (checkError && checkError.code !== 'PGRST116') {
-        // PGRST116 specifically handles 'row not found' (user not existing), which is expected
-        throw checkError;
-      }
-
-      // Proceed with sign up
-      const { error } = await supabase.auth.signUp({
+      // Use Supabase Auth's signUp method
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        options: {
-          data: {
-            name,
-            username,
-            phone: phone || null, // Save phone optionally, if provided
-          },
-        },
       });
 
       if (error) {
-        alert(`Error:
-${error.message}`);
+        alert(`Sign-up error: $
+{error.message}`);
       } else {
-        alert('Sign-up successful! Please check your email for the verification link.');
+        alert('Sign-up successful! Check your email to confirm.');
       }
     } catch (err) {
-      alert(`Unexpected error: $
-{err.message}`);
+      alert(`Unexpected error during sign up:
+${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
-  /**
-   * Handles user login submission.
-   */
+  // Log in using email and password
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // Check if the user exists before logging in
-      const { data: userExists, error: checkError } = await supabase
-        .from('users')
-        .select('id, email')
-        .eq('email', email)
-        .eq('password', password) // Ensure it checks valid credentials
-        .single();
-
-      if (checkError?.code === 'PGRST116' || !userExists) {
-        alert('The email and password do not match any account. Please sign up.');
-        setIsSigningUp(true); // Switch to signup mode
-        return;
-      }
-
-      // Proceed with login
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      // Use Supabase Auth's signInWithPassword method
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
       if (error) {
-        alert(`Error during login:
-${error.message}`);
+        alert(`Login error: $
+{error.message}`);
       } else {
         alert('Login successful! Welcome back.');
       }
     } catch (err) {
-      alert(`Unexpected error: ${err.message}`);
+      alert(`Unexpected error during login:
+${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -108,7 +68,7 @@ ${error.message}`);
         className="form"
         onSubmit={isSigningUp ? handleSignupSubmit : handleLoginSubmit}
       >
-        {/* Email Field */}
+        {/* Email Input */}
         <input
           type="email"
           placeholder="Enter your email"
@@ -118,7 +78,7 @@ ${error.message}`);
           required
         />
 
-        {/* Password Field */}
+        {/* Password Input */}
         <input
           type="password"
           placeholder="Enter your password"
@@ -128,41 +88,12 @@ ${error.message}`);
           required
         />
 
-        {/* Additional Fields for Sign-Up */}
-        {isSigningUp && (
-          <>
-            <input
-              type="text"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="input"
-              required
-            />
-            <input
-              type="text"
-              placeholder="Enter a unique username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="input"
-              required
-            />
-            <input
-              type="tel"
-              placeholder="Optional: Enter your phone number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="input"
-            />
-          </>
-        )}
-
         <button type="submit" className="button" disabled={loading}>
           {loading ? 'Loading...' : isSigningUp ? 'Sign Up' : 'Log In'}
         </button>
       </form>
 
-      {/* Switch Between Login and Sign-Up */}
+      {/* Toggle Button: Switch Between Sign Up and Log In */}
       <button
         onClick={() => setIsSigningUp(!isSigningUp)}
         className="button switch"
