@@ -1,45 +1,26 @@
-import { supabase } from './supabaseClient';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { supabase } from '../supabaseClient';
 
-export default function Auth() {
+const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSigningUp, setIsSigningUp] = useState(false); // Toggle between signup and login modes
+  const [isSigningUp, setIsSigningUp] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Handle Sign Up
-  const handleSignup = async (event) => {
-    event.preventDefault();
+  const handleAuth = async (e) => {
+    e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      alert(error.message);
+    if (isSigningUp) {
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) alert(`Sign-up error: $
+{error.message}`);
+      else alert('Sign-up successful! Check your email.');
     } else {
-      alert('Account created successfully! Please check your email for a confirmation link.');
-    }
-
-    setLoading(false);
-  };
-
-  // Handle Login
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      alert(error.message);
-    } else {
-      alert('Welcome back!');
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) alert(`Login error:
+${error.message}`);
+      else alert('Login successful!');
     }
 
     setLoading(false);
@@ -48,7 +29,7 @@ export default function Auth() {
   return (
     <div>
       <h2>{isSigningUp ? 'Sign Up' : 'Log In'}</h2>
-      <form onSubmit={isSigningUp ? handleSignup : handleLogin}>
+      <form onSubmit={handleAuth}>
         <input
           type="email"
           placeholder="Enter your email"
@@ -67,14 +48,11 @@ export default function Auth() {
           {loading ? 'Loading...' : isSigningUp ? 'Sign Up' : 'Log In'}
         </button>
       </form>
-      <p>
-        {isSigningUp
-          ? 'Already have an account? '
-          : "Don't have an account? "}
-        <button onClick={() => setIsSigningUp(!isSigningUp)} style={{ cursor: 'pointer', background: 'none', border: 'none', color: 'blue' }}>
-          {isSigningUp ? 'Log In' : 'Sign Up'}
-        </button>
-      </p>
+      <button onClick={() => setIsSigningUp(!isSigningUp)}>
+        {isSigningUp ? 'Switch to Log In' : 'Switch to Sign Up'}
+      </button>
     </div>
   );
-}
+};
+
+export default Auth;
