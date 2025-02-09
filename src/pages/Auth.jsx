@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
+import styles from './Auth.module.css'; // Importing CSS module
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -27,14 +28,15 @@ ${error.message}`);
   };
 
   return (
-    <div>
-      <h2>{isSigningUp ? 'Sign Up' : 'Log In'}</h2>
-      <form onSubmit={handleAuth}>
+    <div className={styles.container}>
+      <h2 className={styles.title}>{isSigningUp ? 'Sign Up' : 'Log In'}</h2>
+      <form className={styles.form} onSubmit={handleAuth}>
         <input
           type="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className={styles.input}
           required
         />
         <input
@@ -42,13 +44,17 @@ ${error.message}`);
           placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className={styles.input}
           required
         />
-        <button type="submit" disabled={loading}>
+        <button type="submit" className={styles.button} disabled={loading}>
           {loading ? 'Loading...' : isSigningUp ? 'Sign Up' : 'Log In'}
         </button>
       </form>
-      <button onClick={() => setIsSigningUp(!isSigningUp)}>
+      <button
+        onClick={() => setIsSigningUp(!isSigningUp)}
+        className={`${styles.button}${styles.switch}`}
+      >
         {isSigningUp ? 'Switch to Log In' : 'Switch to Sign Up'}
       </button>
     </div>
