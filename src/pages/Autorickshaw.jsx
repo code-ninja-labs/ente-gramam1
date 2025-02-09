@@ -1,64 +1,58 @@
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../supabaseClient'; // Ensure the Supabase client is imported correctly
+import { supabase } from '../supabaseClient'; // Ensure the path to supabaseClient is correct
 
 const Autorickshaw = () => {
-  const [drivers, setDrivers] = useState([]); // To store driver details
+  const [drivers, setDrivers] = useState([]); // Driver data
   const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state to capture errors
+  const [error, setError] = useState(null); // Error state for debugging
 
-  // Fetch driver data from Supabase
   useEffect(() => {
     const fetchDrivers = async () => {
       try {
-        setLoading(true); // Start loading
+        setLoading(true); // Display loading state
 
-        // Fetch data from the "autorickshaw-drivers" table
+        // Fetch driver details
         const { data, error } = await supabase
-          .from('autorickshaw-drivers') // Table name
-          .select('name, phone'); // Columns to fetch
+          .from('autorickshaw-drivers') // Check correct table name
+          .select('*'); // Fetch all columns
 
         if (error) {
-          // Something went wrong with the query
-          throw error;
+          throw error; // Handle any errors from Supabase
         }
 
-        if (!data.length) {
-          // Handle case where no data is found
-          setDrivers([]);
+        if (data.length === 0) {
           setError('No drivers found in the database.');
+          setDrivers([]);
         } else {
-          // Successfully fetched data
           setDrivers(data);
-          setError(null); // Clear any previous errors
+          setError(null); // Clear error state
         }
       } catch (err) {
-        // Catch connection or query errors
-        if (err.message.toLowerCase().includes('network')) {
-          setError('Connection Error: Unable to connect to the database. Please check your internet connection.');
+        // Categorize errors
+        if (err.message.includes('Invalid API key')) {
+          setError('Invalid API key: Please check your Supabase configuration.');
         } else {
-          setError(`Error: ${err.message}`); // Show specific query errors
+          setError(`Error: ${err.message}`);
         }
       } finally {
-        setLoading(false); // End loading state
+        setLoading(false); // Stop loading
       }
     };
 
-    fetchDrivers(); // Call fetch function
+    fetchDrivers(); // Trigger the function on component load
   }, []);
 
   return (
     <div style={{ padding: '20px', textAlign: 'center' }}>
       <h1>Autorickshaw Drivers</h1>
-      <p>Find details about autorickshaw drivers available in your area:</p>
-      
-      {/* Show loading spinner while fetching */}
+      <p>Find details about autorickshaw drivers available in your area.</p>
+
+      {/* Show loading, errors, or driver data */}
       {loading ? (
         <p>Loading driver details...</p>
       ) : error ? (
-        // Show error message
-        <p style={{ color: 'red', fontSize: '16px' }}>{error}</p>
+        <p style={{ color: 'red', fontWeight: 'bold' }}>{error}</p>
       ) : (
-        // Show driver data if available
         <table border="1" style={{ margin: '20px auto', width: '80%', textAlign: 'center' }}>
           <thead>
             <tr>
