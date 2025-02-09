@@ -1,4 +1,4 @@
-/* Heading and Description */
+/* General Styles */
 .autorickshaw-header {
   text-align: center;
   font-size: 24px;
@@ -15,7 +15,6 @@
   color: #555;
 }
 
-/* Loading and Error Styling */
 .autorickshaw-loading {
   color: #555;
   font-size: 16px;
@@ -28,7 +27,7 @@
   text-align: center;
 }
 
-/* List of Drivers */
+/* Driver List */
 .autorickshaw-list {
   display: flex;
   flex-direction: column;
@@ -36,30 +35,27 @@
   gap: 10px;
 }
 
-/* Individual Driver Card */
 .autorickshaw-card {
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  backdrop-filter: blur(10px); /* Slight blur for the card */
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 10px;
   padding: 10px 20px;
   width: 90%;
   max-width: 400px;
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Avatar */
 .autorickshaw-avatar {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.5); /* Add slight border to avatar */
+  border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-/* Details */
 .autorickshaw-details {
   text-align: left;
 }
@@ -75,4 +71,32 @@
   font-size: 14px;
   color: #555;
   margin: 5px 0 0 0;
+}
+
+/* Shapes Container */
+.shapes-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Circle Shape */
+.circle-shape {
+  width: 50px;
+  height: 50px;
+  background-color: green;
+  border-radius: 50%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Triangle Shape */
+.triangle-shape {
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 50px solid orange;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
