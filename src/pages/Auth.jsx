@@ -75,7 +75,9 @@ ${error.message}`);
           className="input"
           required
         />
-        {!forgotPassword && !isSigningUp && (
+        
+        {/* Show Password Field only in Sign-Up and Log-In Mode */}
+        {!forgotPassword && (
           <input
             type="password"
             placeholder="Enter your password"
