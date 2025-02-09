@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
-import Autorickshaw from './pages/Autorickshaw'; // Import the existing component
-import AddAutorickshawDriver from './pages/addadr'; // Import the new add driver page
-import Auth from './pages/Auth'; // Import the Auth component
+import Autorickshaw from './pages/Autorickshaw'; // Existing page
+import AddAutorickshawDriver from './pages/addadr'; // Page for adding drivers
+import Auth from './pages/Auth'; // Auth page for login/signup
 import { supabase } from './supabaseClient'; // Import Supabase client
 
 // Protected Route Component
 const ProtectedRoute = ({ element, session }) => {
+  // Redirect if no session (not logged in)
   return session ? element : <Navigate to="/auth" replace />;
 };
 
 function App() {
-  const [session, setSession] = useState(null);
+  const [session, setSession] = useState(null); // State to track Supabase session
 
   useEffect(() => {
-    // Retrieve the current session from Supabase on load
+    // Get session on initial app load
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
 
-    // Listen for changes to authentication state
-    supabase.auth.onAuthStateChange((_event, session) => {
+    // Listen for changes in authentication state (login/logout)
+    const { subscription } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
+
+    // Cleanup listener on unmount
+    return () => subscription.unsubscribe();
   }, []);
 
   return (
@@ -32,7 +36,7 @@ function App() {
         {/* Public Route: Home */}
         <Route path="/" element={<Home />} />
 
-        {/* Public Route: Login/Signup */}
+        {/* Public Route: Auth (Login/Signup) */}
         <Route path="/auth" element={<Auth />} />
 
         {/* Protected Route: Autorickshaw */}
