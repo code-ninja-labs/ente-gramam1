@@ -33,8 +33,10 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  position: relative; /* Set position for the parent to allow absolute positioning inside */
 }
 
+/* Individual Driver Card */
 .autorickshaw-card {
   display: flex;
   align-items: center;
@@ -46,6 +48,7 @@
   width: 90%;
   max-width: 400px;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 2; /* Place cards above the background shapes */
 }
 
 .autorickshaw-avatar {
@@ -73,30 +76,38 @@
   margin: 5px 0 0 0;
 }
 
-/* Shapes Container */
-.shapes-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
+/* Background Shapes */
+.shapes-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Fill the parent container */
+  height: 100%;
+  z-index: 1; /* Ensure shapes stay behind the content */
+  overflow: hidden; /* Prevent large shapes from overflowing the parent */
 }
 
-/* Circle Shape */
 .circle-shape {
-  width: 50px;
-  height: 50px;
-  background-color: green;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(0, 255, 0, 0.2); /* Transparent green */
   border-radius: 50%;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  top: 60%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
-/* Triangle Shape */
 .triangle-shape {
+  position: absolute;
   width: 0;
   height: 0;
-  border-left: 25px solid transparent;
-  border-right: 25px solid transparent;
-  border-bottom: 50px solid orange;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-top: 150px solid rgba(255, 165, 0, 0.2); /* Transparent orange */
+  bottom: 40%;
+  right: 30%;
+  transform: translate(50%, 50%);
+  z-index: 1;
 }
