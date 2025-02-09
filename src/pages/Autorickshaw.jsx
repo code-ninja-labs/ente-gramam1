@@ -41,39 +41,35 @@ const Autorickshaw = () => {
 
   return (
     <div>
-      {/* Simple heading and paragraph */}
+      {/* Heading and description */}
       <h1 className="autorickshaw-header">Autorickshaw Drivers</h1>
       <p className="autorickshaw-description">
         Find details about autorickshaw drivers available in your area.
       </p>
 
-      {/* Driver list */}
-      {loading ? (
-        <p className="autorickshaw-loading">Loading driver details...</p>
-      ) : error ? (
-        <p className="autorickshaw-error">{error}</p>
-      ) : (
-        <div className="autorickshaw-list">
-          {drivers.map((driver, index) => (
+      {/* Driver list with background shapes */}
+      <div className="autorickshaw-list">
+        {/* Background shapes */}
+        <div className="shapes-background">
+          <div className="circle-shape"></div>
+          <div className="triangle-shape"></div>
+        </div>
+
+        {/* Driver Cards */}
+        {loading ? (
+          <p className="autorickshaw-loading">Loading driver details...</p>
+        ) : error ? (
+          <p className="autorickshaw-error">{error}</p>
+        ) : (
+          drivers.map((driver, index) => (
             <div key={index} className="autorickshaw-card">
-              <img
-                src={driver.avatar || "https://via.placeholder.com/50"}
-                alt="Avatar"
-                className="autorickshaw-avatar"
-              />
               <div className="autorickshaw-details">
                 <p className="autorickshaw-name">{driver.name}</p>
                 <p className="autorickshaw-phone">{driver.phone}</p>
               </div>
             </div>
-          ))}
-        </div>
-      )}
-
-      {/* Shapes below the contact list */}
-      <div className="shapes-container">
-        <div className="circle-shape"></div>
-        <div className="triangle-shape"></div>
+          ))
+        )}
       </div>
     </div>
   );
