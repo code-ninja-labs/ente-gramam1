@@ -5,48 +5,74 @@ import './Auth.css'; // CSS file
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState(''); // Stores the OTP entered by the user
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [loading, setLoading] = useState(false);
   const [otpStep, setOtpStep] = useState(false); // True if waiting for OTP after email submission
 
-  const handleAuth = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      if (isSigningUp) {
-        // Initial Sign Up Step: Send OTP to email
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-        });
-        if (error) {
-          alert(`Sign-up error: $
-{error.message}`);
-        } else {
-          alert('Sign-up successful! Check your email for the verification code.');
-          setOtpStep(true); // Switch to OTP form
-        }
-      } else {
-        // Initial Log In Step: Send OTP to email
-        const { error } = await supabase.auth.signInWithOtp({
-          email,
-        });
-        if (error) {
-          alert(`Login error:
-${error.message}`);
-        } else {
-          alert('Login OTP sent! Check your email.');
-          setOtpStep(true); // Switch to OTP form
-        }
-      }
-    } catch (error) {
-      alert(`Unexpected error: $
-{error.message}`);
-    }
+      // Sign up step: Create the user and send verification email (OTP)
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            name,
+            username, // Store additional user metadata in Supabase
+          },
+          phone, // Optional phone number (used for metadata only in this case)
+        },
+      });
 
-    setLoading(false);
+      if (error) {
+        alert(`Sign-up error: $
+{error.message}`);
+        setLoading(false);
+        return;
+      }
+
+      alert(
+        `Sign-up successful! We've sent a code to your email. Enter the code to verify your account.`
+      );
+      setOtpStep(true); // Switch to OTP verification form
+    } catch (err) {
+      alert(`Unexpected error:
+${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        alert(`Login error: $
+{error.message}`);
+      } else {
+        alert('Login successful!');
+        // Optionally redirect to your app's main page
+      }
+    } catch (err) {
+      alert(`Unexpected error:
+${err.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleVerifyOtp = async (e) => {
@@ -57,37 +83,34 @@ ${error.message}`);
       const { data, error } = await supabase.auth.verifyOtp({
         email,
         token: otp,
-        type: 'email', // Verification type
+        type: 'signup', // Verifies the email specifically for sign-up
       });
-      if (error) {
-        alert(`OTP verification error:
-${error.message}`);
-      } else {
-        alert('Verification successful! You are now logged in.');
-        console.log('User session:', data);
-        // Optionally redirect or update UI after successful login
-      }
-    } catch (error) {
-      alert(`Unexpected error: ${error.message}`);
-    }
 
-    setLoading(false);
+      if (error) {
+        alert(`OTP verification error: $
+{error.message}`);
+      } else {
+        alert('Account verified successfully! You can now log in.');
+        setOtpStep(false); // Go back to login
+        setIsSigningUp(false); // Switch to login mode
+      }
+    } catch (err) {
+      alert(`Unexpected error:
+${err.message}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="container">
-      <h2 className="title">
-        {otpStep
-          ? 'Enter Verification Code'
-          : isSigningUp
-          ? 'Sign Up'
-          : 'Log In'}
-      </h2>
+      <h2 className="title">{otpStep ? 'Verify Account' : isSigningUp ? 'Sign Up' : 'Log In'}</h2>
 
       <form
         className="form"
-        onSubmit={otpStep ? handleVerifyOtp : handleAuth} // Handle different steps
+        onSubmit={!otpStep ? (isSigningUp ? handleSignUp : handleLogin) : handleVerifyOtp}
       >
+        {/* Email Field */}
         <input
           type="email"
           placeholder="Enter your email"
@@ -95,26 +118,55 @@ ${error.message}`);
           onChange={(e) => setEmail(e.target.value)}
           className="input"
           required
-          disabled={otpStep} // Disable email input after the OTP step
+          disabled={otpStep}
         />
 
-        {/* Show Password Field Only During Signup */}
-        {!otpStep && isSigningUp && (
+        {/* Password Field */}
+        {!otpStep && (
           <input
             type="password"
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="input"
-            required
+            required={isSigningUp || !isSigningUp}
           />
         )}
 
-        {/* OTP Input Field for Verification Step */}
+        {/* Additional Fields for Sign-Up */}
+        {isSigningUp && !otpStep && (
+          <>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="input"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Enter a unique username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="input"
+              required
+            />
+            <input
+              type="tel"
+              placeholder="Optional: Enter your phone number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="input"
+            />
+          </>
+        )}
+
+        {/* OTP Verification Input */}
         {otpStep && (
           <input
             type="text"
-            placeholder="Enter the code"
+            placeholder="Enter the code sent to your email"
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
             className="input"
@@ -126,21 +178,20 @@ ${error.message}`);
           {loading
             ? 'Loading...'
             : otpStep
-            ? 'Verify Code'
+            ? 'Verify Account'
             : isSigningUp
             ? 'Sign Up'
-            : 'Send Login Code'}
+            : 'Log In'}
         </button>
       </form>
 
+      {/* Switch Between Login and Sign-Up */}
       {!otpStep && (
         <button
           onClick={() => setIsSigningUp(!isSigningUp)}
           className="button switch"
         >
-          {isSigningUp
-            ? 'Switch to Log In'
-            : 'Switch to Sign Up'}
+          {isSigningUp ? 'Switch to Log In' : 'Switch to Sign Up'}
         </button>
       )}
     </div>
@@ -148,3 +199,4 @@ ${error.message}`);
 };
 
 export default Auth;
+          
