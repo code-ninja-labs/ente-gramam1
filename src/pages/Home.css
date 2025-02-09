@@ -1,60 +1,59 @@
-/* Main container for all icons */
+/* Main container to center icons on the page */
 .icon-container {
   display: flex;
-  gap: 1rem; /* Space between icons */
+  flex-wrap: wrap; /* Allow icons to wrap on smaller screens */
   justify-content: center; /* Center icons horizontally */
-  flex-wrap: wrap; /* Wrap on smaller screens */
-  margin: 2rem 0; /* Add spacing around the icon section */
+  gap: 1.5rem; /* Space between the icons */
+  margin-top: 2rem; /* Space above the icons section */
 }
 
-/* Wrapper around each individual icon */
+/* Individual round square containers for each icon */
 .icon-wrapper {
-  width: 100px; /* Fixed width for square shape */
-  height: 100px; /* Fixed height for square shape */
-  background-color: #1e1e1e; /* Dark background for contrast */
-  border-radius: 20px; /* Rounded edges */
+  width: 100px; /* Set fixed width for square shape */
+  height: 100px; /* Set fixed height for square shape */
+  background-color: #1e1e1e; /* Dark gray/black background */
+  border-radius: 20px; /* Rounded corners for a "round square" effect */
   display: flex;
   flex-direction: column; /* Stack icon and label vertically */
-  align-items: center; /* Center content horizontally */
-  justify-content: center; /* Center content vertically */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Optional shadow for depth */
-  color: #fff; /* White text/icons */
-  text-align: center;
-  cursor: pointer; /* Add pointer for interaction */
-  transition: transform 0.3s ease; /* Subtle scaling on hover */
+  align-items: center; /* Align icon and text in the center */
+  justify-content: center; /* Vertically center the content */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for a better look */
+  text-align: center; /* Center text */
+  color: #fff; /* White text */
+  transition: transform 0.3s ease; /* Add smooth hover effect */
 }
 
-/* Hover effect for the icon wrapper */
-.icon-wrapper:hover {
-  transform: scale(1.1); /* Slight scaling on hover */
-  background-color: #ff4500; /* Optional: Change to orange on hover */
-}
-
-/* The actual icon inside */
+/* Styling for the icon */
 .icon {
-  font-size: 2rem; /* Adjust size of the icon */
-  margin-bottom: 0.5rem; /* Space between icon and label */
+  font-size: 2rem; /* Set default size for the icon */
+  margin-bottom: 0.5rem; /* Add spacing between icon and label */
 }
 
-/* Label/text under the icon */
+/* Text/label below the icon */
 .icon-wrapper p {
-  font-size: 1rem; /* Size of the label */
-  margin: 0; /* Remove unwanted margins */
-  color: #ccc; /* Slightly dimmed color for labels */
+  margin: 0; /* Remove unwanted margin */
+  font-size: 0.9rem; /* Adjust text size */
+  color: #ccc; /* Light gray for the text label */
 }
 
-/* Responsive adjustments */
+/* Hover effect: scale and background color change */
+.icon-wrapper:hover {
+  transform: scale(1.1); /* Slightly enlarge the box on hover */
+  background-color: #0078d4; /* Optional: blue background on hover */
+}
+
+/* Responsive adjustments for smaller screens */
 @media screen and (max-width: 768px) {
   .icon-wrapper {
-    width: 80px; /* Smaller square on tablets */
+    width: 80px; /* Smaller size for tablets */
     height: 80px;
   }
 
   .icon {
-    font-size: 1.5rem; /* Adjust icon size */
+    font-size: 1.5rem; /* Adjust icon size for smaller screens */
   }
 
   .icon-wrapper p {
-    font-size: 0.9rem; /* Reduce label text size */
+    font-size: 0.8rem; /* Adjust text size */
   }
 }
