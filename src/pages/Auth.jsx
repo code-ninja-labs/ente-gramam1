@@ -7,65 +7,35 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
+  const [otp, setOtp] = useState(''); // Stores OTP entered by the user
   const [phone, setPhone] = useState('');
-  const [otp, setOtp] = useState(''); // Stores the OTP entered by the user
   const [isSigningUp, setIsSigningUp] = useState(false);
+  const [otpStep, setOtpStep] = useState(false); // Switch between form and OTP step
   const [loading, setLoading] = useState(false);
-  const [otpStep, setOtpStep] = useState(false); // True if waiting for OTP after email submission
 
-  const handleSignUp = async (e) => {
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // Sign up step: Create the user and send verification email (OTP)
-      const { data, error } = await supabase.auth.signUp({
+      // Step 1: Send Signup OTP
+      const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           data: {
             name,
-            username, // Store additional user metadata in Supabase
+            username,
           },
-          phone, // Optional phone number (used for metadata only in this case)
+          phone, // Optionally save phone as metadata
         },
       });
-
       if (error) {
-        alert(`Sign-up error: $
-{error.message}`);
-        setLoading(false);
-        return;
-      }
-
-      alert(
-        `Sign-up successful! We've sent a code to your email. Enter the code to verify your account.`
-      );
-      setOtpStep(true); // Switch to OTP verification form
-    } catch (err) {
-      alert(`Unexpected error:
-${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) {
-        alert(`Login error: $
+        alert(`Error: $
 {error.message}`);
       } else {
-        alert('Login successful!');
-        // Optionally redirect to your app's main page
+        alert('Sign-up successful! Check your email for the verification code.');
+        setOtpStep(true); // Switch to OTP step
       }
     } catch (err) {
       alert(`Unexpected error:
@@ -75,24 +45,47 @@ ${err.message}`);
     }
   };
 
-  const handleVerifyOtp = async (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      // Step 1: Send Login OTP
+      const { error } = await supabase.auth.signInWithOtp({ email });
+      if (error) {
+        alert(`Error: $
+{error.message}`);
+      } else {
+        alert('Login OTP sent! Check your email.');
+        setOtpStep(true); // Switch to OTP step
+      }
+    } catch (err) {
+      alert(`Unexpected error:
+${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleOtpVerify = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      // Step 2: Verify OTP
       const { data, error } = await supabase.auth.verifyOtp({
         email,
-        token: otp,
-        type: 'signup', // Verifies the email specifically for sign-up
+        token: otp, // The OTP entered by the user
+        type: isSigningUp ? 'signup' : 'magiclink', // Specify the type of verification
       });
 
       if (error) {
         alert(`OTP verification error: $
 {error.message}`);
       } else {
-        alert('Account verified successfully! You can now log in.');
-        setOtpStep(false); // Go back to login
-        setIsSigningUp(false); // Switch to login mode
+        alert('Account verified successfully!');
+        setOtpStep(false); // Reset the view
+        setIsSigningUp(false); // Return to login mode
       }
     } catch (err) {
       alert(`Unexpected error:
@@ -108,7 +101,7 @@ ${err.message}`);
 
       <form
         className="form"
-        onSubmit={!otpStep ? (isSigningUp ? handleSignUp : handleLogin) : handleVerifyOtp}
+        onSubmit={otpStep ? handleOtpVerify : isSigningUp ? handleSignupSubmit : handleLoginSubmit}
       >
         {/* Email Field */}
         <input
@@ -118,23 +111,23 @@ ${err.message}`);
           onChange={(e) => setEmail(e.target.value)}
           className="input"
           required
-          disabled={otpStep}
+          disabled={otpStep} // Disable email input during the OTP step
         />
 
         {/* Password Field */}
-        {!otpStep && (
+        {!otpStep && isSigningUp && (
           <input
             type="password"
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="input"
-            required={isSigningUp || !isSigningUp}
+            required
           />
         )}
 
         {/* Additional Fields for Sign-Up */}
-        {isSigningUp && !otpStep && (
+        {!otpStep && isSigningUp && (
           <>
             <input
               type="text"
@@ -162,7 +155,7 @@ ${err.message}`);
           </>
         )}
 
-        {/* OTP Verification Input */}
+        {/* OTP Field for Verification Step */}
         {otpStep && (
           <input
             type="text"
@@ -199,4 +192,4 @@ ${err.message}`);
 };
 
 export default Auth;
-          
+        
