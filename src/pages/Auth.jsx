@@ -5,68 +5,89 @@ import './Auth.css'; // CSS file
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [otp, setOtp] = useState(''); // Stores the OTP entered by the user
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [forgotPassword, setForgotPassword] = useState(false);
+  const [otpStep, setOtpStep] = useState(false); // True if waiting for OTP after email submission
 
   const handleAuth = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      if (forgotPassword) {
-        const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: 'http://yourdomain.com/update-password',
+      if (isSigningUp) {
+        // Initial Sign Up Step: Send OTP to email
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
         });
-        if (error) alert(`Password reset error: $
+        if (error) {
+          alert(`Sign-up error: $
 {error.message}`);
-        else alert('Password reset email sent! Check your email.');
-      } else if (isSigningUp) {
-        const { error } = await supabase.auth.signUp({ email, password });
-        if (error) alert(`Sign-up error:
-${error.message}`);
-        else alert('Sign-up successful! Check your email for a magic link to confirm your account.');
+        } else {
+          alert('Sign-up successful! Check your email for the verification code.');
+          setOtpStep(true); // Switch to OTP form
+        }
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) alert(`Login error: $
-{error.message}`);
-        else alert('Login successful!');
+        // Initial Log In Step: Send OTP to email
+        const { error } = await supabase.auth.signInWithOtp({
+          email,
+        });
+        if (error) {
+          alert(`Login error:
+${error.message}`);
+        } else {
+          alert('Login OTP sent! Check your email.');
+          setOtpStep(true); // Switch to OTP form
+        }
       }
     } catch (error) {
-      alert(`Unexpected error:
-${error.message}`);
+      alert(`Unexpected error: $
+{error.message}`);
     }
 
     setLoading(false);
   };
 
-  const handleMagicLink = async () => {
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
     setLoading(true);
+
     try {
-      const { error } = await supabase.auth.signInWithOtp({
+      const { data, error } = await supabase.auth.verifyOtp({
         email,
-        options: { emailRedirectTo: 'http://yourdomain.com/welcome' },
+        token: otp,
+        type: 'email', // Verification type
       });
-      if (error) alert(`Magic link login error: $
-{error.message}`);
-      else alert('Magic link sent! Check your inbox to log in.');
-    } catch (error) {
-      alert(`Unexpected error:
+      if (error) {
+        alert(`OTP verification error:
 ${error.message}`);
+      } else {
+        alert('Verification successful! You are now logged in.');
+        console.log('User session:', data);
+        // Optionally redirect or update UI after successful login
+      }
+    } catch (error) {
+      alert(`Unexpected error: ${error.message}`);
     }
+
     setLoading(false);
   };
 
   return (
     <div className="container">
       <h2 className="title">
-        {forgotPassword
-          ? 'Reset Password'
+        {otpStep
+          ? 'Enter Verification Code'
           : isSigningUp
           ? 'Sign Up'
           : 'Log In'}
       </h2>
-      <form className="form" onSubmit={handleAuth}>
+
+      <form
+        className="form"
+        onSubmit={otpStep ? handleVerifyOtp : handleAuth} // Handle different steps
+      >
         <input
           type="email"
           placeholder="Enter your email"
@@ -74,10 +95,11 @@ ${error.message}`);
           onChange={(e) => setEmail(e.target.value)}
           className="input"
           required
+          disabled={otpStep} // Disable email input after the OTP step
         />
-        
-        {/* Show Password Field only in Sign-Up and Log-In Mode */}
-        {!forgotPassword && (
+
+        {/* Show Password Field Only During Signup */}
+        {!otpStep && isSigningUp && (
           <input
             type="password"
             placeholder="Enter your password"
@@ -88,37 +110,30 @@ ${error.message}`);
           />
         )}
 
+        {/* OTP Input Field for Verification Step */}
+        {otpStep && (
+          <input
+            type="text"
+            placeholder="Enter the code"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+            className="input"
+            required
+          />
+        )}
+
         <button type="submit" className="button" disabled={loading}>
           {loading
             ? 'Loading...'
-            : forgotPassword
-            ? 'Send Reset Email'
+            : otpStep
+            ? 'Verify Code'
             : isSigningUp
             ? 'Sign Up'
-            : 'Log In'}
+            : 'Send Login Code'}
         </button>
       </form>
 
-      {!forgotPassword && (
-        <button
-          onClick={handleMagicLink}
-          className="button magic-link"
-          disabled={loading}
-        >
-          {loading ? 'Sending...' : 'Send Magic Link'}
-        </button>
-      )}
-
-      <button
-        onClick={() => setForgotPassword(!forgotPassword)}
-        className="button switch"
-      >
-        {forgotPassword
-          ? 'Back to Log In'
-          : 'Forgot Password?'}
-      </button>
-
-      {!forgotPassword && (
+      {!otpStep && (
         <button
           onClick={() => setIsSigningUp(!isSigningUp)}
           className="button switch"
