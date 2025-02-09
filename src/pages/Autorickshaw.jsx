@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from "../supabaseClient"; // Ensure the path to supabaseClient is correct
-import "./Autorickshaw.css"; // Import the CSS file
+import { supabase } from "../supabaseClient";
+import "./Autorickshaw.css";
 
 const Autorickshaw = () => {
   const [drivers, setDrivers] = useState([]);
@@ -40,10 +40,14 @@ const Autorickshaw = () => {
   }, []);
 
   return (
-    <div className="autorickshaw-container">
+    <div>
+      {/* Simple heading and paragraph */}
       <h1 className="autorickshaw-header">Autorickshaw Drivers</h1>
-      <p>Details about autorickshaw drivers available in your area.</p>
+      <p className="autorickshaw-description">
+        Find details about autorickshaw drivers available in your area.
+      </p>
 
+      {/* Driver list */}
       {loading ? (
         <p className="autorickshaw-loading">Loading driver details...</p>
       ) : error ? (
@@ -65,6 +69,12 @@ const Autorickshaw = () => {
           ))}
         </div>
       )}
+
+      {/* Shapes below the contact list */}
+      <div className="shapes-container">
+        <div className="circle-shape"></div>
+        <div className="triangle-shape"></div>
+      </div>
     </div>
   );
 };
