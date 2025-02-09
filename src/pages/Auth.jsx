@@ -1,30 +1,32 @@
 import React, { useState } from 'react';
-import { supabase } from '../supabaseClient'; // Ensure Supabase is configured properly
-import './Auth.css'; // Your CSS for styling
+import { supabase } from '../supabaseClient'; // Supabase client for auth
+import './Auth.css'; // CSS for styling
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSigningUp, setIsSigningUp] = useState(false); // State to toggle between Login and Signup
+  const [isSigningUp, setIsSigningUp] = useState(false); // Toggle between Sign Up and Log In
   const [loading, setLoading] = useState(false);
 
-  // Sign up using email and password
+  // Handle Sign-Up
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // Use Supabase Auth's signUp method
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          emailRedirectTo: 'http://localhost:3000/auth', // Add redirect URL for email confirmation
+        },
       });
 
       if (error) {
         alert(`Sign-up error: $
 {error.message}`);
       } else {
-        alert('Sign-up successful! Check your email to confirm.');
+        alert('Sign-up successful! Please check your email to confirm your account.');
       }
     } catch (err) {
       alert(`Unexpected error during sign up:
@@ -34,14 +36,13 @@ ${err.message}`);
     }
   };
 
-  // Log in using email and password
+  // Handle Login
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // Use Supabase Auth's signInWithPassword method
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -64,11 +65,11 @@ ${err.message}`);
     <div className="container">
       <h2 className="title">{isSigningUp ? 'Sign Up' : 'Log In'}</h2>
 
+      {/* Auth Form */}
       <form
         className="form"
         onSubmit={isSigningUp ? handleSignupSubmit : handleLoginSubmit}
       >
-        {/* Email Input */}
         <input
           type="email"
           placeholder="Enter your email"
@@ -77,31 +78,6 @@ ${err.message}`);
           className="input"
           required
         />
-
-        {/* Password Input */}
         <input
           type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="input"
-          required
-        />
-
-        <button type="submit" className="button" disabled={loading}>
-          {loading ? 'Loading...' : isSigningUp ? 'Sign Up' : 'Log In'}
-        </button>
-      </form>
-
-      {/* Toggle Button: Switch Between Sign Up and Log In */}
-      <button
-        onClick={() => setIsSigningUp(!isSigningUp)}
-        className="button switch"
-      >
-        {isSigningUp ? 'Switch to Log In' : 'Switch to Sign Up'}
-      </button>
-    </div>
-  );
-};
-
-export default Auth;
+        
