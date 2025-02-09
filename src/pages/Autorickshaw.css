@@ -1,35 +1,31 @@
-/* Container with Glassmorphism Effect */
-.autorickshaw-container {
-  padding: 20px;
-  text-align: center;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  backdrop-filter: blur(15px); /* Apply blur on the background */
-  -webkit-backdrop-filter: blur(15px); /* For Safari support */
-  border-radius: 15px; /* Rounded edges for modern UI */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Soft white border */
-  margin: 20px auto;
-  max-width: 800px; /* Center and constrain the container */
-}
-
-/* Header */
+/* Heading and Description */
 .autorickshaw-header {
-  margin-bottom: 20px;
+  text-align: center;
   font-size: 24px;
   font-weight: bold;
-  color: #fff;
+  margin-top: 20px;
+  color: #333;
+}
+
+.autorickshaw-description {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #555;
 }
 
 /* Loading and Error Styling */
 .autorickshaw-loading {
-  color: #fff;
+  color: #555;
   font-size: 16px;
+  text-align: center;
 }
 
 .autorickshaw-error {
-  color: #ff6b6b; /* Soft red */
+  color: red;
   font-weight: bold;
+  text-align: center;
 }
 
 /* List of Drivers */
@@ -71,12 +67,12 @@
 .autorickshaw-name {
   font-size: 16px;
   font-weight: bold;
-  color: #fff; /* White text for contrast */
+  color: #333;
   margin: 0px;
 }
 
 .autorickshaw-phone {
   font-size: 14px;
-  color: #d1d1d1; /* Soft gray for phone numbers */
+  color: #555;
   margin: 5px 0 0 0;
 }
