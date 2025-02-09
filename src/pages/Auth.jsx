@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
-import { supabase } from '../supabaseClient'; // Supabase client for auth
-import './Auth.css'; // CSS for styling
+import { supabase } from '../supabaseClient'; // Ensure your environment variables are properly set
+import './Auth.css'; // Styles for the form
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSigningUp, setIsSigningUp] = useState(false); // Toggle between Sign Up and Log In
+  const [isSigningUp, setIsSigningUp] = useState(false); // Toggle between Login and Signup
   const [loading, setLoading] = useState(false);
 
-  // Handle Sign-Up
+  /**
+   * Handle user signup
+   */
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      // Call Supabase's sign up method
       const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: 'http://localhost:3000/auth', // Add redirect URL for email confirmation
+          emailRedirectTo: 'https://your-production-domain.com/auth', // Replace with your production domain
         },
       });
 
@@ -36,12 +39,15 @@ ${err.message}`);
     }
   };
 
-  // Handle Login
+  /**
+   * Handle user login
+   */
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+      // Call Supabase's sign-in method
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -65,11 +71,11 @@ ${err.message}`);
     <div className="container">
       <h2 className="title">{isSigningUp ? 'Sign Up' : 'Log In'}</h2>
 
-      {/* Auth Form */}
       <form
         className="form"
         onSubmit={isSigningUp ? handleSignupSubmit : handleLoginSubmit}
       >
+        {/* Email Input */}
         <input
           type="email"
           placeholder="Enter your email"
@@ -78,6 +84,31 @@ ${err.message}`);
           className="input"
           required
         />
+
+        {/* Password Input */}
         <input
           type="password"
-        
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="input"
+          required
+        />
+
+        <button type="submit" className="button" disabled={loading}>
+          {loading ? 'Loading...' : isSigningUp ? 'Sign Up' : 'Log In'}
+        </button>
+      </form>
+
+      {/* Switch Between Sign Up and Log In */}
+      <button
+        onClick={() => setIsSigningUp(!isSigningUp)}
+        className="button switch"
+      >
+        {isSigningUp ? 'Switch to Log In' : 'Switch to Sign Up'}
+      </button>
+    </div>
+  );
+};
+
+export default Auth;
