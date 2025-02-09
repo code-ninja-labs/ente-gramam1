@@ -1,74 +1,69 @@
-import React, { useEffect, useState } from 'react';
-import { supabase } from '../supabaseClient'; // Ensure the path to supabaseClient is correct
+import React, { useEffect, useState } from "react";
+import { supabase } from "../supabaseClient"; // Ensure the path to supabaseClient is correct
+import "./Autorickshaw.css"; // Import the CSS file
 
 const Autorickshaw = () => {
-  const [drivers, setDrivers] = useState([]); // Driver data
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state for debugging
+  const [drivers, setDrivers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchDrivers = async () => {
       try {
-        setLoading(true); // Display loading state
+        setLoading(true);
 
-        // Fetch driver details
         const { data, error } = await supabase
-          .from('autorickshaw-drivers') // Check correct table name
-          .select('*'); // Fetch all columns
+          .from("autorickshaw-drivers") 
+          .select("*");
 
-        if (error) {
-          throw error; // Handle any errors from Supabase
-        }
+        if (error) throw error;
 
         if (data.length === 0) {
-          setError('No drivers found in the database.');
+          setError("No drivers found.");
           setDrivers([]);
         } else {
           setDrivers(data);
-          setError(null); // Clear error state
+          setError(null);
         }
       } catch (err) {
-        // Categorize errors
-        if (err.message.includes('Invalid API key')) {
-          setError('Invalid API key: Please check your Supabase configuration.');
+        if (err.message.includes("Invalid API key")) {
+          setError("Invalid API key: Please check your Supabase configuration.");
         } else {
           setError(`Error: ${err.message}`);
         }
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
 
-    fetchDrivers(); // Trigger the function on component load
+    fetchDrivers();
   }, []);
 
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h1>Autorickshaw Drivers</h1>
-      <p>Find details about autorickshaw drivers available in your area.</p>
+    <div className="autorickshaw-container">
+      <h1 className="autorickshaw-header">Autorickshaw Drivers</h1>
+      <p>Details about autorickshaw drivers available in your area.</p>
 
-      {/* Show loading, errors, or driver data */}
       {loading ? (
-        <p>Loading driver details...</p>
+        <p className="autorickshaw-loading">Loading driver details...</p>
       ) : error ? (
-        <p style={{ color: 'red', fontWeight: 'bold' }}>{error}</p>
+        <p className="autorickshaw-error">{error}</p>
       ) : (
-        <table border="1" style={{ margin: '20px auto', width: '80%', textAlign: 'center' }}>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Phone</th>
-            </tr>
-          </thead>
-          <tbody>
-            {drivers.map((driver, index) => (
-              <tr key={index}>
-                <td>{driver.name}</td>
-                <td>{driver.phone}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="autorickshaw-list">
+          {drivers.map((driver, index) => (
+            <div key={index} className="autorickshaw-card">
+              <img
+                src={driver.avatar || "https://via.placeholder.com/50"}
+                alt="Avatar"
+                className="autorickshaw-avatar"
+              />
+              <div className="autorickshaw-details">
+                <p className="autorickshaw-name">{driver.name}</p>
+                <p className="autorickshaw-phone">{driver.phone}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
