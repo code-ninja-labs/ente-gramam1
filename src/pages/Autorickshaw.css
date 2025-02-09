@@ -33,7 +33,7 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  position: relative; /* Set position for the parent to allow absolute positioning inside */
+  position: relative; /* Set position relative to handle absolute shapes */
 }
 
 /* Individual Driver Card */
@@ -48,7 +48,7 @@
   width: 90%;
   max-width: 400px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  z-index: 2; /* Place cards above the background shapes */
+  z-index: 2; /* Place content above the background shapes */
 }
 
 .autorickshaw-avatar {
@@ -56,9 +56,10 @@
   height: 50px;
   border-radius: 50%;
   margin-right: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Add slight border to avatar */
 }
 
+/* Driver Details */
 .autorickshaw-details {
   text-align: left;
 }
@@ -66,13 +67,13 @@
 .autorickshaw-name {
   font-size: 16px;
   font-weight: bold;
-  color: #333;
+  color: #fff; /* Bright white for better contrast */
   margin: 0px;
 }
 
 .autorickshaw-phone {
   font-size: 14px;
-  color: #555;
+  color: #e0e0e0; /* Light gray for subtle contrast */
   margin: 5px 0 0 0;
 }
 
