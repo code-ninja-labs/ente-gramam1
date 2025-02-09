@@ -92,3 +92,15 @@
   color: black;
   border: 2px solid #555;
 }
+/* Disabled Input (for email during OTP step) */
+.input:disabled {
+  background-color: #f0f0f0;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* Highlight OTP Input */
+.input[placeholder="Enter the code"] {
+  border: 2px dashed #ff5722;
+  background: #fff7f0;
+}
