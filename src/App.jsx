@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
-import Autorickshaw from './pages/Autorickshaw'; // Import the new component
+import Autorickshaw from './pages/Autorickshaw'; // Import the existing component
+import AddAutorickshawDriver from './pages/addadr'; // Import the new add driver page
 import Auth from './pages/Auth'; // Import the Auth component
 import { supabase } from './supabaseClient'; // Import Supabase client
 
@@ -39,10 +40,15 @@ function App() {
           path="/autorickshaw"
           element={<ProtectedRoute element={<Autorickshaw />} session={session} />}
         />
+
+        {/* Protected Route: Add Autorickshaw Driver */}
+        <Route
+          path="/addadr"
+          element={<ProtectedRoute element={<AddAutorickshawDriver />} session={session} />}
+        />
       </Routes>
     </Router>
   );
 }
 
 export default App;
-    
