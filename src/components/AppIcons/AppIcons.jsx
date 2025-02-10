@@ -9,6 +9,7 @@ const AppIcons = () => {
     { id: 1, name: "Lawn Mower", icon: "🌱" },
     { id: 2, name: "Autorickshaw", icon: "🛺", path: "/autorickshaw" },
     { id: 3, name: "Food Delivery", icon: "🍲" },
+    { id: 4, name: "Add Auto Driver", icon: "🚖", path: "/add-auto-driver" }, // New Icon
   ];
 
   return (
@@ -17,8 +18,8 @@ const AppIcons = () => {
         <div
           key={app.id}
           className="icon-item"
-          onClick={() => app.path && navigate(app.path)}
-          style={{ cursor: app.path ? "pointer" : "default" }}
+          onClick={() => app.path && navigate(app.path)} // Navigate only if 'path' exists
+          style={{ cursor: app.path ? "pointer" : "default" }} // Pointer cursor for interactive icons
         >
           <div className="icon">{app.icon}</div>
           <div className="icon-container"></div>
