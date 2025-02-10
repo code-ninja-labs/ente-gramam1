@@ -1,50 +1,47 @@
 import React, { useState } from "react";
-import { supabase } from "../supabaseClient"; // Ensure this is correctly imported and set up
+import { supabase } from "../supabaseClient"; // Make sure your Supabase client is correctly configured and imported
 
 export default function AddAutorickshawDriver() {
-  // State management
+  // State for form fields and messages
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // Form submit handler
+  // Submit handler
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form behavior (like refreshing the page)
-    setLoading(true); // Show loading state during submission
+    e.preventDefault(); // Stop page refresh on submit
+    setLoading(true);
 
-    // Ensure the user provided the required inputs
+    // Input validation
     if (!name || !phone) {
-      setMessage("Error: Please provide both name and phone."); // Alert about missing fields
+      setMessage("Error: Please provide both name and phone."); // Validation error
       setLoading(false);
-      return; // Exit early from the function
+      return;
     }
 
     try {
-      // Insert into 'autorickshaw-drivers' in your Supabase database
-      const { error } = await supabase.from("autorickshaw-drivers").insert([
-        {
-          name: name.trim(), // Clean and send 'name'
-          phone: phone.trim(), // Clean and send 'phone'
-        },
-      ]);
+      // Insert into Supabase table
+      const { error } = await supabase
+        .from("autorickshaw-drivers")
+        .insert([{ name: name.trim(), phone: phone.trim() }]); // Clean inputs
 
       if (error) {
-        // Handle errors returned by Supabase
+        // Proper string interpolation for error message
         setMessage(`Error: $
-{error.message}`); // Display error message
+{error.message}`);
       } else {
-        // Handle success
-        setMessage("Driver added successfully!"); // Display success message
-        setName(""); // Reset input field for 'name'
-        setPhone(""); // Reset input field for 'phone'
+        // Success
+        setMessage("Driver added successfully!");
+        setName(""); // Clear form fields
+        setPhone("");
       }
     } catch (err) {
-      // Handle unexpected errors (e.g., network issues)
+      // Catch unexpected errors
       setMessage(`Error:
 ${err.message}`);
     } finally {
-      setLoading(false); // Disable loading state regardless of success or failure
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -63,7 +60,6 @@ ${err.message}`);
 {message.includes("Error") ? "red" : "green"}`,
             borderRadius: "5px",
           }}
-          role="alert"
         >
           {message}
         </div>
@@ -79,7 +75,6 @@ ${err.message}`);
           <input
             type="text"
             id="name"
-            aria-label="Driver Name"
             placeholder="Enter driver name"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -101,7 +96,6 @@ ${err.message}`);
           <input
             type="text"
             id="phone"
-            aria-label="Driver Phone"
             placeholder="Enter driver phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -118,7 +112,7 @@ ${err.message}`);
         {/* Submit Button */}
         <button
           type="submit"
-          disabled={loading} // Disable the button while loading
+          disabled={loading}
           style={{
             width: "100%",
             padding: "10px",
