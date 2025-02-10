@@ -129,3 +129,5 @@ ${err.message}`);
     </div>
   );
 }
+
+export default Autorickshaw;
