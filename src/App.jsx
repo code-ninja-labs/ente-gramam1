@@ -52,8 +52,8 @@ function App() {
           element={<ProtectedRoute element={<AddAutorickshawDriver />} session={session} />}
         />
         <Route
-  path="/adadr"
-  element={<ProtectedRoute element={<Adadr />} session={session} />}
+  path="/addadr"
+  element={<ProtectedRoute element={<Addadr />} session={session} />}
 />
       </Routes>
     </Router>
