@@ -1,50 +1,45 @@
 import React, { useState } from "react";
-import { supabase } from "../supabaseClient"; // Ensure this is correctly setup and points to your Supabase client
+import { supabase } from "../supabaseClient"; // Make sure your Supabase client is correctly imported
 
 export default function AddAutorickshawDriver() {
-  // State to manage form data, loading status, and success/error messages
+  // Updated state to reflect 'phone' instead of 'number'
   const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent browser from refreshing the page on form submission
-    setLoading(true); // Set loading state to true
+    e.preventDefault();
+    setLoading(true);
 
-    // Validate user input
-    if (!name || !number) {
-      setMessage("Error: Please provide both name and number.");
+    if (!name || !phone) {
+      setMessage("Error: Please provide both name and phone."); // Input validation
       setLoading(false);
       return;
     }
 
     try {
-      // Insert data into the "autorickshaw-drivers" table in Supabase
+      // Replace 'number' with 'phone'
       const { error } = await supabase.from("autorickshaw-drivers").insert([
         {
-          name: name.trim(),   // Trim spaces from name input
-          number: number.trim(), // Trim spaces from number input
+          name: name.trim(),   // Insert 'name' column
+          phone: phone.trim(), // Insert 'phone' column
         },
       ]);
 
       if (error) {
-        // Handle Supabase errors
-        setMessage(`Error:
-${error.message}`); // Corrected string template issues
+        setMessage(`Error: $
+{error.message}`); // Handle Supabase errors
       } else {
-        // If insert was successful
         setMessage("Driver added successfully!");
-        setName(""); // Reset the form field for 'name'
-        setNumber(""); // Reset the form field for 'number'
+        setName(""); // Reset name field
+        setPhone(""); // Reset phone field
       }
     } catch (err) {
-      // Handle any other unexpected errors
-      setMessage(`Error: $
-{err.message}`);
+      setMessage(`Error:
+${err.message}`); // Handle unexpected errors
     } finally {
-      setLoading(false); // Always stop loading after the process
+      setLoading(false);
     }
   };
 
@@ -52,15 +47,13 @@ ${error.message}`); // Corrected string template issues
     <div style={{ maxWidth: "400px", margin: "50px auto" }}>
       <h1>Add Autorickshaw Driver</h1>
 
-      {/* Message Section */}
       {message && (
         <div
           style={{
             marginBottom: "20px",
             padding: "10px",
             color: message.includes("Error") ? "red" : "green",
-            border: `1px solid
-${message.includes("Error") ? "red" : "green"}`,
+            border: `1px solid ${message.includes("Error") ? "red" : "green"}`,
             borderRadius: "5px",
           }}
         >
@@ -68,7 +61,6 @@ ${message.includes("Error") ? "red" : "green"}`,
         </div>
       )}
 
-      {/* Form Section */}
       <form onSubmit={handleSubmit}>
         {/* Name Input */}
         <div style={{ marginBottom: "20px" }}>
@@ -92,18 +84,18 @@ ${message.includes("Error") ? "red" : "green"}`,
           />
         </div>
 
-        {/* Number Input */}
+        {/* Phone Input */}
         <div style={{ marginBottom: "20px" }}>
-          <label htmlFor="number" style={{ display: "block", marginBottom: "5px" }}>
-            Number
+          <label htmlFor="phone" style={{ display: "block", marginBottom: "5px" }}>
+            Phone
           </label>
           <input
             type="text"
-            id="number"
-            aria-label="Driver Number"
-            placeholder="Enter driver number"
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
+            id="phone"
+            aria-label="Driver Phone"
+            placeholder="Enter driver phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             required
             style={{
               width: "100%",
@@ -114,10 +106,9 @@ ${message.includes("Error") ? "red" : "green"}`,
           />
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
-          disabled={loading} // Disable the button while submitting
+          disabled={loading}
           style={{
             width: "100%",
             padding: "10px",
