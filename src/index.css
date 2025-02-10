@@ -26,19 +26,44 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  justify-content: center; /* Horizontal center */
+  align-items: center; /* Vertical center */
   min-width: 320px;
   min-height: 100vh;
   background-color: #000; /* Black background */
   color: #fff; /* White text color */
 }
 
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Auto-fit dynamic content */
+  gap: 1rem; /* Add spacing between items */
+  padding: 2rem; /* Spacing inside the container */
+  width: 100%; /* Allow full width */
+  max-width: 1200px; /* Optional: Limit maximum width */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e; /* Dark gray background for each item */
+  border-radius: 8px;
+  padding: 1rem;
+  color: #ccc; /* Light gray text */
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Headings */
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
   color: #fff; /* Force white text for headings */
 }
 
+/* Button Design */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -60,6 +85,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Light Mode Adjustments */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547; /* Dark text for light mode */
