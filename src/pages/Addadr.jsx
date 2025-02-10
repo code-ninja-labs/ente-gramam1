@@ -1,132 +1,80 @@
 import React, { useState } from "react";
-import { supabase } from "../supabaseClient";
+import supabase from "../supabaseClient"; // Ensure this points to your client setup
 
-export default function AddAutorickshawDriver() {
-  // State for form fields and feedback
+const AddAdr = () => {
+  // States for form fields
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // Form submission handler
+  // Submission handler
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the form from refreshing the page
-    setLoading(true); // Start loading
+    e.preventDefault(); // Prevent default form submission behavior
+    setMessage(""); // Clear any previous messages
 
-    // Validate input fields
-    if (!name.trim() || !phone.trim()) {
-      setMessage("Error: Name and phone are required.");
-      setLoading(false);
-      return;
-    }
+    // Insert the data into Supabase table
+    const { data, error } = await supabase
+      .from("autorickshaw-drivers-list") // Table name
+      .insert([{ name, phone }]); // Insert rows as an array of objects
 
-    try {
-      // Insert data into 'autorickshaw-drivers-list' table in Supabase
-      const { data, error } = await supabase.from("autorickshaw-drivers-list") // Exact table name
-        .insert([{ name: name.trim(), phone: phone.trim() }]);
-
-      if (error) {
-        // Handle Supabase-specific errors
-        setMessage(`Error: $
-{error.message}`);
-      } else {
-        // Success feedback and reset form fields
-        setMessage("Driver added successfully!");
-        setName("");
-        setPhone("");
-      }
-    } catch (err) {
-      // Handle unexpected errors (like network issues)
-      setMessage(`Unexpected error:
-${err.message}`);
-    } finally {
-      setLoading(false); // Stop the loading spinner
+    if (error) {
+      console.error("Error adding record:", error.message);
+      setMessage("Error adding autorickshaw driver: " + error.message);
+    } else {
+      setMessage("Autorickshaw driver added successfully!");
+      // Clear the form fields
+      setName("");
+      setPhone("");
+      console.log("Added data:", data);
     }
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
-      <h1 style={{ marginBottom: "20px" }}>Add Autorickshaw Driver</h1>
-
-      {/* Display feedback message */}
-      {message && (
-        <div
-          style={{
-            marginBottom: "20px",
-            padding: "10px",
-            color: message.includes("Error") ? "red" : "green",
-            border: `1px solid $
-{message.includes("Error") ? "red" : "green"}`,
-            borderRadius: "5px",
-            backgroundColor: message.includes("Error")
-              ? "rgba(255, 0, 0, 0.1)"
-              : "rgba(0, 255, 0, 0.1)",
-          }}
-        >
-          {message}
-        </div>
-      )}
-
-      {/* Input form */}
+    <div style={{ maxWidth: "500px", margin: "0 auto" }}>
+      <h2>Add Autorickshaw Driver</h2>
       <form onSubmit={handleSubmit}>
-        {/* Name Input */}
         <div style={{ marginBottom: "20px" }}>
-          <label htmlFor="name" style={{ display: "block", marginBottom: "5px" }}>
-            Driver Name
+          <label>
+            Name:
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              placeholder="Enter driver's name"
+              style={{ width: "100%", padding: "8px", marginTop: "5px" }}
+            />
           </label>
-          <input
-            type="text"
-            id="name"
-            placeholder="Enter driver name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-            }}
-          />
         </div>
-
-        {/* Phone Input */}
         <div style={{ marginBottom: "20px" }}>
-          <label htmlFor="phone" style={{ display: "block", marginBottom: "5px" }}>
-            Driver Phone
+          <label>
+            Phone:
+            <input
+              type="text"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+              placeholder="Enter driver's phone number"
+              style={{ width: "100%", padding: "8px", marginTop: "5px" }}
+            />
           </label>
-          <input
-            type="text"
-            id="phone"
-            placeholder="Enter driver phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            style={{
-              width: "100%",
-              padding: "10px",
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-            }}
-          />
         </div>
-
-        {/* Submit Button */}
         <button
           type="submit"
-          disabled={loading}
           style={{
-            width: "100%",
-            padding: "10px",
-            backgroundColor: loading ? "#6c757d" : "#007bff",
-            color: "#fff",
+            background: "#007BFF",
+            color: "white",
+            padding: "10px 15px",
             border: "none",
-            borderRadius: "5px",
-            cursor: loading ? "not-allowed" : "pointer",
-            transition: "background-color 0.2s ease",
+            cursor: "pointer",
           }}
         >
-          {loading ? "Submitting..." : "Submit"}
+          Submit
         </button>
       </form>
+      {message && <p style={{ marginTop: "20px" }}>{message}</p>}
     </div>
   );
-}
+};
+
+export default AddAutorickshawDriver;
