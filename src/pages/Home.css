@@ -1,10 +1,12 @@
-/* Main container to center icons on the page */
+/* Main container to center icons on the page and add spacing from the edges */
 .icon-container {
   display: flex;
   flex-wrap: wrap; /* Allow icons to wrap on smaller screens */
   justify-content: center; /* Center icons horizontally */
   gap: 1.5rem; /* Space between the icons */
   margin-top: 2rem; /* Space above the icons section */
+  padding: 2rem; /* Add spacing inside the container to keep it away from edges */
+  box-sizing: border-box; /* Ensure padding doesn't affect the width of the container */
 }
 
 /* Individual round square containers for each icon */
