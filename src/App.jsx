@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Autorickshaw from './pages/Autorickshaw'; // Existing page
-import AddAutorickshawDriver from './pages/addadr'; // Page for adding drivers
+import Addadr from './pages/Addadr'; // Single import for Add Autorickshaw Driver
 import Auth from './pages/Auth'; // Auth page for login/signup
 import { supabase } from './supabaseClient'; // Import Supabase client
-import Addadr from './pages/Addadr';
 
 // Protected Route Component
 const ProtectedRoute = ({ element, session }) => {
@@ -49,12 +48,8 @@ function App() {
         {/* Protected Route: Add Autorickshaw Driver */}
         <Route
           path="/addadr"
-          element={<ProtectedRoute element={<AddAutorickshawDriver />} session={session} />}
+          element={<ProtectedRoute element={<Addadr />} session={session} />} // Consistent import and path
         />
-        <Route
-  path="/Addadr"
-  element={<ProtectedRoute element={<Addadr />} session={session} />}
-/>
       </Routes>
     </Router>
   );
