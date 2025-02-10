@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import supabase from "../config/supabaseClient"; // Adjust this path if needed
+import supabase from "../supabaseClient";
 
 function Addadr() {
   const [formData, setFormData] = useState({ name: "", phone: "" });
