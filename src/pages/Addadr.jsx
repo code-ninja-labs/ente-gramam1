@@ -1,47 +1,42 @@
 import React, { useState } from "react";
-import { supabase } from "../supabaseClient"; // Make sure your Supabase client is correctly configured and imported
+import { supabase } from "../supabaseClient"; // Ensure this is correctly imported
 
 export default function AddAutorickshawDriver() {
-  // State for form fields and messages
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // Submit handler
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Stop page refresh on submit
-    setLoading(true);
+    e.preventDefault(); // Prevent page refresh on form submission
+    setLoading(true); // Trigger loading state
 
-    // Input validation
-    if (!name || !phone) {
-      setMessage("Error: Please provide both name and phone."); // Validation error
+    if (!name.trim() || !phone.trim()) {
+      setMessage("Error: Name and phone are required."); // Validate inputs
       setLoading(false);
       return;
     }
 
     try {
-      // Insert into Supabase table
-      const { error } = await supabase
-        .from("autorickshaw-drivers")
-        .insert([{ name: name.trim(), phone: phone.trim() }]); // Clean inputs
+      // Insert into the new table 'autorickshaw-drivers-list'
+      const { data, error } = await supabase
+        .from("autorickshaw-drivers-list") // New table name
+        .insert([{ name: name.trim(), phone: phone.trim() }]); // Insert data as objects
 
       if (error) {
-        // Proper string interpolation for error message
         setMessage(`Error: $
-{error.message}`);
+{error.message}`); // Handle errors
       } else {
-        // Success
-        setMessage("Driver added successfully!");
-        setName(""); // Clear form fields
+        setMessage("Driver added successfully!"); // Show success
+        setName(""); // Clear the form fields
         setPhone("");
       }
     } catch (err) {
-      // Catch unexpected errors
-      setMessage(`Error:
+      // Handle unexpected errors
+      setMessage(`Unexpected error:
 ${err.message}`);
     } finally {
-      setLoading(false); // Stop loading spinner
+      setLoading(false); // End loading state
     }
   };
 
@@ -49,7 +44,7 @@ ${err.message}`);
     <div style={{ maxWidth: "400px", margin: "50px auto" }}>
       <h1>Add Autorickshaw Driver</h1>
 
-      {/* Message Area */}
+      {/* Message Display */}
       {message && (
         <div
           style={{
@@ -60,14 +55,14 @@ ${err.message}`);
 {message.includes("Error") ? "red" : "green"}`,
             borderRadius: "5px",
           }}
+          role="alert"
         >
           {message}
         </div>
       )}
 
-      {/* Form */}
+      {/* Form for Input */}
       <form onSubmit={handleSubmit}>
-        {/* Name Input */}
         <div style={{ marginBottom: "20px" }}>
           <label htmlFor="name" style={{ display: "block", marginBottom: "5px" }}>
             Name
@@ -88,7 +83,6 @@ ${err.message}`);
           />
         </div>
 
-        {/* Phone Input */}
         <div style={{ marginBottom: "20px" }}>
           <label htmlFor="phone" style={{ display: "block", marginBottom: "5px" }}>
             Phone
@@ -109,7 +103,6 @@ ${err.message}`);
           />
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
