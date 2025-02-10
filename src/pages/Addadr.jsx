@@ -8,35 +8,33 @@ export default function AddAutorickshawDriver() {
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page refresh on form submission
-    setLoading(true); // Trigger loading state
+    e.preventDefault(); // Prevent page refresh
+    setLoading(true);
 
     if (!name.trim() || !phone.trim()) {
-      setMessage("Error: Name and phone are required."); // Validate inputs
+      setMessage("Error: Name and phone are required."); // Validate fields
       setLoading(false);
       return;
     }
 
     try {
-      // Insert into the new table 'autorickshaw-drivers-list'
       const { data, error } = await supabase
-        .from("autorickshaw-drivers-list") // New table name
-        .insert([{ name: name.trim(), phone: phone.trim() }]); // Insert data as objects
+        .from("autorickshaw-drivers-list") // Match the exact table name
+        .insert([{ name: name.trim(), phone: phone.trim() }]); // Insert into table
 
       if (error) {
         setMessage(`Error: $
-{error.message}`); // Handle errors
+{error.message}`); // Show error if available
       } else {
-        setMessage("Driver added successfully!"); // Show success
-        setName(""); // Clear the form fields
+        setMessage("Driver added successfully!");
+        setName(""); // Clear input fields
         setPhone("");
       }
     } catch (err) {
-      // Handle unexpected errors
       setMessage(`Unexpected error:
 ${err.message}`);
     } finally {
-      setLoading(false); // End loading state
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -44,29 +42,27 @@ ${err.message}`);
     <div style={{ maxWidth: "400px", margin: "50px auto" }}>
       <h1>Add Autorickshaw Driver</h1>
 
-      {/* Message Display */}
+      {/* Display success or error messages */}
       {message && (
         <div
           style={{
             marginBottom: "20px",
             padding: "10px",
             color: message.includes("Error") ? "red" : "green",
-            border: `1px solid $
-{message.includes("Error") ? "red" : "green"}`,
+            border: `1px solid ${
+              message.includes("Error") ? "red" : "green"
+            }`,
             borderRadius: "5px",
           }}
-          role="alert"
         >
           {message}
         </div>
       )}
 
-      {/* Form for Input */}
+      {/* Data input form */}
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: "20px" }}>
-          <label htmlFor="name" style={{ display: "block", marginBottom: "5px" }}>
-            Name
-          </label>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
             id="name"
@@ -82,11 +78,8 @@ ${err.message}`);
             }}
           />
         </div>
-
         <div style={{ marginBottom: "20px" }}>
-          <label htmlFor="phone" style={{ display: "block", marginBottom: "5px" }}>
-            Phone
-          </label>
+          <label htmlFor="phone">Phone</label>
           <input
             type="text"
             id="phone"
@@ -102,7 +95,6 @@ ${err.message}`);
             }}
           />
         </div>
-
         <button
           type="submit"
           disabled={loading}
