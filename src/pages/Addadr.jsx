@@ -1,75 +1,77 @@
 import React, { useState } from "react";
+import supabase from "../config/supabaseClient"; // Adjust this path if needed
 
 function Addadr() {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: ""
-  });
+  const [formData, setFormData] = useState({ name: "", phone: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      // Send form data to the backend API
-      const response = await fetch("http://localhost:5000/api/add-driver", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
+    setIsSubmitting(true);
 
-      if (response.ok) {
-        alert("Driver data added successfully!");
-        setFormData({ name: "", phone: "" }); // Reset form after submission
+    try {
+      // Insert data into Supabase table
+      const { data, error } = await supabase.from("autorickshaw_drivers_list").insert([
+        {
+          name: formData.name,
+          phone: formData.phone,
+        },
+      ]);
+
+      if (error) {
+        console.error(error);
+        alert("Failed to add driver data.");
       } else {
-        alert("Failed to add driver data!");
+        alert("Driver data added successfully!");
+        setFormData({ name: "", phone: "" }); // Clear form inputs
       }
-    } catch (error) {
-      console.error("Error submitting the form: ", error);
+    } catch (err) {
+      console.error("Error submitting the form: ", err);
+      alert("An error occurred while submitting the form.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: "400px", margin: "auto" }}>
       <h2>Add Autorickshaw Driver</h2>
       <form onSubmit={handleSubmit}>
-        {/* Name Input */}
-        <div>
-          <label htmlFor="name">Name:</label>
+        {/* Name Field */}
+        <div style={{ marginBottom: "15px" }}>
+          <label>Name:</label>
           <input
             type="text"
-            id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Driver's Name"
+            placeholder="Enter driver's name"
             required
           />
         </div>
 
-        {/* Phone Input */}
-        <div>
-          <label htmlFor="phone">Phone:</label>
+        {/* Phone Field */}
+        <div style={{ marginBottom: "15px" }}>
+          <label>Phone:</label>
           <input
             type="text"
-            id="phone"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            placeholder="Driver's Phone Number"
+            placeholder="Enter driver's phone"
             required
           />
         </div>
 
         {/* Submit Button */}
-        <button type="submit">Add Driver</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Submitting..." : "Add Driver"}
+        </button>
       </form>
     </div>
   );
