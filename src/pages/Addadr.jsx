@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import supabase from "../supabaseClient"; // Ensure this points to your client setup
+import { supabase } from "../supabaseClient"; // Correct import for named export
 
 const AddAdr = () => {
   // States for form fields
