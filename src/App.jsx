@@ -5,7 +5,7 @@ import Autorickshaw from './pages/Autorickshaw'; // Existing page
 import AddAutorickshawDriver from './pages/addadr'; // Page for adding drivers
 import Auth from './pages/Auth'; // Auth page for login/signup
 import { supabase } from './supabaseClient'; // Import Supabase client
-import Addadr from './pages/addadr';
+import Addadr from './pages/Addadr';
 
 // Protected Route Component
 const ProtectedRoute = ({ element, session }) => {
@@ -52,7 +52,7 @@ function App() {
           element={<ProtectedRoute element={<AddAutorickshawDriver />} session={session} />}
         />
         <Route
-  path="/addadr"
+  path="/Addadr"
   element={<ProtectedRoute element={<Addadr />} session={session} />}
 />
       </Routes>
