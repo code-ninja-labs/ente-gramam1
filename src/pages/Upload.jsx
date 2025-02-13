@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import { supabase } from "./supabaseClient"; // Your Supabase client configuration file
 
 const Upload = () => {
   const [file, setFile] = useState(null); // Store selected file
   const [previewUrl, setPreviewUrl] = useState(null); // Store preview URL of selected file
-  const [uploadedUrl, setUploadedUrl] = useState(null); // Store Cloudinary URL of uploaded image
+  const [uploadedUrl, setUploadedUrl] = useState(null); // Store URL of uploaded image
   const [isUploading, setIsUploading] = useState(false); // Control uploading state
 
-  const CLOUD_NAME = "dzsj1tls1"; // Your Cloudinary Cloud Name
-  const UPLOAD_PRESET = "upload"; // Your unsigned upload preset name
+  const bucketName = "image"; // Your Supabase bucket name
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -23,29 +23,31 @@ const Upload = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", UPLOAD_PRESET);
+    const fileExt = file.name.split(".").pop(); // Extract file extension
+    const fileName = `${Date.now()}.${fileExt}`; // Create a unique file name
+    const filePath = `${fileName}`;
 
     setIsUploading(true);
+
     try {
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/$
-{CLOUD_NAME}/image/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      const data = await response.json();
-      if (data.secure_url) {
-        setUploadedUrl(data.secure_url); // Cloudinary URL after upload
-        alert("Upload successful!");
-      } else {
-        alert("Upload failed. Please try again.");
+      // Upload the file to Supabase Storage
+      let { error: uploadError } = await supabase.storage.from(bucketName).upload(filePath, file);
+
+      if (uploadError) {
+        throw uploadError;
       }
+
+      // Get a public URL for the uploaded file
+      const { data: publicData, error: publicError } = supabase.storage.from(bucketName).getPublicUrl(filePath);
+
+      if (publicError) {
+        throw publicError;
+      }
+
+      setUploadedUrl(publicData.publicUrl); // Set the public URL for the uploaded image
+      alert("Upload successful!");
     } catch (error) {
-      console.error("Upload failed:", error);
+      console.error("Upload failed:", error.message);
       alert("Failed to upload the file!");
     } finally {
       setIsUploading(false);
@@ -54,12 +56,12 @@ const Upload = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>File Upload with Cloudinary</h1>
+      <h1 style={styles.title}>File Upload with Supabase</h1>
 
       {/* File Input */}
       <input
         type="file"
-        accept="image/*" // Accepts image files only
+        accept="image/*"
         onChange={handleFileChange}
         style={styles.input}
       />
