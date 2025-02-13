@@ -1,117 +1,141 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 const Upload = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [message, setMessage] = useState(null);
-  const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [file, setFile] = useState(null); // Store selected file
+  const [previewUrl, setPreviewUrl] = useState(null); // Store preview URL of selected file
+  const [uploadedUrl, setUploadedUrl] = useState(null); // Store Cloudinary URL of uploaded image
+  const [isUploading, setIsUploading] = useState(false); // Control uploading state
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setMessage(null);
-    setUploadedImageUrl(null);
+  const CLOUD_NAME = "dzsj1tls1"; // Your Cloudinary Cloud Name
+  const UPLOAD_PRESET = "upload"; // Your unsigned upload preset name
 
-    if (!file) {
-      setMessage({ type: "error", text: "No file selected." });
-      return;
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setPreviewUrl(URL.createObjectURL(selectedFile)); // Set local preview URL
     }
-
-    const maxSize = 5 * 1024 * 1024; // 5MB
-    const allowedTypes = ["image/jpeg", "image/png"];
-
-    if (!allowedTypes.includes(file.type)) {
-      setMessage({ type: "error", text: "Only JPEG and PNG formats are allowed." });
-      e.target.value = ""; // Reset input
-      return;
-    }
-
-    if (file.size > maxSize) {
-      setMessage({ type: "error", text: "File size exceeds 5MB." });
-      e.target.value = ""; // Reset input
-      return;
-    }
-
-    setSelectedFile(file);
   };
 
   const handleUpload = async () => {
-    if (!selectedFile) {
-      setMessage({ type: "error", text: "No file selected." });
+    if (!file) {
+      alert("Please select a file before uploading!");
       return;
     }
 
-    setIsLoading(true);
-    setMessage(null);
-
     const formData = new FormData();
-    formData.append("image", selectedFile);
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
 
+    setIsUploading(true);
     try {
-      const response = await axios.post(
-        import.meta.env.VITE_IMGHIPPO_API_URL,
-        formData,
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/$
+{CLOUD_NAME}/image/upload`,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${import.meta.env.VITE_IMGHIPPO_API_KEY}`,
-          },
+          method: "POST",
+          body: formData,
         }
       );
-
-      if (response.data?.data?.display_url) {
-        setUploadedImageUrl(response.data.data.display_url);
-        setMessage({ type: "success", text: "Image uploaded successfully!" });
+      const data = await response.json();
+      if (data.secure_url) {
+        setUploadedUrl(data.secure_url); // Cloudinary URL after upload
+        alert("Upload successful!");
       } else {
-        throw new Error("Invalid response from server");
+        alert("Upload failed. Please try again.");
       }
     } catch (error) {
       console.error("Upload failed:", error);
-      setMessage({
-        type: "error",
-        text: error.response?.data?.message || "Failed to upload image. Please try again.",
-      });
-      setUploadedImageUrl(null);
+      alert("Failed to upload the file!");
     } finally {
-      setIsLoading(false);
-      setSelectedFile(null);
-      document.querySelector("input[type='file']").value = ""; // Reset input
+      setIsUploading(false);
     }
   };
 
   return (
-    <div className="upload-container">
+    <div style={styles.container}>
+      <h1 style={styles.title}>File Upload with Cloudinary</h1>
+
+      {/* File Input */}
       <input
         type="file"
-        accept="image/jpeg, image/png"
+        accept="image/*" // Accepts image files only
         onChange={handleFileChange}
-        disabled={isLoading}
+        style={styles.input}
       />
-      <button 
-        onClick={handleUpload}
-        disabled={!selectedFile || isLoading}
-      >
-        {isLoading ? "Uploading..." : "Upload"}
-      </button>
 
-      {message && (
-        <p style={{ color: message.type === "success" ? "green" : "red" }}>
-          {message.text}
-        </p>
+      {/* File Preview */}
+      {previewUrl && (
+        <div style={styles.previewContainer}>
+          <h2>Preview</h2>
+          <img src={previewUrl} alt="Preview" style={styles.previewImage} />
+        </div>
       )}
 
-      {uploadedImageUrl && (
-        <div className="preview-container">
-          <h3>Uploaded Image:</h3>
-          <img 
-            src={uploadedImageUrl} 
-            alt="Uploaded content" 
-            style={{ maxWidth: "100%", maxHeight: "400px" }}
-          />
+      {/* Upload Button */}
+      <button
+        onClick={handleUpload}
+        style={{
+          ...styles.uploadButton,
+          backgroundColor: isUploading ? "#ddd" : "#007BFF",
+          cursor: isUploading ? "not-allowed" : "pointer",
+        }}
+        disabled={isUploading}
+      >
+        {isUploading ? "Uploading..." : "Upload File"}
+      </button>
+
+      {/* Uploaded File Output */}
+      {uploadedUrl && (
+        <div style={styles.uploadedContainer}>
+          <h2>Uploaded File</h2>
+          <a href={uploadedUrl} target="_blank" rel="noopener noreferrer">
+            <img src={uploadedUrl} alt="Uploaded file" style={styles.previewImage} />
+          </a>
         </div>
       )}
     </div>
   );
+};
+
+const styles = {
+  container: {
+    width: "400px",
+    margin: "50px auto",
+    textAlign: "center",
+    fontFamily: "Arial, sans-serif",
+    border: "1px solid #ddd",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  },
+  title: {
+    marginBottom: "20px",
+  },
+  input: {
+    marginBottom: "20px",
+  },
+  previewContainer: {
+    marginBottom: "20px",
+  },
+  previewImage: {
+    width: "100%",
+    maxHeight: "250px",
+    objectFit: "contain",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    marginBottom: "10px",
+  },
+  uploadButton: {
+    padding: "10px 20px",
+    color: "#fff",
+    border: "none",
+    borderRadius: "5px",
+    fontSize: "16px",
+  },
+  uploadedContainer: {
+    marginTop: "20px",
+  },
 };
 
 export default Upload;
