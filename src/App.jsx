@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Home from './pages/Home';
-import Autorickshaw from './pages/Autorickshaw'; // Existing page
-import Addadr from './pages/Addadr'; // Single import for Add Autorickshaw Driver
-import Auth from './pages/Auth'; // Auth page for login/signup
-import { supabase } from './supabaseClient'; // Import Supabase client
+import Home from './pages/Home'; // Home page (public)
+import Autorickshaw from './pages/Autorickshaw'; // Protected route for Autorickshaw
+import Addadr from './pages/Addadr'; // Protected route for Adding Autorickshaw Driver
+import Auth from './pages/Auth'; // Public route for login/signup
+import { supabase } from './supabaseClient'; // Import Supabase client for authentication
 
 // Protected Route Component
 const ProtectedRoute = ({ element, session }) => {
-  // Redirect if no session (not logged in)
+  // If no session, redirect user to "/auth"
   return session ? element : <Navigate to="/auth" replace />;
 };
 
@@ -16,17 +16,17 @@ function App() {
   const [session, setSession] = useState(null); // State to track Supabase session
 
   useEffect(() => {
-    // Get session on initial app load
+    // Fetch session on initial app load
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
 
-    // Listen for changes in authentication state (login/logout)
+    // Listen for changes in authentication state (e.g., login or logout)
     const { subscription } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
 
-    // Cleanup listener on unmount
+    // Cleanup the subscription listener when component unmounts
     return () => subscription.unsubscribe();
   }, []);
 
@@ -39,16 +39,16 @@ function App() {
         {/* Public Route: Auth (Login/Signup) */}
         <Route path="/auth" element={<Auth />} />
 
-        {/* Protected Route: Autorickshaw */}
+        {/* Protected Route: Autorickshaw Page */}
         <Route
           path="/autorickshaw"
           element={<ProtectedRoute element={<Autorickshaw />} session={session} />}
         />
 
-        {/* Protected Route: Add Autorickshaw Driver */}
+        {/* Protected Route: Add Autorickshaw Driver Page */}
         <Route
           path="/addadr"
-          element={<ProtectedRoute element={<Addadr />} session={session} />} // Consistent import and path
+          element={<ProtectedRoute element={<Addadr />} session={session} />}
         />
       </Routes>
     </Router>
