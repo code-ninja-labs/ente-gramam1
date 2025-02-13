@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { supabase } from "./supabaseClient"; // Your Supabase client configuration file
+import { supabase } from "../supabaseClient"; // Adjust relative path based on Upload.jsx's location
 
 const Upload = () => {
   const [file, setFile] = useState(null); // Store selected file
