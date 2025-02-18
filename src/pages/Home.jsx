@@ -1,9 +1,31 @@
-import React from "react";
-import Nav from "../components/Nav/Nav"; // Updated path assuming Nav is in a Nav folder
-import AppIcons from "../components/AppIcons/AppIcons"; // Assumes AppIcons is in a subfolder named AppIcons
+import React, { useEffect } from "react";
+import Nav from "../components/Nav/Nav";
+import AppIcons from "../components/AppIcons/AppIcons";
 import "./Home.css";
 
 const Home = () => {
+
+  useEffect(() => {
+    const loadShareusAdScript = () => {
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = 'https://securepubads.shareus.io/scripts/tag/js/gpt.js';
+      script.async = true;
+      document.body.appendChild(script);
+
+      script.onload = () => {
+        window._shareustag = window._shareustag || {cmd: []};
+        window._shareustag.cmd.push(function() {
+          var slot1 = window._shareustag.defineSlot('/shareus-admanager/3311712454/aHrokQdEJZ/pan', [[970, 90], [728, 90], [320, 50], [300, 250], [336, 280]], 'shareus-admanager-3311712454-aHrokQdEJZ')
+            .addService(window._shareustag.pubads());
+          window._shareustag.enableServices();
+        });
+      };
+    };
+
+    loadShareusAdScript();
+  }, []);
+
   return (
     <div className="home-container">
       <Nav /> {/* Navigation Bar */}
@@ -11,6 +33,7 @@ const Home = () => {
         <h2>Welcome to Ente Gramam</h2>
         <p>Select a service below to proceed:</p>
         <AppIcons /> {/* App-Style Icons */}
+        <div id="shareus-admanager-3311712454-aHrokQdEJZ"></div> {/* Ad Container */}
       </main>
       <footer className="footer">
         <p>© {new Date().getFullYear()} Ente Gramam. All rights reserved.</p> {/* Dynamic Year */}
