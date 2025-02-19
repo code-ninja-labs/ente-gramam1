@@ -1,61 +1,91 @@
-/* Main container to center icons on the page and add spacing from the edges */
+/* Main container for icons */
 .icon-container {
   display: flex;
-  flex-wrap: wrap; /* Allow icons to wrap on smaller screens */
-  justify-content: center; /* Center icons horizontally */
-  gap: 1.5rem; /* Space between the icons */
-  margin-top: 2rem; /* Space above the icons section */
-  padding: 2rem; /* Add spacing inside the container to keep it away from edges */
-  box-sizing: border-box; /* Ensure padding doesn't affect the width of the container */
+  flex-wrap: wrap; /* Allow icons to wrap for responsiveness */
+  justify-content: center; /* Align centrally */
+  gap: 2rem; /* Space between items */
+  margin: 1.5rem 0; /* Add spacing above/below section */
+  padding: 1rem; /* Space inside container for edges */
 }
 
-/* Individual round square containers for each icon */
+/* Icon wrapper: Individual icon item */
 .icon-wrapper {
-  width: 100px; /* Set fixed width for square shape */
-  height: 100px; /* Set fixed height for square shape */
-  background-color: #1e1e1e; /* Dark gray/black background */
-  border-radius: 20px; /* Rounded corners for a "round square" effect */
+  width: 90px; /* Adjust width for the square */
+  height: 90px; /* Adjust height for the square */
+  background-color: #1e1e1e; /* Background for icon blocks */
+  border-radius: 15px; /* Rounded corners for better design */
   display: flex;
-  flex-direction: column; /* Stack icon and label vertically */
-  align-items: center; /* Align icon and text in the center */
-  justify-content: center; /* Vertically center the content */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for a better look */
-  text-align: center; /* Center text */
-  color: #fff; /* White text */
-  transition: transform 0.3s ease; /* Add smooth hover effect */
+  flex-direction: column; /* Align icon above label */
+  align-items: center;
+  justify-content: center; /* Center content vertically and horizontally */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  text-align: center;
+  color: #fff; /* Default text color */
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Hover effects */
 }
 
-/* Styling for the icon */
-.icon {
-  font-size: 2rem; /* Set default size for the icon */
-  margin-bottom: 0.5rem; /* Add spacing between icon and label */
-}
-
-/* Text/label below the icon */
-.icon-wrapper p {
-  margin: 0; /* Remove unwanted margin */
-  font-size: 0.9rem; /* Adjust text size */
-  color: #ccc; /* Light gray for the text label */
-}
-
-/* Hover effect: scale and background color change */
+/* Hover animations and color changes */
 .icon-wrapper:hover {
-  transform: scale(1.1); /* Slightly enlarge the box on hover */
-  background-color: #0078d4; /* Optional: blue background on hover */
+  transform: scale(1.1); /* Slight enlarge-on-hover effect */
+  background-color: #34495e; /* Change to a lighter shade */
+  cursor: pointer; /* Show clickable pointer */
 }
 
-/* Responsive adjustments for smaller screens */
+/* Individual icon styling */
+.icon {
+  font-size: 2rem; /* Adjust icon size for better visibility */
+  margin-bottom: 0.5rem; /* Space below icon */
+}
+
+/* Styling for text below icons */
+.icon-wrapper p {
+  margin: 0; /* Remove bottom margin for uniformity */
+  font-size: 0.85rem; /* Adjust text size */
+  color: #ccc; /* Light gray for text labels */
+}
+
+/* Ad container adjustment */
+.ads-container {
+  margin-top: 2rem; /* Space above ads */
+  width: 100%; /* Ensure it spans full width */
+  text-align: center; /* Center-align the ad */
+  background-color: #1a1a1a; /* Match dark theme */
+  padding: 1rem; /* Space inside to integrate smoothly */
+  border-radius: 8px; /* Slight rounding of corners */
+}
+
+/* Tablet and smaller screen adjustments */
 @media screen and (max-width: 768px) {
-  .icon-wrapper {
-    width: 80px; /* Smaller size for tablets */
-    height: 80px;
+  .icon-container {
+    gap: 1.5rem; /* Reduce gap on smaller screens */
   }
 
-  .icon {
-    font-size: 1.5rem; /* Adjust icon size for smaller screens */
+  .icon-wrapper {
+    width: 75px; /* Shrink for smaller screens */
+    height: 75px;
   }
 
   .icon-wrapper p {
-    font-size: 0.8rem; /* Adjust text size */
+    font-size: 0.75rem; /* Reduce text size */
+  }
+
+  .icon {
+    font-size: 1.5rem; /* Adjust icon size */
+  }
+}
+
+/* Extra-small screens (phones and below) */
+@media screen and (max-width: 480px) {
+  .icon-wrapper {
+    width: 60px; /* Further reduce box size */
+    height: 60px;
+  }
+
+  .icon-wrapper p {
+    font-size: 0.7rem; /* Adjust text size further */
+  }
+
+  .icon {
+    font-size: 1.2rem; /* Further adjust icon size */
   }
 }
