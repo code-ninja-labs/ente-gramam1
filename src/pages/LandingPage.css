@@ -1,51 +1,48 @@
 /* LandingPage.css */
 
-/* Universal reset */
+/* Universal reset -- optional but ensures consistency */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body styling */
-body {
-  font-family: "Poppins", sans-serif; /* Sleek and modern typography */
-  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
-  color: #fff; /* White text on a dark background */
+/* Scoped container for LandingPage */
+.landing-page-container {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   overflow: hidden;
-}
-
-/* Landing page container */
-div {
   text-align: center;
   padding: 2rem;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
-  backdrop-filter: blur(10px); /* Frosted glass effect */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   max-width: 500px;
   width: 90%;
   margin: auto;
 }
 
-/* Title design */
-h1 {
-  font-size: 3rem; /* Large engaging title */
+/* Title design scoped under landing-page-container */
+.landing-page-container h1 {
+  font-size: 3rem;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 2rem;
   color: #fff;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Glow effect */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Call-to-action button */
-button {
-  background: #ff6f61; /* Vibrant coral color */
+/* Button design scoped under landing-page-container */
+.landing-page-container button {
+  background: #ff6f61;
   border: none;
   color: #fff;
   font-size: 1.2rem;
@@ -53,25 +50,24 @@ button {
   padding: 0.8rem 2rem;
   border-radius: 30px;
   cursor: pointer;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Adds depth */
-  transition: all 0.3s ease-in-out; /* Smooth animation */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
   text-transform: uppercase;
 }
 
-/* Hover effect for button */
-button:hover {
-  background: #ff856e; /* Slightly lighter coral for hover */
-  transform: translateY(-5px); /* Adds "lift" effect */
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); /* Enhance shadow for hover */
+.landing-page-container button:hover {
+  background: #ff856e;
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments scoped under landing-page-container */
 @media (max-width: 768px) {
-  h1 {
+  .landing-page-container h1 {
     font-size: 2rem;
   }
 
-  button {
+  .landing-page-container button {
     font-size: 1rem;
     padding: 0.6rem 1.5rem;
   }
