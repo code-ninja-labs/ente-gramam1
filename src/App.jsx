@@ -7,7 +7,7 @@ import Addadr from "./pages/Addadr"; // For adding an Autorickshaw driver
 import Auth from "./pages/Auth"; // Auth (login/signup) page
 import Upload from "./pages/Upload"; // Upload component
 import LandingPage from "./pages/LandingPage"; // New landing page component
-import Support from "./pages/Support";
+import Support from "./pages/Support"; // New support page
 import { supabase } from "./supabaseClient"; // Supabase client
 
 // Protected Route Component
@@ -37,10 +37,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* New Landing Page ("/") */}
+        {/* Landing Page ("/") */}
         <Route path="/" element={<LandingPage session={session} />} />
 
-        {/* Route for logged-in Home. You can also make Home public if needed */}
+        {/* Route for logged-in Home */}
         <Route
           path="/home"
           element={<ProtectedRoute element={<Home />} session={session} />}
@@ -65,8 +65,7 @@ function App() {
         <Route path="/upload" element={<Upload />} />
 
         {/* Public Route: Support Page */}
-        <Route path="/Support" element={<Support />} />
-        
+        <Route path="/support" element={<Support />} />
       </Routes>
     </Router>
   );
