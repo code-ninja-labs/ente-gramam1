@@ -7,6 +7,7 @@ import Addadr from "./pages/Addadr"; // For adding an Autorickshaw driver
 import Auth from "./pages/Auth"; // Auth (login/signup) page
 import Upload from "./pages/Upload"; // Upload component
 import LandingPage from "./pages/LandingPage"; // New landing page component
+import Support from "./pages/Support";
 import { supabase } from "./supabaseClient"; // Supabase client
 
 // Protected Route Component
@@ -62,6 +63,10 @@ function App() {
 
         {/* Public Route: Upload Page */}
         <Route path="/upload" element={<Upload />} />
+
+        {/* Public Route: Support Page */}
+        <Route path="/Support" element={<Support />} />
+        
       </Routes>
     </Router>
   );
