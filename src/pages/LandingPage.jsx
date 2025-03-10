@@ -1,7 +1,7 @@
 // src/pages/LandingPage.jsx
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./LandingPage.css";
+import "./LandingPage.css"; // Import the scoped CSS
 
 const LandingPage = ({ session }) => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const LandingPage = ({ session }) => {
   };
 
   return (
-    <div>
+    <div className="landing-page-container">
       <h1>Ente Gramam</h1>
       <button onClick={handleGetStarted}>Get Started</button>
     </div>
