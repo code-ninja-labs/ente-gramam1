@@ -19,7 +19,12 @@ const Pages = ({ session, isLoading }) => {
   return (
     <Routes>
       {/* Landing Page ("/") */}
-      <Route path="/" element={<LandingPage session={session} />} />
+      <Route
+        path="/"
+        element={
+          session ? <Navigate to="/home" replace /> : <LandingPage />
+        }
+      />
 
       {/* Logged-in Home */}
       <Route
