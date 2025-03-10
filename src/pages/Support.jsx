@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-// Initialize Supabase client
+// Initialize Supabase client using Vite's .env variables
 const supabase = createClient(
-  "https://YOUR-SUPABASE-PROJECT-URL.supabase.co",
-  "YOUR-SUPABASE-ANON-KEY"
+  import.meta.env.VITE_SUPABASE_URL, // Supabase URL from .env
+  import.meta.env.VITE_SUPABASE_ANON_KEY // Supabase Anon Key from .env
 );
 
 function Support() {
@@ -13,45 +13,45 @@ function Support() {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Handle form input changes
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle form submission
+  // Handle form submissions
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccessMessage("");
     setErrorMessage("");
 
     try {
-      // Insert the new support request into Supabase
+      // Attempt to insert data into Supabase
       const { data, error } = await supabase.from("support_requests").insert([
         {
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          status: "submitted", // Default status
+          status: "submitted", // Default status for new entries
         },
       ]);
 
       if (error) {
-        setErrorMessage("Error submitting support request.");
-        console.error("Supabase insert error:", error.message);
+        console.error("Error inserting into Supabase:", error.message);
+        setErrorMessage("Error submitting support request. Please try again.");
         return;
       }
 
       setSuccessMessage("Support request submitted successfully!");
-      setFormData({ name: "", email: "", message: "" }); // Reset form
-      fetchRequests(); // Refresh the requests
+      setFormData({ name: "", email: "", message: "" }); // Reset the form
+      fetchRequests(); // Update the displayed list of requests
     } catch (err) {
-      console.error("Error:", err);
-      setErrorMessage("An unexpected error occurred.");
+      console.error("Unexpected error:", err);
+      setErrorMessage("Unexpected error occurred. Please try again.");
     }
   };
 
-  // Fetch all support requests from Supabase
+  // Fetch all support requests
   const fetchRequests = async () => {
     try {
       const { data, error } = await supabase
@@ -60,26 +60,26 @@ function Support() {
         .order("created_at", { ascending: false });
 
       if (error) {
-        console.error("Supabase fetch error:", error.message);
+        console.error("Error fetching data from Supabase:", error.message);
         return;
       }
 
-      setRequests(data); // Save fetched data in state
+      setRequests(data); // Update state with the fetched requests
     } catch (err) {
       console.error("Error fetching support requests:", err);
     }
   };
 
-  // Fetch support requests on component mount
+  // Fetch requests when the component mounts
   useEffect(() => {
     fetchRequests();
   }, []);
 
   return (
     <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
-      <h1>Support</h1>
+      <h1>Support Form</h1>
 
-      {/* Form to submit a support request */}
+      {/* Form for creating support requests */}
       <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
         <div style={{ marginBottom: "10px" }}>
           <label>
@@ -124,7 +124,7 @@ function Support() {
         </button>
       </form>
 
-      {/* Display success or error message */}
+      {/* Success/Error notifications */}
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
@@ -135,11 +135,13 @@ function Support() {
       <ul>
         {requests.length > 0 ? (
           requests.map((req) => (
-            <li key={req.id} style={{ marginBottom: "10px" }}>
+            <li key={req.id} style={{ marginBottom: "20px" }}>
               <p>
                 <strong>{req.name}</strong> ({req.email}): {req.message}
               </p>
-              <p>Status: <strong>{req.status}</strong></p>
+              <p>
+                <em>Status:</em> <strong>{req.status}</strong>
+              </p>
               <small>Submitted on: {new Date(req.created_at).toLocaleString()}</small>
             </li>
           ))
