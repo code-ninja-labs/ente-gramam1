@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { supabase } from '../supabaseClient'; // Ensure your environment variables are properly set
+import { supabase } from '../supabaseClient'; // Supabase client
 import './Auth.css'; // Styles for the form
 
 const Auth = () => {
@@ -16,7 +16,7 @@ const Auth = () => {
     setLoading(true);
 
     try {
-      // Call Supabase's sign up method
+      // Call Supabase's signup method
       const { error } = await supabase.auth.signUp({
         email,
         password,
@@ -30,9 +30,10 @@ const Auth = () => {
 {error.message}`);
       } else {
         alert('Sign-up successful! Please check your email to confirm your account.');
+        window.location.href = '/'; // Redirect to home page after successful signup
       }
     } catch (err) {
-      alert(`Unexpected error during sign up:
+      alert(`Unexpected error during sign-up:
 ${err.message}`);
     } finally {
       setLoading(false);
@@ -58,6 +59,7 @@ ${err.message}`);
 {error.message}`);
       } else {
         alert('Login successful! Welcome back.');
+        window.location.href = '/'; // Redirect to home page after successful login
       }
     } catch (err) {
       alert(`Unexpected error during login:
