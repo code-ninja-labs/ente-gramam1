@@ -17,22 +17,24 @@ function Support() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/support", formData); // Adjust API endpoint if needed
+      // Sending the data (POST request) to the backend
+      const res = await axios.post("http://localhost:5000/api/support", formData);
       setSuccessMessage("Support request created successfully!");
-      setFormData({ name: "", email: "", message: "" }); // Reset form fields
-      fetchRequests(); // Refresh the list of requests after submission
+      setFormData({ name: "", email: "", message: "" }); // Reset form
+      fetchRequests(); // Fetch the updated list of requests
     } catch (err) {
-      console.error(err);
+      console.error("Error submitting support request:", err);
     }
   };
 
-  // Fetch all support requests
+  // Fetch all support requests from the backend
   const fetchRequests = async () => {
     try {
+      // Fetching data (GET request) from the backend
       const res = await axios.get("http://localhost:5000/api/support");
-      setRequests(res.data); // Store fetched data
+      setRequests(res.data); // Save the fetched data in state
     } catch (err) {
-      console.error(err);
+      console.error("Error fetching support requests:", err);
     }
   };
 
@@ -95,7 +97,7 @@ function Support() {
 
       <hr />
 
-      {/* Display support requests */}
+      {/* Display all support requests */}
       <h2>Support Requests</h2>
       <ul>
         {requests.length > 0 ? (
@@ -116,4 +118,3 @@ function Support() {
 }
 
 export default Support;
-        
