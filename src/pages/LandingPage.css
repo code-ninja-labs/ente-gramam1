@@ -1,0 +1,78 @@
+/* LandingPage.css */
+
+/* Universal reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: "Poppins", sans-serif; /* Sleek and modern typography */
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+  color: #fff; /* White text on a dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Landing page container */
+div {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  max-width: 500px;
+  width: 90%;
+  margin: auto;
+}
+
+/* Title design */
+h1 {
+  font-size: 3rem; /* Large engaging title */
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Glow effect */
+}
+
+/* Call-to-action button */
+button {
+  background: #ff6f61; /* Vibrant coral color */
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Adds depth */
+  transition: all 0.3s ease-in-out; /* Smooth animation */
+  text-transform: uppercase;
+}
+
+/* Hover effect for button */
+button:hover {
+  background: #ff856e; /* Slightly lighter coral for hover */
+  transform: translateY(-5px); /* Adds "lift" effect */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); /* Enhance shadow for hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+  }
+}
