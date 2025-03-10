@@ -1,11 +1,17 @@
-// src/pages/Support.jsx
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { createClient } from "@supabase/supabase-js";
+
+// Initialize Supabase client
+const supabase = createClient(
+  "https://YOUR-SUPABASE-PROJECT-URL.supabase.co",
+  "YOUR-SUPABASE-ANON-KEY"
+);
 
 function Support() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [requests, setRequests] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Handle form input changes
   const handleChange = (e) => {
@@ -16,29 +22,55 @@ function Support() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSuccessMessage("");
+    setErrorMessage("");
+
     try {
-      // Sending the data (POST request) to the backend
-      const res = await axios.post("http://localhost:5000/api/support", formData);
-      setSuccessMessage("Support request created successfully!");
+      // Insert the new support request into Supabase
+      const { data, error } = await supabase.from("support_requests").insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          status: "submitted", // Default status
+        },
+      ]);
+
+      if (error) {
+        setErrorMessage("Error submitting support request.");
+        console.error("Supabase insert error:", error.message);
+        return;
+      }
+
+      setSuccessMessage("Support request submitted successfully!");
       setFormData({ name: "", email: "", message: "" }); // Reset form
-      fetchRequests(); // Fetch the updated list of requests
+      fetchRequests(); // Refresh the requests
     } catch (err) {
-      console.error("Error submitting support request:", err);
+      console.error("Error:", err);
+      setErrorMessage("An unexpected error occurred.");
     }
   };
 
-  // Fetch all support requests from the backend
+  // Fetch all support requests from Supabase
   const fetchRequests = async () => {
     try {
-      // Fetching data (GET request) from the backend
-      const res = await axios.get("http://localhost:5000/api/support");
-      setRequests(res.data); // Save the fetched data in state
+      const { data, error } = await supabase
+        .from("support_requests")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Supabase fetch error:", error.message);
+        return;
+      }
+
+      setRequests(data); // Save fetched data in state
     } catch (err) {
       console.error("Error fetching support requests:", err);
     }
   };
 
-  // Fetch requests on component mount
+  // Fetch support requests on component mount
   useEffect(() => {
     fetchRequests();
   }, []);
@@ -92,12 +124,13 @@ function Support() {
         </button>
       </form>
 
-      {/* Display success message */}
+      {/* Display success or error message */}
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
       <hr />
 
-      {/* Display all support requests */}
+      {/* Display support requests */}
       <h2>Support Requests</h2>
       <ul>
         {requests.length > 0 ? (
@@ -106,6 +139,7 @@ function Support() {
               <p>
                 <strong>{req.name}</strong> ({req.email}): {req.message}
               </p>
+              <p>Status: <strong>{req.status}</strong></p>
               <small>Submitted on: {new Date(req.created_at).toLocaleString()}</small>
             </li>
           ))
