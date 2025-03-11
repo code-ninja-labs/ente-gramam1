@@ -1,74 +1,95 @@
 /* LandingPage.css */
 
-/* Universal reset -- optional but ensures consistency */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Scoped container for LandingPage */
 .landing-page-container {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: #fff;
+  background-color: #e7f5fe; /* Light blue background */
+  font-family: 'Roboto', sans-serif; /* Use a clean, modern font */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
-  text-align: center;
-  padding: 2rem;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
-  width: 90%;
-  margin: auto;
+  justify-content: space-between;
 }
 
-/* Title design scoped under landing-page-container */
-.landing-page-container h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-  color: #fff;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light navbar shadow */
 }
 
-/* Button design scoped under landing-page-container */
-.landing-page-container button {
-  background: #ff6f61;
-  border: none;
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: 600;
-  padding: 0.8rem 2rem;
-  border-radius: 30px;
+header a,
+header button {
+  transition: all 0.3s ease-in-out; /* Smooth hover effects */
+}
+
+header a:hover,
+header button:hover {
+  color: #1c3d5a;
+}
+
+button {
   cursor: pointer;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Hero Section */
+h1 {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-top: 24px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #38a169; /* Green */
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.landing-page-container button:hover {
-  background: #ff856e;
+p {
+  font-size: 18px;
+  color: #4a5568; /* Gray text */
+  line-height: 1.6;
+}
+
+img {
+  object-fit: cover;
+}
+
+/* Buttons */
+button {
+  background: #38a169;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+  background: #2f855a; /* Darker green */
+}
+
+/* Feature Cards */
+.card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsive adjustments scoped under landing-page-container */
-@media (max-width: 768px) {
-  .landing-page-container h1 {
-    font-size: 2rem;
-  }
+.card h3 {
+  font-size: 20px;
+  color: #2d3748; /* Darker gray */
+  margin-bottom: 16px;
+}
 
-  .landing-page-container button {
-    font-size: 1rem;
-    padding: 0.6rem 1.5rem;
-  }
+.card p {
+  font-size: 16px;
+  color: #718096; /* Cool gray */
 }
