@@ -9,9 +9,9 @@ import LandingPage from "./pages/LandingPage"; // New landing page component
 import Support from "./pages/Support"; // New support page
 
 // Protected Route Component
-const ProtectedRoute = ({ element, session, isLoading }) => {
+const ProtectedRoute = ({ component: Component, session, isLoading }) => {
   if (isLoading) return <div>Loading...</div>; // Loading indicator
-  return session ? element : <Navigate to="/auth" replace />;
+  return session ? <Component /> : <Navigate to="/auth" replace />;
 };
 
 // Pages Component
@@ -19,7 +19,7 @@ const Pages = ({ session, isLoading }) => {
   return (
     <Router>
       <Routes>
-        {/* Landing Page ("/") */}
+        {/* Landing Page or Home based on session */}
         <Route
           path="/"
           element={
@@ -35,7 +35,7 @@ const Pages = ({ session, isLoading }) => {
           path="/autorickshaw"
           element={
             <ProtectedRoute
-              element={<Autorickshaw />}
+              component={Autorickshaw}
               session={session}
               isLoading={isLoading}
             />
@@ -47,7 +47,7 @@ const Pages = ({ session, isLoading }) => {
           path="/addadr"
           element={
             <ProtectedRoute
-              element={<Addadr />}
+              component={Addadr}
               session={session}
               isLoading={isLoading}
             />
@@ -60,12 +60,10 @@ const Pages = ({ session, isLoading }) => {
         {/* Public Route: Support Page */}
         <Route path="/support" element={<Support />} />
 
-        {/* Redirect "/home" to "/" for authenticated users */}
+        {/* Redirect "/home" to "/" */}
         <Route
           path="/home"
-          element={
-            <Navigate to="/" replace />
-          }
+          element={<Navigate to="/" replace />}
         />
       </Routes>
     </Router>
