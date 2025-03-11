@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, Navigate, BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home"; // Home page
 import Autorickshaw from "./pages/Autorickshaw"; // Existing page
 import Addadr from "./pages/Addadr"; // For adding an Autorickshaw driver
@@ -19,7 +19,7 @@ const Pages = ({ session, isLoading }) => {
   return (
     <Router>
       <Routes>
-        {/* Landing Page or Home based on session */}
+        {/* If authenticated, show Home at root path, otherwise show LandingPage */}
         <Route
           path="/"
           element={
