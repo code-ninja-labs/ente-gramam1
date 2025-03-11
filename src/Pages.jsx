@@ -1,16 +1,16 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import Home from "./pages/Home"; // Home page
-import Autorickshaw from "./pages/Autorickshaw"; // Existing page
-import Addadr from "./pages/Addadr"; // For adding an Autorickshaw driver
-import Auth from "./pages/Auth"; // Auth (Login/Signup) page
-import Upload from "./pages/Upload"; // Upload component
-import LandingPage from "./pages/LandingPage"; // New landing page component
-import Support from "./pages/Support"; // New support page
+import Home from "./pages/Home"; 
+import Autorickshaw from "./pages/Autorickshaw"; 
+import Addadr from "./pages/Addadr"; 
+import Auth from "./pages/Auth"; 
+import Upload from "./pages/Upload"; 
+import LandingPage from "./pages/LandingPage"; 
+import Support from "./pages/Support"; 
 
 // Protected Route Component
 const ProtectedRoute = ({ element, session, isLoading }) => {
-  if (isLoading) return <div>Loading...</div>; // Loading indicator
+  if (isLoading) return <div>Loading...</div>; 
   return session ? element : <Navigate to="/auth" replace />;
 };
 
@@ -18,15 +18,12 @@ const ProtectedRoute = ({ element, session, isLoading }) => {
 const Pages = ({ session, isLoading }) => {
   return (
     <Routes>
-      {/* Landing Page ("/") */}
       <Route
         path="/"
         element={
           session ? <Navigate to="/home" replace /> : <LandingPage />
         }
       />
-
-      {/* Logged-in Home */}
       <Route
         path="/home"
         element={
@@ -37,11 +34,7 @@ const Pages = ({ session, isLoading }) => {
           />
         }
       />
-
-      {/* Public Route: Auth (Login/Signup) */}
       <Route path="/auth" element={<Auth />} />
-
-      {/* Protected Route: Autorickshaw */}
       <Route
         path="/autorickshaw"
         element={
@@ -52,8 +45,6 @@ const Pages = ({ session, isLoading }) => {
           />
         }
       />
-
-      {/* Protected Route: Add Autorickshaw Driver */}
       <Route
         path="/addadr"
         element={
@@ -64,11 +55,7 @@ const Pages = ({ session, isLoading }) => {
           />
         }
       />
-
-      {/* Public Route: Upload Page */}
       <Route path="/upload" element={<Upload />} />
-
-      {/* Public Route: Support Page */}
       <Route path="/support" element={<Support />} />
     </Routes>
   );
