@@ -1,95 +1,166 @@
-/* LandingPage.css */
-
-.landing-page-container {
-  background-color: #e7f5fe; /* Light blue background */
-  font-family: 'Roboto', sans-serif; /* Use a clean, modern font */
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: url('/bg.jpeg') no-repeat center center/cover; /* Set /bg.jpeg as background */
+    background-attachment: fixed; /* Keep the background fixed */
 }
 
-header {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light navbar shadow */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
 }
 
-header a,
-header button {
-  transition: all 0.3s ease-in-out; /* Smooth hover effects */
+/* Gradient Glass Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(100, 140, 255, 0.1)); /* Subtle gradient */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for separation */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for slight 3D effect */
+    z-index: 1000; /* Ensure navbar stays above other elements */
 }
 
-header a:hover,
-header button:hover {
-  color: #1c3d5a;
+.nav-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white; /* White text for contrast */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Add subtle shadow for better visibility */
 }
 
-button {
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
+.nav-links a {
+    margin-left: 10px;
+    padding: 8px 15px;
+    background-color: rgba(51, 51, 51, 0.8);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s;
 }
 
-/* Hero Section */
-h1 {
-  font-size: 48px;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-top: 24px;
+.nav-links a:hover {
+    background-color: rgba(51, 51, 51, 1);
 }
 
-h2 {
-  font-size: 24px;
-  color: #38a169; /* Green */
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.welcome {
+    margin-top: 80px; /* Adjusted for fixed navbar */
+    background: url('imgbg.jpeg') no-repeat center center/cover; /* Use imgbg.jpeg as background */
+    padding: 60px 20px;
+    border-radius: 25px; /* Image corner rounding */
+    overflow: hidden; /* Clip content overflow to maintain rounded corners */
+    position: relative; /* Required for positioning child elements */
 }
 
-p {
-  font-size: 18px;
-  color: #4a5568; /* Gray text */
-  line-height: 1.6;
+.glass-container {
+    position: relative; /* Position relative to the parent */
+    display: inline-block; /* Make the container only as wide as the text */
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(100, 140, 255, 0.1)); /* Subtle gradient */
+    backdrop-filter: blur(10px);
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px 25px; /* Adjusted padding for smaller text */
+    margin: 0 auto; /* Center the container */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-img {
-  object-fit: cover;
+.welcome h1 {
+    font-size: 1.8em; /* Reduced font size */
+    color: white; /* Ensure text is white */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Add subtle shadow for better contrast */
+    margin: 0; /* Remove default margin */
 }
 
-/* Buttons */
-button {
-  background: #38a169;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  transition: background 0.3s ease-in-out;
+main {
+    padding: 20px 0;
 }
 
-button:hover {
-  background: #2f855a; /* Darker green */
+/* Glass Morphism for Text Section */
+.text-section {
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(100, 140, 255, 0.1)); /* Subtle gradient */
+    backdrop-filter: blur(10px);
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px; /* Match container width */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-/* Feature Cards */
-.card {
-  background-color: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 24px;
-  text-align: center;
-  transition: transform 0.3s ease-in-out;
+.text-section p {
+    font-size: 1em;
+    color: white; /* White text for contrast */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Add subtle shadow for better visibility */
 }
 
-.card:hover {
-  transform: translateY(-5px);
+.btn-group {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    gap: 15px; /* Space between buttons */
+    margin-bottom: 20px;
 }
 
-.card h3 {
-  font-size: 20px;
-  color: #2d3748; /* Darker gray */
-  margin-bottom: 16px;
+/* Gradient Glass Morphism Buttons */
+.login-btn {
+    padding: 12px 24px;
+    color: white;
+    background: linear-gradient(90deg, rgba(255, 107, 107, 0.2), rgba(255, 69, 58, 0.2)); /* Coral gradient */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border: none;
+    border-radius: 25px; /* Fully rounded corners */
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
-.card p {
-  font-size: 16px;
-  color: #718096; /* Cool gray */
+.login-btn:hover {
+    background: linear-gradient(90deg, rgba(255, 69, 58, 0.3), rgba(255, 107, 107, 0.3)); /* Darker gradient on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
+
+.about-btn {
+    padding: 12px 24px;
+    color: white;
+    background: linear-gradient(90deg, rgba(76, 175, 80, 0.2), rgba(46, 125, 50, 0.2)); /* Green gradient */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border: none;
+    border-radius: 25px; /* Fully rounded corners */
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.about-btn:hover {
+    background: linear-gradient(90deg, rgba(46, 125, 50, 0.3), rgba(76, 175, 80, 0.3)); /* Darker gradient on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Gradient Glass Footer */
+footer {
+    border-radius: 20px 20px 0 0;
+    padding: 10px 0;
+    margin-top: 50px; /* Reduced margin for better spacing */
+    background: linear-gradient(120deg, rgba(50, 150, 200, 0.2), rgba(150, 50, 200, 0.2)); /* Gradient background */
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for separation */
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: white; /* White text for contrast */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Add subtle shadow for better visibility */
+}
+
+footer p {
+    margin: 0;
+                                            }
