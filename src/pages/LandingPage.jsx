@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./LandingPage.css"; // Import the scoped CSS for this page
+import "./LandingPage.css"; // Import scoped CSS for additional custom styles
 
 const LandingPage = ({ session }) => {
   const navigate = useNavigate();
 
-  // If a user session exists, redirect to the Home page
+  // Redirect to Home if a session exists
   useEffect(() => {
     if (session) {
       navigate("/home", { replace: true });
@@ -42,7 +42,7 @@ const LandingPage = ({ session }) => {
           </a>
         </nav>
 
-        {/* Get Started Button */}
+        {/* Get Started Button (Login/Signup) */}
         <button
           onClick={handleGetStarted}
           className="px-6 py-2 text-white bg-green-600 hover:bg-green-700 rounded-lg"
@@ -111,6 +111,13 @@ const LandingPage = ({ session }) => {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-r from-green-500 to-blue-500 text-white py-6 mt-8">
+        <div className="max-w-7xl mx-auto text-center">
+          <p>&copy; 2023 Ente Gramam. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };
