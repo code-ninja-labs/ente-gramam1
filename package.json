@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/cli": "^7.1.0",
+    "@capacitor/core": "^7.1.0",
     "@supabase/supabase-js": "^2.48.1",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
