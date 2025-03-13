@@ -20,5 +20,9 @@
     "platforms": [
       "android"
     ]
+  },
+  "dependencies": {
+    "@capacitor/cli": "^7.1.0",
+    "@capacitor/core": "^7.1.0"
   }
 }
