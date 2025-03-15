@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Ente Gramam</string>
-    <string name="title_activity_main">Ente Gramam</string>
-    <string name="package_name">entegramam.app</string>
-    <string name="custom_url_scheme">entegramam.app</string>
-</resources>
