@@ -13,7 +13,7 @@ body {
     margin: 0 auto;
     padding: 20px;
     text-align: center;
-    background: transparent; /* Transparent background */
+    background: transparent;
 }
 
 /* Navbar */
@@ -23,10 +23,10 @@ body {
     left: 0;
     right: 0;
     display: flex;
-    justify-content: space-between; /* Evenly space title and button */
+    justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(100, 140, 255, 0.1)); /* Glass effect */
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(100, 140, 255, 0.1)); /* Subtle glass effect */
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -43,12 +43,12 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 15px; /* Spacing between links */
+    gap: 10px;
 }
 
 .login-btn {
     padding: 8px 16px;
-    background: rgba(51, 51, 51, 0.8);
+    background: #4CAF50; /* Green color for navbar button */
     color: white;
     text-decoration: none;
     border-radius: 10px;
@@ -56,12 +56,12 @@ body {
 }
 
 .login-btn:hover {
-    background: rgba(51, 51, 51, 1);
+    background: #45a049; /* Darker green on hover */
 }
 
 /* Welcome Section */
 .welcome {
-    margin-top: 80px;
+    margin-top: 80px; /* Adjust for fixed navbar */
     background: url('/a-serene-semi-realistic-cartoon-style-na_FHWDrhwLTbOwBFyIw8aLig_PmgiSYV6Q76Eyd31v90b-A.jpeg') no-repeat center center/cover;
     padding: 60px 20px;
     border-radius: 25px;
@@ -91,7 +91,6 @@ body {
 /* Main Content Section */
 main {
     padding: 20px 0;
-    margin-top: 20px;
 }
 
 /* Text Section */
@@ -115,13 +114,28 @@ main {
     margin-bottom: 20px;
 }
 
-.login-btn,
-.about-btn {
-    padding: 12px 24px;
+.btn-group .login-btn {
+    background: #007BFF; /* Blue color for the main login button */
     color: white;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    border: none;
+    padding: 12px 24px;
+    border-radius: 25px; /* Fully rounded corners */
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-group .login-btn:hover {
+    background: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-group .about-btn {
+    background: #28A745; /* Green color for the "About Us" button */
+    color: white;
+    padding: 12px 24px;
     border-radius: 25px;
     text-decoration: none;
     font-size: 1em;
@@ -130,9 +144,8 @@ main {
     transition: all 0.3s ease-in-out;
 }
 
-.login-btn:hover,
-.about-btn:hover {
-    background: rgba(0, 0, 0, 0.7);
+.btn-group .about-btn:hover {
+    background: #218838; /* Darker green on hover */
     transform: translateY(-2px);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
 }
