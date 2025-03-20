@@ -1,106 +1,84 @@
-/* Container */
-.container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #f9f9f9; /* Light background for contrast */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  font-family: 'Arial', sans-serif;
+/* Import TailwindCSS */
+@import "https://cdn.jsdelivr.net/npm/tailwindcss@^3.2.4/dist/tailwind.min.css";
+
+/* Glass Effect */
+.login-glass {
+  backdrop-filter: blur(12.5px);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Title */
-.title {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: #333; /* Dark text for readability */
+/* Background Shape Styles */
+.login-shape {
+  position: absolute;
+  border-radius: 40%;
+}
+.login-shape-pink {
+  background: linear-gradient(135deg, rgba(255, 102, 204, 1), rgba(255, 0, 128, 1));
+}
+.login-shape-yellow {
+  background: linear-gradient(135deg, rgba(255, 235, 102, 1), rgba(255, 165, 0, 1));
+}
+.login-shape-blue {
+  background: linear-gradient(135deg, rgba(0, 204, 255, 1), rgba(0, 128, 255, 1));
 }
 
-/* Form */
-.form {
+/* Social Button */
+.login-social-btn {
   display: flex;
-  flex-direction: column;
-  gap: 15px; /* Space between form elements */
-}
-
-/* Input Fields */
-.input {
-  padding: 12px;
-  font-size: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.input:focus {
-  border-color: #555; /* Highlighted border on focus */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Button */
-.button {
-  padding: 12px 20px;
-  font-size: 1rem;
-  color: black;
+  align-items: center;
+  justify-content: center;
   background-color: white;
-  border: 2px solid black; /* Black border for contrast */
-  border-radius: 5px;
-  cursor: pointer;
-  text-transform: uppercase;
+  color: #333;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   font-weight: bold;
-  transition: all 0.3s ease-in-out;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+.login-social-btn:hover {
+  background-color: #f7f7f7;
 }
 
-.button:hover {
-  background-color: black; /* Reverse hover effect */
+/* Divider */
+.login-divider {
+  border-top: 1px solid #4b5563;
+}
+
+/* Form Fields */
+.login-form-group {
+  margin-bottom: 1rem;
+}
+.login-form-label {
+  display: block;
+  color: #9ca3af;
+  margin-bottom: 0.5rem;
+}
+.login-form-input {
+  width: 100%;
+  background-color: rgba(55, 65, 81, 0.6);
+  padding: 0.5rem;
   color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #4b5563;
+  border-radius: 6px;
 }
 
-.button:disabled {
-  background-color: #f0f0f0;
-  color: #888;
-  cursor: not-allowed;
-  border: 2px solid #ddd;
-  box-shadow: none;
+/* Buttons */
+.login-btn-gradient {
+  background: linear-gradient(to right, #22c55e, #3b82f6);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: bold;
+  width: 100%;
+  transition: background 0.3s;
+}
+.login-btn-gradient:hover {
+  background: linear-gradient(to right, #16a34a, #2563eb);
 }
 
-/* Switch Button */
-.switch {
-  margin-top: 10px;
-  border: 2px dashed black; /* Dashed border for visual difference */
-}
-
-.switch:hover {
-  background-color: #f4f4f4;
-  color: black;
-  border: 2px solid #666;
-  box-shadow: none;
-}
-/* Magic Link Button */
-.magic-link {
-  background-color: #f0f0f0;
-  color: #444;
-  font-style: italic;
-  border: 2px solid #888;
-}
-
-.magic-link:hover {
-  background-color: #ddd;
-  color: black;
-  border: 2px solid #555;
-}
-/* Disabled Input (for email during OTP step) */
-.input:disabled {
-  background-color: #f0f0f0;
-  color: #888;
-  cursor: not-allowed;
-}
-
-/* Highlight OTP Input */
-.input[placeholder="Enter the code"] {
-  border: 2px dashed #ff5722;
-  background: #fff7f0;
+.login-btn-secondary {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #3b82f6;
 }
