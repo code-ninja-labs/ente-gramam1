@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { supabase } from "../../supabaseClient";
-import "./Auth.css"; // Use login.css for styling
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -76,7 +75,6 @@ ${err.message}`);
 
       {/* Login/Signup Card */}
       <div className="login-glass rounded-lg shadow-lg w-full max-w-md p-8 relative z-10">
-        {/* Logo Section */}
         <div className="flex items-center justify-center mb-6">
           <img
             src="https://i.imgur.com/NHGkS76.png"
@@ -85,17 +83,12 @@ ${err.message}`);
           />
         </div>
 
-        {/* Form Title */}
         <h2 className="text-center text-2xl font-bold text-white mb-8">
           {isSigningUp ? "Create your account" : "Welcome back"}
         </h2>
 
-        {/* Social Buttons */}
         <div className="space-y-3 mb-6">
-          <button
-            className="login-social-btn"
-            disabled={loading} // Prevent clicking while loading
-          >
+          <button className="login-social-btn" disabled={loading}>
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
               alt="Google Logo"
@@ -105,15 +98,12 @@ ${err.message}`);
           </button>
         </div>
 
-        {/* Divider */}
         <div className="login-divider mb-6" />
 
-        {/* Flexible Form */}
         <form
           onSubmit={isSigningUp ? handleSignupSubmit : handleLoginSubmit}
           className="login-form"
         >
-          {/* Email Input */}
           <div className="login-form-group">
             <label htmlFor="email" className="login-form-label">
               Email
@@ -129,7 +119,6 @@ ${err.message}`);
             />
           </div>
 
-          {/* Password Input */}
           <div className="login-form-group">
             <label htmlFor="password" className="login-form-label">
               Password
@@ -145,7 +134,6 @@ ${err.message}`);
             />
           </div>
 
-          {/* Form Button */}
           <button
             type="submit"
             className="login-btn-gradient"
@@ -155,7 +143,6 @@ ${err.message}`);
           </button>
         </form>
 
-        {/* Switch Button */}
         <div className="mt-6 text-center">
           <button
             onClick={() => setIsSigningUp(!isSigningUp)}
@@ -167,9 +154,93 @@ ${err.message}`);
           </button>
         </div>
       </div>
+
+      {/* Inline Styles */}
+      <style jsx>{`
+        /* Glass Effect */
+        .login-glass {
+          backdrop-filter: blur(12.5px);
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Background Shape Styles */
+        .login-shape {
+          position: absolute;
+          border-radius: 40%;
+        }
+        .login-shape-pink {
+          background: linear-gradient(135deg, rgba(255, 102, 204, 1), rgba(255, 0, 128, 1));
+        }
+        .login-shape-yellow {
+          background: linear-gradient(135deg, rgba(255, 235, 102, 1), rgba(255, 165, 0, 1));
+        }
+        .login-shape-blue {
+          background: linear-gradient(135deg, rgba(0, 204, 255, 1), rgba(0, 128, 255, 1));
+        }
+
+        /* Social Button */
+        .login-social-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: white;
+          color: #333;
+          padding: 0.5rem;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          font-weight: bold;
+          width: 100%;
+          transition: background-color 0.2s;
+        }
+        .login-social-btn:hover {
+          background-color: #f7f7f7;
+        }
+
+        /* Divider */
+        .login-divider {
+          border-top: 1px solid #4b5563;
+        }
+
+        /* Form Fields */
+        .login-form-group {
+          margin-bottom: 1rem;
+        }
+        .login-form-label {
+          display: block;
+          color: #9ca3af;
+          margin-bottom: 0.5rem;
+        }
+        .login-form-input {
+          width: 100%;
+          background-color: rgba(55, 65, 81, 0.6);
+          padding: 0.5rem;
+          color: white;
+          border: 1px solid #4b5563;
+          border-radius: 6px;
+        }
+
+        /* Buttons */
+        .login-btn-gradient {
+          background: linear-gradient(to right, #22c55e, #3b82f6);
+          color: white;
+          padding: 0.75rem 1.5rem;
+          border-radius: 6px;
+          font-weight: bold;
+          width: 100%;
+          transition: background 0.3s;
+        }
+        .login-btn-gradient:hover {
+          background: linear-gradient(to right, #16a34a, #2563eb);
+        }
+
+        .login-btn-secondary {
+          margin-top: 1rem;
+          font-size: 0.9rem;
+          color: #3b82f6;
+        }
+      `}</style>
     </div>
   );
 };
 
 export default Auth;
-              
