@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { supabase } from "../supabaseClient"; // Supabase client import
+import { supabase } from "../../supabaseClient";
 import "./Auth.css"; // Use login.css for styling
 
 const Auth = () => {
