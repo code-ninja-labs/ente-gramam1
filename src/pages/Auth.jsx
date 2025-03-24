@@ -1,86 +1,66 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // For navigation
-import { supabase } from "../supabaseClient"; // Supabase instance
-import "./Auth.css"; // Import the CSS file
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../supabaseClient';
+import styles from './Auth.module.css'; // Import the scoped CSS
 
 const Auth = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); // For displaying errors
+  const [email, setEmail] = useState(''); // Email state
+  const [password, setPassword] = useState(''); // Password state
+  const [loading, setLoading] = useState(false); // Loading state
+  const [errorMessage, setErrorMessage] = useState(''); // Error state
   const [isSignup, setIsSignup] = useState(false); // Toggle between login and signup
+  const navigate = useNavigate(); // React router navigation hook
 
-  const navigate = useNavigate(); // React Router navigation
-
-  // Handle Login or Signup Submit
+  // Handle form submission (for both login and signup)
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setErrorMessage(""); // Clear previous error message
+    setErrorMessage(''); // Clear any previous error messages
 
-    if (isSignup) {
-      // Sign Up Logic
-      try {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-        });
-
+    try {
+      if (isSignup) {
+        // Sign Up logic
+        const { error } = await supabase.auth.signUp({ email, password });
         if (error) {
-          setErrorMessage(`Signup failed: $
-{error.message}`);
+          setErrorMessage(error.message);
         } else {
-          setErrorMessage(
-            "Signup successful! Please check your email to confirm your account."
-          );
+          setErrorMessage('Signup successful! Please check your email to confirm your account.');
         }
-      } catch (err) {
-        setErrorMessage(`Unexpected error:
-${err.message}`);
-      }
-    } else {
-      // Login Logic
-      try {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-
+      } else {
+        // Login logic
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
-          setErrorMessage(`Login failed: $
-{error.message}`);
+          setErrorMessage(error.message);
         } else {
-          navigate("/home"); // Redirect to Home on success
+          navigate('/home'); // Redirect to home page on successful login
         }
-      } catch (err) {
-        setErrorMessage(`Unexpected error:
-${err.message}`);
       }
+    } catch (err) {
+      setErrorMessage('An unexpected error occurred. Please try again.');
+    } finally {
+      setLoading(false); // Stop the spinner regardless of success or failure
     }
-
-    setLoading(false); // Stop loading spinner
   };
 
   return (
-    <div className="auth-container">
-      {/* Background Circles */}
-      <div className="circle yellow"></div>
-      <div className="circle pink"></div>
-      <div className="circle blue"></div>
+    <div className={styles.authContainer}>
+      {/* Decorative Background Circles */}
+      <div className={`${styles.circle}${styles.circleYellow}`}></div>
+      <div className={`${styles.circle}${styles.circlePink}`}></div>
+      <div className={`${styles.circle}${styles.circleBlue}`}></div>
 
-      {/* Glassmorphic Card */}
-      <div className="glass-card">
-        <div className="logo">
-          <span>EG</span>
-        </div>
-        <h2>{isSignup ? "Sign Up" : "Welcome Back"}</h2>
+      {/* Main Auth Card */}
+      <div className={styles.glassCard}>
+        <div className={styles.logo}>EG</div>
+        <h2 className={styles.header}>{isSignup ? 'Sign Up' : 'Welcome Back'}</h2>
 
-        {/* Error Message */}
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {/* Error message */}
+        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
+        <form onSubmit={handleSubmit} className={styles.authForm}>
+          {/* Email Input */}
+          <div className={styles.formGroup}>
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -91,7 +71,9 @@ ${err.message}`);
               required
             />
           </div>
-          <div className="form-group">
+
+          {/* Password Input */}
+          <div className={styles.formGroup}>
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -102,31 +84,28 @@ ${err.message}`);
               required
             />
           </div>
-          <button type="submit" className="login-button" disabled={loading}>
-            {loading ? <div className="ios-loader"></div> : isSignup ? "Sign Up" : "Sign In"}
+
+          {/* Submit Button */}
+          <button type="submit" className={styles.loginButton} disabled={loading}>
+            {loading ? <div className={styles.iosLoader}></div> : isSignup ? 'Sign Up' : 'Sign In'}
           </button>
         </form>
 
-        <p className="auth-footer">
+        {/* Footer with Signup/Login toggle */}
+        <p className={styles.authFooter}>
           {isSignup ? (
             <>
-              Already have an account?{" "}
-              <button
-                className="toggle-link"
-                onClick={() => setIsSignup(false)}
-              >
+              Already have an account?{' '}
+              <span className={styles.toggleLink} onClick={() => setIsSignup(false)}>
                 Log in
-              </button>
+              </span>
             </>
           ) : (
             <>
-              Don’t have an account?{" "}
-              <button
-                className="toggle-link"
-                onClick={() => setIsSignup(true)}
-              >
+              Don’t have an account yet?{' '}
+              <span className={styles.toggleLink} onClick={() => setIsSignup(true)}>
                 Sign up
-              </button>
+              </span>
             </>
           )}
         </p>
@@ -136,4 +115,3 @@ ${err.message}`);
 };
 
 export default Auth;
-            
