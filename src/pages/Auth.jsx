@@ -1,38 +1,64 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // For navigation
-import { supabase } from "../supabaseClient"; // Ensure this is correctly set up
+import { supabase } from "../supabaseClient"; // Supabase instance
 import "./Auth.css"; // Import the CSS file
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); // For displaying errors
+  const [isSignup, setIsSignup] = useState(false); // Toggle between login and signup
+
   const navigate = useNavigate(); // React Router navigation
 
-  const handleLoginSubmit = async (e) => {
+  // Handle Login or Signup Submit
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMessage(""); // Clear previous error message
 
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+    if (isSignup) {
+      // Sign Up Logic
+      try {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+        });
 
-      if (error) {
-        alert(`Login error: $
+        if (error) {
+          setErrorMessage(`Signup failed: $
 {error.message}`);
-      } else {
-        alert("Login successful! Redirecting to Home...");
-        navigate("/home"); // Redirect to Home.jsx after a successful login
-      }
-    } catch (err) {
-      console.error("Unexpected error:", err);
-      alert(`Unexpected error:
+        } else {
+          setErrorMessage(
+            "Signup successful! Please check your email to confirm your account."
+          );
+        }
+      } catch (err) {
+        setErrorMessage(`Unexpected error:
 ${err.message}`);
-    } finally {
-      setLoading(false); // Stop loading spinner
+      }
+    } else {
+      // Login Logic
+      try {
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) {
+          setErrorMessage(`Login failed: $
+{error.message}`);
+        } else {
+          navigate("/home"); // Redirect to Home on success
+        }
+      } catch (err) {
+        setErrorMessage(`Unexpected error:
+${err.message}`);
+      }
     }
+
+    setLoading(false); // Stop loading spinner
   };
 
   return (
@@ -47,9 +73,13 @@ ${err.message}`);
         <div className="logo">
           <span>EG</span>
         </div>
-        <h2>Welcome Back</h2>
+        <h2>{isSignup ? "Sign Up" : "Welcome Back"}</h2>
 
-        <form onSubmit={handleLoginSubmit} className="auth-form">
+        {/* Error Message */}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -73,15 +103,32 @@ ${err.message}`);
             />
           </div>
           <button type="submit" className="login-button" disabled={loading}>
-            {loading ? <div className="ios-loader"></div> : "Sign In"}
+            {loading ? <div className="ios-loader"></div> : isSignup ? "Sign Up" : "Sign In"}
           </button>
         </form>
 
         <p className="auth-footer">
-          Don’t have an account yet?{" "}
-          <a href="#" className="signup-link">
-            Sign up
-          </a>
+          {isSignup ? (
+            <>
+              Already have an account?{" "}
+              <button
+                className="toggle-link"
+                onClick={() => setIsSignup(false)}
+              >
+                Log in
+              </button>
+            </>
+          ) : (
+            <>
+              Don’t have an account?{" "}
+              <button
+                className="toggle-link"
+                onClick={() => setIsSignup(true)}
+              >
+                Sign up
+              </button>
+            </>
+          )}
         </p>
       </div>
     </div>
@@ -89,3 +136,4 @@ ${err.message}`);
 };
 
 export default Auth;
+            
