@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import './LandingPage.css';
 
 const LandingPage = ({ session }) => {
   const navigate = useNavigate();
