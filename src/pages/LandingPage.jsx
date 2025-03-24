@@ -35,161 +35,115 @@ const LandingPage = ({ session }) => {
 
       <div
         style={{
+          position: "relative",
+          minHeight: "100vh",
           fontFamily: "'Arial', sans-serif",
           display: "flex",
           flexDirection: "column",
-          minHeight: "100vh",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden", // Clips overflowing elements
         }}
       >
-        {/* Navbar */}
-        <nav
+        {/* Background Gradient Blobs */}
+        <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "16px",
-            backgroundColor: "#fff",
-            borderBottom: "1px solid #eee",
+            position: "absolute",
+            top: "-50px",
+            left: "-100px",
+            width: "300px",
+            height: "300px",
+            background: "radial-gradient(circle, #ffdd55, #ff6644)",
+            filter: "blur(100px)",
+            zIndex: 1,
           }}
-        >
-          <div style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
-            Ente Gramam
-          </div>
-          <div>
-            <button
-              onClick={handleGetStarted}
-              style={{
-                padding: "10px 16px",
-                backgroundColor: "#38A169",
-                color: "#fff",
-                borderRadius: "5px",
-                border: "none",
-                cursor: "pointer",
-                transition: "background-color 0.3s",
-              }}
-              onMouseOver={(e) =>
-                (e.target.style.backgroundColor = "#2F855A")
-              }
-              onMouseOut={(e) =>
-                (e.target.style.backgroundColor = "#38A169")
-              }
-            >
-              Login
-            </button>
-          </div>
-        </nav>
-
-        {/* Header Section */}
-        <header
+        />
+        <div
           style={{
-            backgroundColor: "#E7F5FE",
-            padding: "64px 16px",
+            position: "absolute",
+            bottom: "-80px",
+            right: "-120px",
+            width: "400px",
+            height: "400px",
+            background: "radial-gradient(circle, #66ccff, #7755ee)",
+            filter: "blur(150px)",
+            zIndex: 1,
+          }}
+        />
+
+        {/* Glassmorphic Section */}
+        <div
+          style={{
+            zIndex: 2,
+            backdropFilter: "blur(20px)", // Creates the glass effect
+            background: "rgba(255, 255, 255, 0.2)", // Semi-transparent background
+            border: "1px solid rgba(255, 255, 255, 0.3)",
+            borderRadius: "15px",
+            padding: "32px",
             textAlign: "center",
+            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.2)", // Subtle shadow
+            width: "90%",
+            maxWidth: "400px",
           }}
         >
-          <div
+          <h1
             style={{
-              maxWidth: "800px",
-              margin: "auto",
-              padding: "32px",
-              background: "rgba(255, 255, 255, 0.2)",
-              backdropFilter: "blur(10px)",
-              borderRadius: "15px",
-              color: "#333",
+              fontSize: "2rem",
+              fontWeight: "bold",
+              color: "#fff",
+              marginBottom: "16px",
             }}
           >
-            <h1
-              style={{
-                fontSize: "2.5rem",
-                fontWeight: "bold",
-                color: "#2D3748",
-              }}
-            >
-              Connecting our village together
-            </h1>
-          </div>
-        </header>
+            Welcome to Ente Gramam
+          </h1>
+          <p style={{ fontSize: "1rem", color: "#ddd", marginBottom: "24px" }}>
+            Connecting Villagers Together
+          </p>
 
-        {/* Main Content */}
-        <main
-          style={{
-            maxWidth: "800px",
-            margin: "auto",
-            padding: "24px",
-          }}
-        >
-          {/* Text Section */}
-          <div style={{ marginBottom: "32px", color: "#4A5568" }}>
-            <p>
-              This web app is for the people of Edavannapara. Created by
-              Sameem Kunnath. Discover local news, events, and a community
-              that celebrates our traditions and heritage.
-            </p>
-          </div>
-
-          {/* Button Group */}
-          <div
+          <button
+            onClick={handleGetStarted}
             style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "16px",
-              marginBottom: "32px",
+              width: "100%",
+              padding: "12px",
+              marginBottom: "16px",
+              backgroundColor: "#38A169",
+              color: "#fff",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "1rem",
             }}
           >
-            <button
-              onClick={handleGetStarted}
-              style={{
-                padding: "12px 24px",
-                backgroundColor: "#38A169",
-                color: "#fff",
-                borderRadius: "5px",
-                border: "none",
-                cursor: "pointer",
-                transition: "background-color 0.3s",
-              }}
-              onMouseOver={(e) =>
-                (e.target.style.backgroundColor = "#2F855A")
-              }
-              onMouseOut={(e) =>
-                (e.target.style.backgroundColor = "#38A169")
-              }
-            >
-              Login
-            </button>
-            <a
-              href="#"
-              style={{
-                padding: "12px 24px",
-                backgroundColor: "#E2E8F0",
-                color: "#2D3748",
-                borderRadius: "5px",
-                textDecoration: "none",
-                textAlign: "center",
-                transition: "background-color 0.3s",
-              }}
-              onMouseOver={(e) =>
-                (e.target.style.backgroundColor = "#CBD5E0")
-              }
-              onMouseOut={(e) =>
-                (e.target.style.backgroundColor = "#E2E8F0")
-              }
-            >
-              About Us
-            </a>
-          </div>
-        </main>
+            Login
+          </button>
+          <button
+            onClick={() => alert("Sign Up Clicked")}
+            style={{
+              width: "100%",
+              padding: "12px",
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              color: "#fff",
+              border: "1px solid rgba(255, 255, 255, 0.4)",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize: "1rem",
+            }}
+          >
+            Sign Up
+          </button>
+        </div>
 
         {/* Footer */}
         <footer
           style={{
-            backgroundImage: "linear-gradient(to right, #38A169, #4299E1)",
-            color: "#fff",
-            padding: "24px",
-            marginTop: "auto",
+            position: "absolute",
+            bottom: "10px",
             textAlign: "center",
+            color: "#fff",
+            zIndex: 2,
           }}
         >
-          <p>&copy; 2023 Ente Gramam. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Ente Gramam. All rights reserved.</p>
         </footer>
       </div>
     </>
