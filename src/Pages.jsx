@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home"; // Home page
 import Autorickshaw from "./pages/Autorickshaw"; // Existing page
 import Addadr from "./pages/Addadr"; // For adding an Autorickshaw driver
-import Auth from "./pages/Auth"; // Auth (Login/Signup) page
+import Auth from "./pages/Auth/Auth"; // Auth (Login/Signup) page
 import Upload from "./pages/Upload"; // Upload component
 import LandingPage from "./pages/LandingPage"; // New landing page component
 import Support from "./pages/Support"; // New support page
