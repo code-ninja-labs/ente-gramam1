@@ -19,9 +19,10 @@ const Auth = () => {
       if (isSignup) {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) setErrorMessage(error.message);
-        else setErrorMessage(
-          "Signup successful! Please check your email to confirm your account."
-        );
+        else
+          setErrorMessage(
+            "Signup successful! Please check your email to confirm your account."
+          );
       } else {
         const { error } = await supabase.auth.signInWithPassword({
           email,
@@ -95,7 +96,13 @@ const Auth = () => {
             style={loading ? styles.buttonDisabled : styles.button}
             disabled={loading}
           >
-            {loading ? <div style={styles.spinner}></div> : isSignup ? "Sign Up" : "Sign In"}
+            {loading ? (
+              <div style={styles.spinner}></div>
+            ) : isSignup ? (
+              "Sign Up"
+            ) : (
+              "Sign In"
+            )}
           </button>
         </form>
 
@@ -129,8 +136,11 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    background: "linear-gradient(135deg, rgba(9, 9, 121, 1) 0%, rgba(0, 212, 255, 1) 100%)",
+    background:
+      "linear-gradient(135deg, rgba(9, 9, 121, 1) 0%, rgba(0, 212, 255, 1) 100%)",
     overflow: "hidden",
+    boxSizing: "border-box",
+    padding: "0 20px",
   },
   yellowBlob: {
     position: "absolute",
@@ -138,8 +148,8 @@ const styles = {
     height: "600px",
     background: "rgba(255, 235, 59, 0.6)",
     borderRadius: "50%",
-    top: "-150px",
-    left: "-250px",
+    top: "-200px",
+    left: "-300px",
     filter: "blur(100px)",
     zIndex: 1,
   },
@@ -149,35 +159,34 @@ const styles = {
     height: "500px",
     background: "rgba(255, 64, 129, 0.6)",
     borderRadius: "50%",
-    bottom: "-150px",
-    left: "40%",
+    bottom: "-200px",
+    left: "35%",
     filter: "blur(100px)",
     zIndex: 1,
   },
   blueBlob: {
     position: "absolute",
-    width: "600px",
-    height: "600px",
+    width: "700px",
+    height: "700px",
     background: "rgba(63, 81, 181, 0.6)",
     borderRadius: "50%",
-    bottom: "-200px",
-    right: "-250px",
-    filter: "blur(100px)",
+    bottom: "-250px",
+    right: "-300px",
+    filter: "blur(150px)",
     zIndex: 1,
   },
   card: {
     position: "relative",
     zIndex: 2,
-    backdropFilter: "blur(30px)",
-    background: "rgba(255, 255, 255, 0.1)",
+    backdropFilter: "blur(20px)",
+    background: "rgba(255, 255, 255, 0.15)",
     border: "1px solid rgba(255, 255, 255, 0.3)",
-    borderRadius: "20px",
-    padding: "30px",
-    width: "90%",
+    borderRadius: "16px",
+    padding: "40px 20px",
+    width: "100%",
     maxWidth: "400px",
     textAlign: "center",
-    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
-    color: "#fff",
+    boxShadow: "0 10px 40px rgba(0, 0, 0, 0.25)",
   },
   logo: {
     width: "60px",
@@ -185,7 +194,7 @@ const styles = {
     background: "#000",
     borderRadius: "50%",
     color: "#fff",
-    fontSize: "20px",
+    fontSize: "24px",
     fontWeight: "700",
     display: "flex",
     justifyContent: "center",
@@ -195,7 +204,7 @@ const styles = {
   header: {
     fontSize: "1.8rem",
     color: "#fff",
-    marginBottom: "20px",
+    margin: "20px 0",
   },
   errorMessage: {
     color: "#ff6b6b",
@@ -204,21 +213,23 @@ const styles = {
   },
   form: {
     textAlign: "left",
+    marginTop: "20px",
   },
   formGroup: {
-    marginBottom: "15px",
+    marginBottom: "20px",
   },
   label: {
     color: "#ddd",
     fontSize: "0.85rem",
-    marginBottom: "5px",
+    marginBottom: "8px",
     display: "block",
   },
   input: {
     width: "100%",
     padding: "12px",
+    boxSizing: "border-box",
     border: "1px solid rgba(255, 255, 255, 0.3)",
-    borderRadius: "8px",
+    borderRadius: "6px",
     background: "rgba(0, 0, 0, 0.2)",
     color: "#fff",
     fontSize: "1rem",
@@ -239,7 +250,7 @@ const styles = {
     transition: "opacity 0.3s ease",
   },
   buttonDisabled: {
-    opacity: 0.5,
+    opacity: 0.6,
     cursor: "not-allowed",
   },
   spinner: {
