@@ -1,1 +1,177 @@
+/* Auth.module.css */
 
+.authContainer {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem;
+  text-align: center;
+  margin: auto;
+  z-index: 1;
+}
+
+/* Background Circles */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0.3;
+}
+
+.circleYellow {
+  width: 300px;
+  height: 300px;
+  background: yellow;
+  top: -50px;
+  left: -70px;
+}
+
+.circlePink {
+  width: 300px;
+  height: 300px;
+  background: pink;
+  top: -60px;
+  right: -60px;
+}
+
+.circleBlue {
+  width: 300px;
+  height: 300px;
+  background: blue;
+  bottom: -80px;
+  left: -60px;
+}
+
+/* Glassmorphic Effect */
+.glassCard {
+  position: relative;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  z-index: 2;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  background-color: black;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  font-size: 1.8rem;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+/* Error Message */
+.errorMessage {
+  color: red;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+/* Form Style */
+.authForm .formGroup {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.authForm .formGroup label {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.authForm .formGroup input {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 1rem;
+  outline: none;
+}
+
+.authForm .formGroup input::placeholder {
+  color: #aaa;
+}
+
+.authForm .formGroup input:focus {
+  border-color: #4caf50; /* Green border on focus */
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Button */
+.loginButton {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  color: white;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #32ccbc, #90f7ec);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.loginButton:hover {
+  opacity: 0.9;
+}
+
+.loginButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Footer */
+.authFooter {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #bbb;
+}
+
+.toggleLink {
+  color: #4caf50;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.toggleLink:hover {
+  text-decoration: underline;
+}
+
+/* iOS Loading Spinner */
+.iosLoader {
+  border: 3px solid rgba(255, 255, 255, 0.3); /* Light outer border */
+  border-top: 3px solid white; /* The spinning part */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
