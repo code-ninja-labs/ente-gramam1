@@ -73,6 +73,13 @@ body {
   max-width: 100%;
 }
 
+/* Error Message */
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
 /* Logo */
 .logo {
   width: 60px;
@@ -88,7 +95,6 @@ body {
   color: white;
 }
 
-/* Title */
 .glass-card h2 {
   font-size: 1.8rem;
   color: white;
@@ -129,10 +135,11 @@ body {
 }
 
 /* Button */
-button.login-button {
+.login-button {
   width: 100%;
   padding: 0.7rem 1rem;
   color: white;
+  font-size: 1rem;
   text-transform: uppercase;
   font-weight: bold;
   border: none;
@@ -146,11 +153,11 @@ button.login-button {
   justify-content: center;
 }
 
-button.login-button:hover {
+.login-button:hover {
   opacity: 0.9;
 }
 
-button.login-button:disabled {
+.login-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -162,31 +169,34 @@ button.login-button:disabled {
   color: #bbb;
 }
 
-.auth-footer .signup-link {
+.toggle-link {
   color: #4caf50;
   text-decoration: none;
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.auth-footer .signup-link:hover {
+.toggle-link:hover {
   text-decoration: underline;
 }
 
 /* iOS Spinner */
 .ios-loader {
-  border: 3px solid rgba(255, 255, 255, 0.3); /* Light outer border */
-  border-top: 3px solid white; /* The spinning part */
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid white;
   border-radius: 50%;
   width: 20px;
   height: 20px;
   animation: spin 1s linear infinite;
-  margin: 0 auto;
 }
 
 @keyframes spin {
-  0% {
+  from {
     transform: rotate(0deg);
   }
-  100% {
+  to {
     transform: rotate(360deg);
   }
-  }
+}
