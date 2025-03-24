@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
-import "./Autorickshaw.css";
 
 const Autorickshaw = () => {
   const [drivers, setDrivers] = useState([]);
