@@ -1,32 +1,37 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../supabaseClient';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../supabaseClient";
 
 const Auth = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [isSignup, setIsSignup] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setErrorMessage('');
+    setErrorMessage("");
 
     try {
       if (isSignup) {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) setErrorMessage(error.message);
-        else setErrorMessage('Signup successful! Please check your email to confirm your account.');
+        else setErrorMessage(
+          "Signup successful! Please check your email to confirm your account."
+        );
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
         if (error) setErrorMessage(error.message);
-        else navigate('/home');
+        else navigate("/home");
       }
     } catch (err) {
-      setErrorMessage('An unexpected error occurred. Please try again.');
+      setErrorMessage("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -40,16 +45,18 @@ const Auth = () => {
       <div style={styles.pinkBlob}></div>
       <div style={styles.blueBlob}></div>
 
-      {/* Glassmorphism Card */}
+      {/* Glassmorphic Card */}
       <div style={styles.card}>
         <div style={styles.logo}>EG</div>
-        <h2 style={styles.header}>{isSignup ? 'Sign Up' : 'Welcome Back'}</h2>
+        <h2 style={styles.header}>{isSignup ? "Sign Up" : "Welcome Back"}</h2>
 
         {errorMessage && <p style={styles.errorMessage}>{errorMessage}</p>}
 
         <form onSubmit={handleSubmit} style={styles.form}>
           <div style={styles.formGroup}>
-            <label htmlFor="email" style={styles.label}>Email</label>
+            <label htmlFor="email" style={styles.label}>
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -57,14 +64,18 @@ const Auth = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               style={styles.input}
-              onFocus={(e) => e.target.style.border = '1px solid #4caf50'}
-              onBlur={(e) => e.target.style.border = '1px solid rgba(255, 255, 255, 0.3)'}
+              onFocus={(e) => (e.target.style.border = "1px solid #4caf50")}
+              onBlur={(e) =>
+                (e.target.style.border = "1px solid rgba(255, 255, 255, 0.3)")
+              }
               required
             />
           </div>
 
           <div style={styles.formGroup}>
-            <label htmlFor="password" style={styles.label}>Password</label>
+            <label htmlFor="password" style={styles.label}>
+              Password
+            </label>
             <input
               type="password"
               id="password"
@@ -72,8 +83,10 @@ const Auth = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               style={styles.input}
-              onFocus={(e) => e.target.style.border = '1px solid #4caf50'}
-              onBlur={(e) => e.target.style.border = '1px solid rgba(255, 255, 255, 0.3)'}
+              onFocus={(e) => (e.target.style.border = "1px solid #4caf50")}
+              onBlur={(e) =>
+                (e.target.style.border = "1px solid rgba(255, 255, 255, 0.3)")
+              }
               required
             />
           </div>
@@ -83,20 +96,24 @@ const Auth = () => {
             style={loading ? styles.buttonDisabled : styles.button}
             disabled={loading}
           >
-            {loading ? <div style={styles.spinner}></div> : isSignup ? 'Sign Up' : 'Sign In'}
+            {loading ? <div style={styles.spinner}></div> : isSignup ? "Sign Up" : "Sign In"}
           </button>
         </form>
 
         <p style={styles.footer}>
           {isSignup ? (
             <>
-              Already have an account?{' '}
-              <span style={styles.link} onClick={() => setIsSignup(false)}>Log in</span>
+              Already have an account?{" "}
+              <span style={styles.link} onClick={() => setIsSignup(false)}>
+                Log in
+              </span>
             </>
           ) : (
             <>
-              Don’t have an account yet?{' '}
-              <span style={styles.link} onClick={() => setIsSignup(true)}>Sign up</span>
+              Don’t have an account yet?{" "}
+              <span style={styles.link} onClick={() => setIsSignup(true)}>
+                Sign up
+              </span>
             </>
           )}
         </p>
@@ -107,149 +124,154 @@ const Auth = () => {
 
 const styles = {
   container: {
-    position: 'relative',
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-    background: 'linear-gradient(135deg, #090979, #00d4ff)',
+    position: "relative",
+    height: "100vh",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "linear-gradient(135deg, rgba(9, 9, 121, 1) 0%, rgba(0, 212, 255, 1) 100%)",
+    overflow: "hidden",
   },
   gradientOverlay: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    background: 'rgba(0, 0, 0, 0.5)',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background: "linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7))",
     zIndex: 0,
   },
   yellowBlob: {
-    position: 'absolute',
-    width: '300px',
-    height: '300px',
-    background: 'rgba(255, 235, 59, 0.4)',
-    borderRadius: '50%',
-    top: '-50px',
-    left: '-70px',
-    filter: 'blur(70px)',
+    position: "absolute",
+    width: "350px",
+    height: "350px",
+    background: "rgba(255, 235, 59, 0.7)",
+    borderRadius: "50%",
+    top: "-100px",
+    left: "-150px",
+    filter: "blur(80px)",
     zIndex: 1,
   },
   pinkBlob: {
-    position: 'absolute',
-    width: '300px',
-    height: '300px',
-    background: 'rgba(255, 64, 129, 0.4)',
-    borderRadius: '50%',
-    top: '-60px',
-    right: '-60px',
-    filter: 'blur(70px)',
+    position: "absolute",
+    width: "300px",
+    height: "300px",
+    background: "rgba(255, 64, 129, 0.7)",
+    borderRadius: "50%",
+    bottom: "-100px",
+    left: "40%",
+    filter: "blur(80px)",
     zIndex: 1,
   },
   blueBlob: {
-    position: 'absolute',
-    width: '300px',
-    height: '300px',
-    background: 'rgba(63, 81, 181, 0.4)',
-    borderRadius: '50%',
-    bottom: '-80px',
-    left: '-60px',
-    filter: 'blur(70px)',
+    position: "absolute",
+    width: "400px",
+    height: "400px",
+    background: "rgba(63, 81, 181, 0.7)",
+    borderRadius: "50%",
+    bottom: "-150px",
+    right: "-100px",
+    filter: "blur(80px)",
     zIndex: 1,
   },
   card: {
-    position: 'relative',
+    position: "relative",
     zIndex: 2,
-    backdropFilter: 'blur(20px)',
-    background: 'rgba(255, 255, 255, 0.15)',
-    border: '1px solid rgba(255, 255, 255, 0.3)',
-    borderRadius: '20px',
-    padding: '30px',
-    width: '100%',
-    maxWidth: '400px',
-    textAlign: 'center',
-    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)',
+    backdropFilter: "blur(30px)",
+    background: "rgba(255, 255, 255, 0.1)",
+    border: "1px solid rgba(255, 255, 255, 0.3)",
+    borderRadius: "20px",
+    padding: "30px",
+    width: "90%",
+    maxWidth: "400px",
+    textAlign: "center",
+    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
+    color: "#fff",
   },
   logo: {
-    width: '60px',
-    height: '60px',
-    background: '#000',
-    color: '#fff',
-    fontSize: '1.5rem',
-    fontWeight: '700',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: '50%',
-    margin: '0 auto 20px',
+    width: "60px",
+    height: "60px",
+    background: "#000",
+    borderRadius: "50%",
+    color: "#fff",
+    fontSize: "20px",
+    fontWeight: "700",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "0 auto 20px",
   },
   header: {
-    fontSize: '1.8rem',
-    color: '#fff',
-    marginBottom: '20px',
+    fontSize: "1.8rem",
+    color: "#fff",
+    marginBottom: "20px",
   },
   errorMessage: {
-    color: 'red',
-    fontSize: '0.9rem',
-    marginBottom: '15px',
+    color: "#ff6b6b",
+    fontSize: "0.9rem",
+    marginBottom: "15px",
   },
   form: {
-    textAlign: 'left',
+    textAlign: "left",
   },
   formGroup: {
-    marginBottom: '15px',
+    marginBottom: "15px",
   },
   label: {
-    color: '#fff',
-    fontSize: '0.9rem',
-    marginBottom: '5px',
+    color: "#ddd",
+    fontSize: "0.85rem",
+    marginBottom: "5px",
+    display: "block",
   },
   input: {
-    width: '100%',
-    padding: '10px',
-    border: '1px solid rgba(255, 255, 255, 0.3)',
-    borderRadius: '8px',
-    background: 'rgba(255, 255, 255, 0.2)',
-    color: '#fff',
-    fontSize: '1rem',
-    fontWeight: '500',
-    outline: 'none',
-    transition: 'border-color 0.3s ease',
+    width: "100%",
+    padding: "12px",
+    border: "1px solid rgba(255, 255, 255, 0.3)",
+    borderRadius: "8px",
+    background: "rgba(0, 0, 0, 0.2)",
+    color: "#fff",
+    fontSize: "1rem",
+    fontWeight: "500",
+    outline: "none",
+    transition: "all 0.3s ease",
   },
   button: {
-    width: '100%',
-    padding: '12px',
-    fontSize: '1rem',
-    fontWeight: '700',
-    background: 'linear-gradient(135deg, #32ccbc, #90f7ec)',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '8px',
-    cursor: 'pointer',
-    transition: 'opacity 0.3s ease',
+    width: "100%",
+    padding: "12px",
+    fontSize: "1rem",
+    fontWeight: "700",
+    background: "linear-gradient(135deg, #32ccbc, #90f7ec)",
+    color: "#fff",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    transition: "opacity 0.3s ease",
   },
   buttonDisabled: {
     opacity: 0.5,
-    cursor: 'not-allowed',
+    cursor: "not-allowed",
   },
   spinner: {
-    width: '20px',
-    height: '20px',
-    border: '3px solid rgba(255, 255, 255, 0.3)',
-    borderTop: '3px solid white',
-    borderRadius: '50%',
-    animation: 'spin 1s linear infinite',
+    width: "20px",
+    height: "20px",
+    border: "3px solid rgba(255, 255, 255, 0.3)",
+    borderTop: "3px solid white",
+    borderRadius: "50%",
+    animation: "spin 1s linear infinite",
+    margin: "0 auto",
   },
   footer: {
-    marginTop: '20px',
-    fontSize: '0.85rem',
-    color: '#ddd',
+    marginTop: "20px",
+    fontSize: "0.85rem",
+    color: "#ddd",
   },
   link: {
-    color: '#4caf50',
-    cursor: 'pointer',
-    textDecoration: 'none',
-    fontWeight: 'bold',
+    color: "#4caf50",
+    cursor: "pointer",
+    fontWeight: "bold",
   },
 };
 
 export default Auth;
-    
+      
