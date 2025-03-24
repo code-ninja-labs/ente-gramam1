@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { supabase } from '../supabaseClient'; // Ensure Supabase is already initialized
-
-import './Auth.css'; // Link the CSS file here
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // For navigation
+import { supabase } from "../supabaseClient"; // Ensure this is correctly set up
+import "./Auth.css"; // Import the CSS file
 
 const Auth = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // React Router navigation
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -22,14 +23,15 @@ const Auth = () => {
         alert(`Login error: $
 {error.message}`);
       } else {
-        alert('Login successful! Welcome back.');
+        alert("Login successful! Redirecting to Home...");
+        navigate("/home"); // Redirect to Home.jsx after a successful login
       }
     } catch (err) {
-      console.error(err.message);
+      console.error("Unexpected error:", err);
       alert(`Unexpected error:
 ${err.message}`);
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -40,14 +42,14 @@ ${err.message}`);
       <div className="circle pink"></div>
       <div className="circle blue"></div>
 
-      {/* Glassmorphic Form */}
+      {/* Glassmorphic Card */}
       <div className="glass-card">
         <div className="logo">
           <span>EG</span>
         </div>
-        <h2>Welcome back</h2>
+        <h2>Welcome Back</h2>
 
-        <form onSubmit={handleLoginSubmit}>
+        <form onSubmit={handleLoginSubmit} className="auth-form">
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -70,13 +72,13 @@ ${err.message}`);
               required
             />
           </div>
-          <button type="submit" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? <div className="ios-loader"></div> : "Sign In"}
           </button>
         </form>
 
-        <p className="footer">
-          Don’t have an account yet?{' '}
+        <p className="auth-footer">
+          Don’t have an account yet?{" "}
           <a href="#" className="signup-link">
             Sign up
           </a>
