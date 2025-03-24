@@ -1,0 +1,79 @@
+/* Home.module.css */
+
+/* Main Container */
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Content Section */
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Welcome Section */
+.welcomeSection h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #4caf50;
+}
+
+.welcomeSection h2 span {
+  font-weight: bold;
+  color: #2a7f2e;
+}
+
+.welcomeSection p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* App Icons Section */
+.appIconsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+  justify-content: center;
+}
+
+.appIconsContainer > * {
+  margin: 0.5rem;
+}
+
+/* Ad Container */
+.adContainer {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.adSlot {
+  width: 100%;
+  max-width: 728px;
+  background: #e0e0e0;
+  color: #999;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Footer */
+.footer {
+  background-color: #4caf50;
+  color: #ffffff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
