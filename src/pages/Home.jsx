@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Nav from "../components/Nav/Nav";
 import AppIcons from "../components/AppIcons/AppIcons";
-import styles from "../styles/Home.module.css"; // Import CSS module
 
 const Home = () => {
   useEffect(() => {
