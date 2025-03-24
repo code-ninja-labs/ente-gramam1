@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
-import styles from '../styles/Auth.module.css'; // Correct path based on the file's actual location
+import styles from '../../styles/Auth.module.css';
 
 const Auth = () => {
   const [email, setEmail] = useState(''); // Email state
